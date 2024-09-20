@@ -1,10 +1,20 @@
 //test about sending data to main
-const activateTest = document.getElementById("test");
+const activateCopy = document.getElementById("copyBtn");
+const activateImport = document.getElementById("importBtn");
+const activateExport = document.getElementById("exportBtn");
 
-activateTest.addEventListener("click", () => {
+activateCopy.addEventListener("click", () => {
   const getData = document.getElementById("text-input").value;
 
   getPythonData(getData);
+});
+
+activateImport.addEventListener("click", () => {
+  getPythonData("import");
+});
+
+activateExport.addEventListener("click", () => {
+  getPythonData("export");
 });
 
 const getPythonData = async (getData) => {

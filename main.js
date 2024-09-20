@@ -19,7 +19,7 @@ app.whenReady().then(() => {
   ipcMain.handle("activatePython", () => {
     return new Promise((resolve, reject) => {
       execFile(
-        "./term.exe",
+        "./main.exe",
         ['-msg="Does this cat?"'],
         (error, stdout, stderror) => {
           if (error) {
@@ -34,8 +34,8 @@ app.whenReady().then(() => {
   ipcMain.handle("testText", (event, value) => {
     return new Promise((resolve, reject) => {
       execFile(
-        "./resources/term.exe",
-        [`-msg=${value}`],
+        "./resources/main.exe",
+        [`${value}`, "resources/config.toml"],
         (error, stdout, stderror) => {
           if (error) {
             console.log(error);
