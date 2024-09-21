@@ -17,7 +17,7 @@ Linguists use a variety of software tools to document endangered languages. They
 
 run <code>npm install</code>
 
-This repo contains a main.exe (built on windows) that contains rebabel. The electron application runs this executable from the command line along with an ACTION and a config.toml file. Right now, there are 2 working buttons: import and export. These buttons are hardcoded to run <code>./resources/main.exe import resources/config.toml</code> and <code>./resources/main.exe export resources/config.toml</code> respectively.
+This repo requires a rebabel executable named main.exe in the main directory. If on a different operating system from windows, after putting the executable in, be sure to edit the name of the executable in main.js and forge.config.js to match your file. The electron application runs this executable from the command line along with an ACTION and a config.toml file. Right now, there are 2 working buttons: import and export. These buttons are hardcoded to run <code>./resources/main.exe import resources/config.toml</code> and <code>./resources/main.exe export resources/config.toml</code> respectively.
 
 Use the command <code>npm run start</code> to run the app. Use the command <code>npm run make</code> to build.
 
