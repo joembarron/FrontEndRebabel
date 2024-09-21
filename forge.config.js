@@ -4,7 +4,11 @@ const { FuseV1Options, FuseVersion } = require("@electron/fuses");
 module.exports = {
   packagerConfig: {
     asar: true,
-    extraResource: "./main.exe",
+    extraResource: [
+      "./main.exe",
+      "./config.toml",
+      "./lez-all_txts.flextext"
+    ],
   },
   rebuildConfig: {},
   makers: [
