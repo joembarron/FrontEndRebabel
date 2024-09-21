@@ -1,0 +1,11 @@
+# the same database file will be used for all workflows
+db = "resources/demo.db"
+
+# these next parameters only apply to the "import" action
+[import]
+mode = "flextext"
+infiles = ["resources/lez-all_txts.flextext"]
+
+[export]
+mode = "flextext"
+outfile = "resources/lez-all_txts2.flextext"

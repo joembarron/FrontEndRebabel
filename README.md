@@ -17,11 +17,11 @@ Linguists use a variety of software tools to document endangered languages. They
 
 run <code>npm install</code>
 
-The python file term.py contains the code where you can have the command line argument of <code>-msg="Your Message Here"</code>. Or you can experiment with whatever command line stuff you want.
-
 To make term.py an executable move term.py out of the project to a separate folder. If you want you can create a virtual environment. Then install pyinstaller, <code>pip install pyinstaller</code> and run the command <code>pyinstaller -F term.py</code> In the dist folder you should find an executable titled, term (on windows, this is term.exe). You can move that back into the project to replace the current term. It's also possible in main.js in the function "testText" you might need to change the term to whatever is apporipriate for your OS.
+
+This repo contains a main.exe (built on windows) that contains all the rebabel functions. Basically, the electron application runs the executable from the command line with arguments. Right now, there are 2 working buttons: import and export. These buttons are hardcoded to run <code>./resources/main.exe import resources/config.toml</code> and <code>./resources/main.exe export resources/config.toml</code>.
 
 Use the command <code>npm run start</code> to run the app
 Use the command <code>npm run make</code> to build.
 
-If you build the app you should find the electron-test executable in the out folder in the folder electron-test-[linux or windows or mac] folder.
+If you build the app, you should find the electron-test executable at out/electron-test-[linux windows mac]. A config.toml and lez-all_txt.flextext files have been provided in the main directory. Put a copy of these files in the out/electron-test-[linux windows mac]/resources folder.

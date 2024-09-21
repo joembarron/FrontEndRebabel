@@ -16,21 +16,6 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   createWindow();
-  ipcMain.handle("activatePython", () => {
-    return new Promise((resolve, reject) => {
-      execFile(
-        "./main.exe",
-        ['-msg="Does this cat?"'],
-        (error, stdout, stderror) => {
-          if (error) {
-            console.log(error);
-          }
-          resolve(stdout ? stdout : stderror);
-        }
-      );
-    });
-  });
-
   ipcMain.handle("testText", (event, value) => {
     return new Promise((resolve, reject) => {
       execFile(
