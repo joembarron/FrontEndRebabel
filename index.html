@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Gap App</title>
+  </head>
+  <body>
+    <h1>Gap App</h1>
+    <p></p>
+    <input type="text" id="text-input" />
+    <button id="copyBtn">Copy</button>
+    <button id="importBtn">Import</button>
+    <button id="exportBtn">Export</button>
+    <div>
+      <h2>Output:</h2>
+      <p id="python-text"></p>
+    </div>
+    <div>
+      <span id="text"></span>
+    </div>
+  </body>
+  <script src="./renderer.js"></script>
+</html>
