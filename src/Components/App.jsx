@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
 function App() {
-  return <h1>Welcome to React</h1>;
+  const [text, setText] = useState("");
+  async function importAction(action) {
+    const response = await window.pythonApi.actions(action);
+    setText(() => response);
+  }
+  return (
+    <div>
+      <h1>Gap App</h1>
+      <p></p>
+      <input type="text" id="text-input" />
+      <button id="copyBtn">Copy</button>
+      <button id="importBtn" onClick={() => importAction("import")}>
+        Import
+      </button>
+      <button id="exportBtn">Export</button>
+      <div>
+        <h2>Output:</h2>
+        <p id="python-text"></p>
+      </div>
+      <div>
+        <span id="text">{text}</span>
+      </div>
+    </div>
+  );
 }
 
 export default App;

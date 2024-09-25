@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("node:path");
+const execFile = require("node:child_process").execFile;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -25,6 +26,22 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+
+  //handles import and export
+  ipcMain.handle("action", (event, value) => {
+    return new Promise((resolve, reject) => {
+      execFile(
+        "./rebabel",
+        [`${value}`, "config.toml"],
+        (error, stdout, stderror) => {
+          if (error) {
+            console.log(error);
+          }
+          resolve(stdout ? stdout : stderror);
+        }
+      );
+    });
+  });
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.

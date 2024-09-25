@@ -142,3 +142,8 @@ out/
 
 # rebabel exe
 main.exe
+rebabel.exe
+rebabel
+
+# databases
+*.db
