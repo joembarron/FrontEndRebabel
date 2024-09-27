@@ -7,24 +7,34 @@ function App() {
     setText(() => response);
   }
   return (
-    <div>
-      <h1>Gap App</h1>
-      <p></p>
-      <input type="text" id="text-input" />
-      <button id="copyBtn">Copy</button>
-      <button id="importBtn" onClick={() => action("import")}>
-        Import
-      </button>
-      <button id="exportBtn" onClick={() => action("export")}>
-        Export
-      </button>
-      <div>
-        <h2>Output:</h2>
-        <p id="python-text"></p>
-      </div>
-      <div>
-        <span id="text">{text}</span>
-      </div>
+    <div className="flex-base">
+      <header>
+        <h1>Gap App</h1>
+      </header>
+      <section className="input-fields">
+        <div className="select-file">
+          <input
+            id="file-in"
+            readOnly="readonly"
+            placeholder="Select File..."
+          />
+          <button id="file-in-btn">Browse</button>
+        </div>
+        <button id="copyBtn">Copy</button>
+        <button id="importBtn" onClick={() => action("import")}>
+          Import
+        </button>
+        <button id="exportBtn" onClick={() => action("export")}>
+          Export
+        </button>
+        <div>
+          <h2>Output:</h2>
+          <p id="python-text"></p>
+        </div>
+        <div>
+          <span id="text">{text}</span>
+        </div>
+      </section>
     </div>
   );
 }

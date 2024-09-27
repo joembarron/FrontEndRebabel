@@ -1,0 +1,27 @@
+.flex-base {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+header {
+  margin-bottom: 4rem;
+  margin-top: 6.5rem;
+}
+
+.input-fields {
+  width: 60%;
+  padding-left: 5rem;
+}
+
+#file-in {
+  width: 60%;
+  margin-right: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .input-fields {
+    width: 40%;
+  }
+}
