@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const path = require("node:path");
-const execFile = require("node:child_process").execFile;
+const { execFile } = require("node:child_process");
+const { unlink } = require('node:fs');
+const util = require('node:util');
+const execFilePromisified = util.promisify(require('node:child_process').execFile);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -43,6 +45,31 @@ app.whenReady().then(() => {
     });
   });
 
+  ipcMain.handle('rebabelConvert', async (event) => {
+    let conversionFailure = false;
+
+    // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
+    const { stdout, stderr } = await execFilePromisified("./rebabel_scripts/rebabel_convert", ["nlp_pos", "flextext", "/", "nlp_pos.txt", '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}']);
+
+    if (stderr) {
+      console.log(error) // This is temporary minimum error handling.   
+      conversionFailure = true;
+    } else {
+      console.log("The file conversion process completed.");
+    }
+
+    unlink("./temp.db", (err) => {
+      if (err) {
+        console.error(`Error removing the temp.db SQLite database.`);
+        conversionFailure = true;
+      } else {
+        console.log(`The temp.db SQLite database has been removed.`);
+      }
+    });
+
+    return conversionFailure;
+  });
+
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on("activate", () => {
@@ -60,6 +87,3 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
