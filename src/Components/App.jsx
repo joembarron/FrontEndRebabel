@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 
+const initialState = {
+  filePath: "",
+  fileName: "",
+  inFileType: "",
+  outFileType: "",
+  mappings: [],
+  additionalSettings: [],
+};
+
 function App() {
   async function rebabel() {
     const response = await window.pythonApi.rebabelConvert();
