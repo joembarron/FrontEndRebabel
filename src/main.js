@@ -36,7 +36,7 @@ app.whenReady().then(() => {
 
     //if user cancels
     if (filePath == undefined) {
-      return "";
+      return undefined;
     }
 
     //gets fileName from absolute path

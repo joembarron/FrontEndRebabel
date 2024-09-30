@@ -19,7 +19,7 @@ function App() {
     //returns object with filePath and fileName
     const response = await window.pythonApi.getFile();
 
-    if (response !== "") {
+    if (response !== undefined) {
       setData(() => ({
         ...initialState,
         fileName: response.fileName,
