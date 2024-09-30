@@ -16,7 +16,7 @@ function App() {
           />
           <button id="file-in-btn">Browse</button>
         </div>
-        <div id="file-input-type">
+        <div id="file-type">
           <label>File input type:</label>
           <select aria-label="Select File Type">
             <option selected value=""></option>
@@ -26,13 +26,12 @@ function App() {
           </select>
         </div>
         <div>Mappings?</div>
-        <div>Additional?</div>
-        <div id="file-input-type">
+        <div>Additional Settings?</div>
+        <div id="file-type">
           <label>File output type:</label>
           <select aria-label="Select File Type">
             <option selected value=""></option>
             <option value="flextext">Flextext</option>
-            <option value="conllu">Conllu</option>
             <option value="nlp_pos">NLP</option>
           </select>
         </div>
