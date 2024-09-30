@@ -42,22 +42,10 @@ function App() {
             <option value="nlp_pos">NLP</option>
           </select>
         </div>
-        <button id="copyBtn">Copy</button>
-        <button id="importBtn" onClick={() => action("import")}>
-          Import
-        </button>
-        <button id="exportBtn" onClick={() => action("export")}>
-          Export
-        </button>
-        <button id="convertBtn" onClick={() => rebabel()}>
-          Convert
-        </button>
-        <div>
-          <h2>Output:</h2>
-          <p id="python-text"></p>
-        </div>
-        <div>
-          <span id="text">{text}</span>
+        <div className="convert-btn">
+          <button id="convertBtn" onClick={() => rebabel()}>
+            Convert
+          </button>
         </div>
       </section>
     </div>

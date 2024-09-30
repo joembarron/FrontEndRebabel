@@ -31,6 +31,12 @@ label {
   font-weight: bold;
 }
 
+.convert-btn {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 1200px) {
   .input-fields {
     width: 40%;
