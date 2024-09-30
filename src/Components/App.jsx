@@ -6,6 +6,11 @@ function App() {
     const response = await window.pythonApi.actions(command);
     setText(() => response);
   }
+
+  async function rebabel() {
+    const response = await window.pythonApi.rebabelConvert();
+  }
+
   return (
     <div className="flex-base">
       <header>
@@ -26,6 +31,9 @@ function App() {
         </button>
         <button id="exportBtn" onClick={() => action("export")}>
           Export
+        </button>
+        <button id="convertBtn" onClick={() => rebabel()}>
+          Convert
         </button>
         <div>
           <h2>Output:</h2>
