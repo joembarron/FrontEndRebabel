@@ -13,9 +13,6 @@ function App() {
 
   return (
     <div className="flex-base">
-      <header>
-        <h1>Gap App</h1>
-      </header>
       <section className="input-fields">
         <div className="select-file">
           <input

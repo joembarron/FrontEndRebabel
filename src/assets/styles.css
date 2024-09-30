@@ -3,12 +3,13 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-}
-
-header {
-  margin-bottom: 2rem;
   margin-top: 3rem;
 }
+
+/* header {
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+} */
 
 .input-fields {
   width: 60%;
