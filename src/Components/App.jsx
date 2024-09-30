@@ -10,8 +10,22 @@ const initialState = {
 };
 
 function App() {
+  const [data, setData] = useState(initialState);
   async function rebabel() {
     const response = await window.pythonApi.rebabelConvert();
+  }
+
+  async function handleSelectFile() {
+    //returns object with filePath and fileName
+    const response = await window.pythonApi.getFile();
+
+    if (response !== "") {
+      setData(() => ({
+        ...initialState,
+        fileName: response.fileName,
+        filePath: response.filePath,
+      }));
+    }
   }
 
   return (
@@ -22,13 +36,16 @@ function App() {
             id="file-in"
             readOnly="readonly"
             placeholder="Select File..."
+            value={data.fileName}
           />
-          <button id="file-in-btn">Browse</button>
+          <button id="file-in-btn" onClick={() => handleSelectFile()}>
+            Browse
+          </button>
         </div>
         <div id="file-type">
           <label>File input type:</label>
           <select aria-label="Select File Type">
-            <option selected value=""></option>
+            <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
             <option value="conllu">Conllu</option>
             <option value="nlp_pos">NLP</option>
@@ -39,7 +56,7 @@ function App() {
         <div id="file-type">
           <label>File output type:</label>
           <select aria-label="Select File Type">
-            <option selected value=""></option>
+            <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
             <option value="nlp_pos">NLP</option>
           </select>
