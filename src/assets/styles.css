@@ -21,8 +21,14 @@
   margin-right: 1rem;
 }
 
-#file-input-type > select {
+#file-input-type,
+file-output-type > select {
   width: 30%;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 @media (min-width: 1200px) {

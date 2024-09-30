@@ -31,6 +31,17 @@ function App() {
             <option value="nlp_pos">NLP</option>
           </select>
         </div>
+        <div>Mappings?</div>
+        <div>Additional?</div>
+        <div id="file-input-type">
+          <label>File output type:</label>
+          <select aria-label="Select File Type">
+            <option selected value=""></option>
+            <option value="flextext">Flextext</option>
+            <option value="conllu">Conllu</option>
+            <option value="nlp_pos">NLP</option>
+          </select>
+        </div>
         <button id="copyBtn">Copy</button>
         <button id="importBtn" onClick={() => action("import")}>
           Import
