@@ -1,4 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const path = require("node:path");
 const { unlink } = require("node:fs");
 const util = require("node:util");
 const execFilePromisified = util.promisify(
@@ -29,6 +30,20 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+
+  ipcMain.handle("selectFile", async () => {
+    const filePath = dialog.showOpenDialogSync();
+
+    //if user cancels
+    if (filePath == undefined) {
+      return "";
+    }
+
+    //gets fileName from absolute path
+    const fileName = path.basename(filePath[0]);
+
+    return { filePath: filePath[0], fileName: fileName };
+  });
 
   ipcMain.handle("rebabelConvert", async (event) => {
     let conversionFailure = false;
