@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
-const { execFile } = require("node:child_process");
-const { unlink } = require('node:fs');
-const util = require('node:util');
-const execFilePromisified = util.promisify(require('node:child_process').execFile);
+const { unlink } = require("node:fs");
+const util = require("node:util");
+const execFilePromisified = util.promisify(
+  require("node:child_process").execFile
+);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -29,30 +30,23 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  //handles import and export
-  ipcMain.handle("action", (event, value) => {
-    return new Promise((resolve, reject) => {
-      execFile(
-        "./rebabel",
-        [`${value}`, "config.toml"],
-        (error, stdout, stderror) => {
-          if (error) {
-            console.log(error);
-          }
-          resolve(stdout ? stdout : stderror);
-        }
-      );
-    });
-  });
-
-  ipcMain.handle('rebabelConvert', async (event) => {
+  ipcMain.handle("rebabelConvert", async (event) => {
     let conversionFailure = false;
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
-    const { stdout, stderr } = await execFilePromisified("./rebabel_scripts/rebabel_convert", ["nlp_pos", "flextext", "/", "nlp_pos.txt", '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}']);
+    const { stdout, stderr } = await execFilePromisified(
+      "./rebabel_scripts/rebabel_convert",
+      [
+        "nlp_pos",
+        "flextext",
+        "/",
+        "nlp_pos.txt",
+        '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
+      ]
+    );
 
     if (stderr) {
-      console.log(error) // This is temporary minimum error handling.   
+      console.log(error); // This is temporary minimum error handling.
       conversionFailure = true;
     } else {
       console.log("The file conversion process completed.");

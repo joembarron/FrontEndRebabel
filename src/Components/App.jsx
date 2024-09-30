@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 
 function App() {
-  const [text, setText] = useState("");
-  async function action(command) {
-    const response = await window.pythonApi.actions(command);
-    setText(() => response);
-  }
-
   async function rebabel() {
     const response = await window.pythonApi.rebabelConvert();
   }
