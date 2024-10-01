@@ -6,10 +6,18 @@
   margin-top: 3rem;
 }
 
-/* header {
-  margin-bottom: 2rem;
-  margin-top: 3rem;
-} */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+header h2 {
+  margin: 0 20px;
+  font-size: 4rem;
+  font-weight: bold;
+}
 
 .input-fields {
   width: 60%;

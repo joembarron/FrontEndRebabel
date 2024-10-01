@@ -29,6 +29,7 @@ function App() {
         <h2>Gap App</h2>
         <button onClick={handleOpenAbout}>About</button>
       </header>
+      
       <section className="input-fields">
         <div className="select-file">
           <input
