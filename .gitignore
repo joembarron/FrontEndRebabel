@@ -144,6 +144,9 @@ out/
 main.exe
 rebabel.exe
 rebabel
+rebabel_scripts/rebabel_convert.exe
+rebabel_scripts/rebabel_convert.spec
+rebabel_scripts/build
 
 # databases
 *.db

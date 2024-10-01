@@ -1,12 +1,34 @@
 import React, { useState } from "react";
+import Help from './Help.jsx';
+import About from './About.jsx';
 
 function App() {
-  async function rebabel() {
-    const response = await window.pythonApi.rebabelConvert();
-  }
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+
+  const handleOpenHelp = () => {
+    setIsHelpOpen(true);
+  };
+
+  const handleCloseHelp = () => {
+    setIsHelpOpen(false);
+  };
+
+  const handleOpenAbout = () => {
+    setIsAboutOpen(true);
+  };
+
+  const handleCloseAbout = () => {
+    setIsAboutOpen(false);
+  };
 
   return (
     <div className="flex-base">
+      <header>
+        <button onClick={handleOpenHelp}>Help</button>
+        <h2>Gap App</h2>
+        <button onClick={handleOpenAbout}>About</button>
+      </header>
       <section className="input-fields">
         <div className="select-file">
           <input
@@ -41,6 +63,9 @@ function App() {
           </button>
         </div>
       </section>
+      {/* Dialog component */}
+      <Help isOpen={isHelpOpen} onClose={handleCloseHelp} />
+      <About isOpen={isAboutOpen} onClose={handleCloseAbout} />
     </div>
   );
 }
