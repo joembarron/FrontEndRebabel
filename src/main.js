@@ -32,7 +32,9 @@ app.whenReady().then(() => {
   createWindow();
 
   ipcMain.handle("selectFile", async () => {
-    const filePath = dialog.showOpenDialogSync();
+    const filePath = dialog.showOpenDialogSync({
+      properties: ["openFile"],
+    });
 
     //if user cancels
     if (filePath == undefined) {
