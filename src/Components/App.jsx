@@ -28,6 +28,14 @@ function App() {
     }
   }
 
+  function handleSelectType(e) {
+    if (e.target.name === "inputType") {
+      setData((data) => ({ ...data, inFileType: e.target.value }));
+    } else if (e.target.name === "outputType") {
+      setData((data) => ({ ...data, outFileType: e.target.value }));
+    }
+  }
+
   return (
     <div className="flex-base">
       <section className="input-fields">
@@ -43,8 +51,12 @@ function App() {
           </button>
         </div>
         <div id="file-type">
-          <label>File input type:</label>
-          <select aria-label="Select File Type">
+          <label>File input type</label>
+          <select
+            aria-label="Select File Type"
+            name="inputType"
+            onChange={(e) => handleSelectType(e)}
+          >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
             <option value="conllu">Conllu</option>
@@ -54,8 +66,12 @@ function App() {
         <div>Mappings?</div>
         <div>Additional Settings?</div>
         <div id="file-type">
-          <label>File output type:</label>
-          <select aria-label="Select File Type">
+          <label>File output type</label>
+          <select
+            aria-label="Select File Type"
+            name="outputType"
+            onChange={(e) => handleSelectType(e)}
+          >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
             <option value="nlp_pos">NLP</option>
