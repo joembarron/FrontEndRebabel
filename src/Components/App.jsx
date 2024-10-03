@@ -6,28 +6,12 @@ function App() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
-  const handleOpenHelp = () => {
-    setIsHelpOpen(true);
-  };
-
-  const handleCloseHelp = () => {
-    setIsHelpOpen(false);
-  };
-
-  const handleOpenAbout = () => {
-    setIsAboutOpen(true);
-  };
-
-  const handleCloseAbout = () => {
-    setIsAboutOpen(false);
-  };
-
   return (
     <div className="flex-base">
       <header>
-        <button onClick={handleOpenHelp}>Help</button>
+        <button onClick={() => setIsHelpOpen(!isHelpOpen)}>Help</button>
         <h2>Gap App</h2>
-        <button onClick={handleOpenAbout}>About</button>
+        <button onClick={() => setIsAboutOpen(!isAboutOpen)}>About</button>
       </header>
       
       <section className="input-fields">
@@ -65,8 +49,8 @@ function App() {
         </div>
       </section>
       {/* Dialog component */}
-      <Help isOpen={isHelpOpen} onClose={handleCloseHelp} />
-      <About isOpen={isAboutOpen} onClose={handleCloseAbout} />
+      <Help isOpen={isHelpOpen} onClose={() => setIsHelpOpen(!isHelpOpen)} />
+      <About isOpen={isAboutOpen} onClose={() => setIsAboutOpen(!isAboutOpen)} />
     </div>
   );
 }
