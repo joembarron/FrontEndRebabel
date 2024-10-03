@@ -6,11 +6,9 @@ const About = ({ isOpen, onClose }) => {
       <article>
         <h2>About</h2>
         <p>
-        Linguists use a variety of software tools to document endangered languages. 
-        They frequently need to move language data stored in one program into another, a process for which no automated and user-friendly tool exists. 
-        There is also no efficient way to import language data from the output of natural language processing (NLP) models into these software tools. 
-        The Gap App desktop application will enable linguists to convert between NLP output files and language data file formats used by software like Fieldworks Language Explorer (FLEx) and ELAN. 
-        The app will facilitate the speedy conversion between language data formats through an easy-to-use interface. 
+          Linguists rely on a variety of specialized software tools to document and preserve endangered languages.
+          A common challenge they face is the need to transfer language data between different applications, a process that currently lacks an automated and user-friendly solution.
+          Gap App provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.
         </p>
         <h3>Team Members:</h3>
         <ul>
