@@ -150,3 +150,6 @@ rebabel_scripts/build
 
 # databases
 *.db
+
+# venv
+.venv
