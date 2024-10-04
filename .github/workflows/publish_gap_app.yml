@@ -3,8 +3,10 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
 jobs:
-  build_on_mac:
+  build-Gap-App-on-Mac-OS:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@master
@@ -13,4 +15,16 @@ jobs:
     - uses: actions/setup-node@master
       with:
         node-version: '18'
-    - run: ls
+    - name: Install Node dependencies for Gap App  
+      run: npm install
+    - name: Create rebabel_convert executable using PyInstaller
+      shell: bash
+      run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller_mac_os
+    - name: Publish Gap App to GitHub releases
+      env:
+        GITHUB_TOKEN: ${{ secrets.ELECTRON_FORGE_PUBLISH_AUTH_TOKEN }}
+      run: npm run publish
+          
+          
+
+
