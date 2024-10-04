@@ -63,5 +63,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.ELECTRON_FORGE_PUBLISH_AUTH_TOKEN }}
       run: npm run publish
-          
-          
