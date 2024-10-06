@@ -1,0 +1,43 @@
+.flex-base {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+/* header {
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+} */
+
+.input-fields {
+  width: 60%;
+  padding-left: 5rem;
+}
+
+#file-in {
+  width: 60%;
+  margin-right: 1rem;
+}
+
+#file-type > select {
+  width: 30%;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.convert-btn {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1200px) {
+  .input-fields {
+    width: 40%;
+  }
+}
