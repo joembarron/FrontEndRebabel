@@ -1,0 +1,44 @@
+#!/bin/bash
+
+cd ./rebabel_scripts
+
+echo
+echo '--------------------------------------'
+echo 'Creating Python virtual environment...'
+echo '--------------------------------------'
+echo
+
+python3 -m venv .venv
+
+echo
+echo '----------------------------------------'
+echo 'Activating Python virtual environment...'
+echo '----------------------------------------'
+echo
+
+source .venv/bin/activate
+
+echo
+echo '----------------------------------------------'
+echo 'Installing dependencies in requirements.txt...'
+echo '----------------------------------------------'
+echo
+
+pip install -r requirements.txt
+
+echo
+echo '---------------------------------------------------------------------------'
+echo 'Creating executable from Python rebabel_convert script using PyInstaller...'
+echo '---------------------------------------------------------------------------'
+echo
+
+pyinstaller --onefile --collect-all rebabel_format rebabel_convert.py
+cp ./dist/rebabel_convert ./rebabel_convert
+
+echo 
+echo '------------------------------------------'
+echo 'Deactivating Python virtual environment...'
+echo '------------------------------------------'
+echo
+
+deactivate
