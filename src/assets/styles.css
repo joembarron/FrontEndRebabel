@@ -55,6 +55,17 @@ label {
   justify-content: center;
 }
 
+/* Additional Settings Styles */
+#additional-inputs {
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+  width: 40%;
+}
+
+.inputs {
+  width: 30%;
+}
+
 /* @media (min-width: 1200px) {
   .input-fields {
     width: 40%;
