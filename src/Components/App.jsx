@@ -9,7 +9,8 @@ const initialState = {
   inFileType: "",
   outFileType: "",
   mappings: [],
-  additionalSettings: [],
+  root: "",
+  skip: "",
 };
 
 function App() {
@@ -107,10 +108,14 @@ function App() {
         isOpen={isAboutOpen}
         onClose={() => setIsAboutOpen(!isAboutOpen)}
       />
-      <AdditionalSettings
-        isOpen={isAddSettingsOpen}
-        onClose={() => setAddSettingsOpen(!isAddSettingsOpen)}
-      />
+      {isAddSettingsOpen && (
+        <AdditionalSettings
+          isOpen={isAddSettingsOpen}
+          onClose={() => setAddSettingsOpen(!isAddSettingsOpen)}
+          data={data}
+          setData={setData}
+        />
+      )}
     </div>
   );
 }

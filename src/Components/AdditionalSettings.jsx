@@ -1,6 +1,13 @@
 import React from "react";
 
-function AdditionalSettings({ isOpen, onClose }) {
+function AdditionalSettings({ isOpen, onClose, data, setData }) {
+  function handleChanges(e) {
+    if (e.target.name == "root") {
+      setData((data) => ({ ...data, root: e.target.value }));
+    } else if (e.target.name == "skip") {
+      setData((data) => ({ ...data, skip: e.target.value }));
+    }
+  }
   return (
     <dialog id="a" open={isOpen} className="modal-overlay">
       <article>
@@ -9,19 +16,24 @@ function AdditionalSettings({ isOpen, onClose }) {
         <section id="additional-inputs">
           <div>
             <label>Root</label>
-            <input />
+            <input
+              name="root"
+              value={data.root}
+              onChange={(e) => handleChanges(e)}
+            />
           </div>
           <div>
             <label>Skip</label>
-            <input />
+            <input
+              name="skip"
+              value={data.skip}
+              onChange={(e) => handleChanges(e)}
+            />
           </div>
         </section>
         <footer>
           <button className="backBtn" onClick={onClose}>
-            Cancel
-          </button>
-          <button className="backBtn" onClick={onClose}>
-            Confirm
+            Close
           </button>
         </footer>
       </article>
