@@ -20,6 +20,7 @@ function AdditionalSettings({ isOpen, onClose, data, setData }) {
               name="root"
               value={data.root}
               onChange={(e) => handleChanges(e)}
+              aria-label="root settings"
             />
           </div>
           <div>
@@ -28,13 +29,12 @@ function AdditionalSettings({ isOpen, onClose, data, setData }) {
               name="skip"
               value={data.skip}
               onChange={(e) => handleChanges(e)}
+              aria-label="skip settings"
             />
           </div>
         </section>
         <footer>
-          <button className="backBtn" onClick={onClose}>
-            Close
-          </button>
+          <button onClick={onClose}>Close</button>
         </footer>
       </article>
     </dialog>
