@@ -92,7 +92,6 @@ function App() {
         <div className="settings-container">
           <button> Mappings</button>
           <button onClick={() => setAddSettingsOpen(true)}>
-            {" "}
             Additional Settings
           </button>
         </div>

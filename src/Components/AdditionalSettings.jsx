@@ -18,6 +18,7 @@ function AdditionalSettings({ isOpen, onClose, data, setData }) {
             <label>Root</label>
             <input
               name="root"
+              type="text"
               value={data.root}
               onChange={(e) => handleChanges(e)}
               aria-label="root settings"
@@ -27,6 +28,7 @@ function AdditionalSettings({ isOpen, onClose, data, setData }) {
             <label>Skip</label>
             <input
               name="skip"
+              type="text"
               value={data.skip}
               onChange={(e) => handleChanges(e)}
               aria-label="skip settings"
