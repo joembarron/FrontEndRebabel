@@ -4,8 +4,8 @@ import About from "./About.jsx";
 import AdditionalSettings from "./AdditionalSettings.jsx";
 
 const initialState = {
-  filePath: "",
-  fileName: "",
+  filePath: [],
+  fileName: [],
   inFileType: "",
   outFileType: "",
   mappings: [],
@@ -58,9 +58,13 @@ function App() {
             id="file-in"
             readOnly="readonly"
             placeholder="Select File..."
-            value={data.fileName}
+            value={data.fileName.join(", ")}
           />
-          <button id="file-in-btn" onClick={() => handleSelectFile()}>
+          <button
+            data-tooltip="Hold Ctrl to Select Multiple Files"
+            id="file-in-btn"
+            onClick={() => handleSelectFile()}
+          >
             Browse
           </button>
         </div>
