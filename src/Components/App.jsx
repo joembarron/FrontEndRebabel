@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Help from "./Help.jsx";
 import About from "./About.jsx";
+import AdditionalSettings from "./AdditionalSettings.jsx";
 
 const initialState = {
   filePath: "",
@@ -8,12 +9,14 @@ const initialState = {
   inFileType: "",
   outFileType: "",
   mappings: [],
-  additionalSettings: [],
+  root: "",
+  skip: "",
 };
 
 function App() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
 
   const [data, setData] = useState(initialState);
   async function rebabel() {
@@ -88,7 +91,9 @@ function App() {
         </div>
         <div className="settings-container">
           <button> Mappings</button>
-          <button> Additional Settings</button>
+          <button onClick={() => setAddSettingsOpen(true)}>
+            Additional Settings
+          </button>
         </div>
         <div className="convert-btn">
           <button id="convertBtn" onClick={() => rebabel()}>
@@ -102,6 +107,14 @@ function App() {
         isOpen={isAboutOpen}
         onClose={() => setIsAboutOpen(!isAboutOpen)}
       />
+      {isAddSettingsOpen && (
+        <AdditionalSettings
+          isOpen={isAddSettingsOpen}
+          onClose={() => setAddSettingsOpen(!isAddSettingsOpen)}
+          data={data}
+          setData={setData}
+        />
+      )}
     </div>
   );
 }
