@@ -45,6 +45,7 @@ app.whenReady().then(() => {
     let filePaths = [];
     let fileNames = [];
 
+    //loops through selected files and adds to filePaths and fileNames arrays
     for (let i = 0; i < filePathSelect.length; i++) {
       filePaths.push(filePathSelect[i]);
 
