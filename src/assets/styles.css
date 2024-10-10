@@ -66,6 +66,11 @@ label {
   width: 30%;
 }
 
+.loading-status {
+  font-weight: 500;
+  color: #6a6a6a;
+}
+
 /* @media (min-width: 1200px) {
   .input-fields {
     width: 40%;
