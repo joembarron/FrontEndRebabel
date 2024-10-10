@@ -14,13 +14,15 @@ const initialState = {
 };
 
 function App() {
+  //Sets state for file conversion
+  const [data, setData] = useState(initialState);
+  //Set state for modals
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
 
-  const [data, setData] = useState(initialState);
-  async function rebabel() {
-    const response = await window.pythonApi.rebabelConvert();
+  async function convertFiles() {
+    const response = await window.pythonApi.rebabelConvert(data);
   }
 
   async function handleSelectFile() {
@@ -100,7 +102,7 @@ function App() {
           </button>
         </div>
         <div className="convert-btn">
-          <button id="convertBtn" onClick={() => rebabel()}>
+          <button id="convertBtn" onClick={() => convertFiles()}>
             Convert
           </button>
         </div>

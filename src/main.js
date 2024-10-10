@@ -59,7 +59,7 @@ app.whenReady().then(() => {
     return { filePath: filePaths, fileName: fileNames };
   });
 
-  ipcMain.handle("rebabelConvert", async (event) => {
+  ipcMain.handle("rebabelConvert", async (event, data) => {
     let conversionFailure = false;
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
