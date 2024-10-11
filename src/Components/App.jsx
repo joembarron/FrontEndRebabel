@@ -4,8 +4,8 @@ import About from "./About.jsx";
 import AdditionalSettings from "./AdditionalSettings.jsx";
 
 const initialState = {
-  filePath: "",
-  fileName: "",
+  filePath: [],
+  fileName: [],
   inFileType: "",
   outFileType: "",
   mappings: [],
@@ -14,13 +14,23 @@ const initialState = {
 };
 
 function App() {
+  //Sets state for file conversion
+  const [data, setData] = useState(initialState);
+  //Set state for modals
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
+  //Sets loading status for file conversion
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [data, setData] = useState(initialState);
-  async function rebabel() {
-    const response = await window.pythonApi.rebabelConvert();
+  async function convertFiles() {
+    setIsLoading(true);
+    const response = await window.pythonApi.rebabelConvert(data);
+
+    //Temporary setTimeout to show loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
   }
 
   async function handleSelectFile() {
@@ -58,9 +68,15 @@ function App() {
             id="file-in"
             readOnly="readonly"
             placeholder="Select File..."
-            value={data.fileName}
+            value={data.fileName.join(", ")}
+            disabled={isLoading}
           />
-          <button id="file-in-btn" onClick={() => handleSelectFile()}>
+          <button
+            data-tooltip="Hold Ctrl to Select Multiple Files"
+            id="file-in-btn"
+            onClick={() => handleSelectFile()}
+            disabled={isLoading}
+          >
             Browse
           </button>
         </div>
@@ -70,6 +86,7 @@ function App() {
             aria-label="Select File Type"
             name="inputType"
             onChange={(e) => handleSelectType(e)}
+            disabled={isLoading}
           >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
@@ -83,6 +100,7 @@ function App() {
             aria-label="Select File Type"
             name="outputType"
             onChange={(e) => handleSelectType(e)}
+            disabled={isLoading}
           >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
@@ -90,15 +108,26 @@ function App() {
           </select>
         </div>
         <div className="settings-container">
-          <button> Mappings</button>
-          <button onClick={() => setAddSettingsOpen(true)}>
+          <button disabled={isLoading}> Mappings</button>
+          <button onClick={() => setAddSettingsOpen(true)} disabled={isLoading}>
             Additional Settings
           </button>
         </div>
         <div className="convert-btn">
-          <button id="convertBtn" onClick={() => rebabel()}>
-            Convert
-          </button>
+          {!isLoading && (
+            <button
+              id="convertBtn"
+              onClick={() => convertFiles()}
+              disabled={isLoading}
+            >
+              Convert
+            </button>
+          )}
+          {isLoading && (
+            <span className="loading-status" aria-busy="true">
+              Converting...
+            </span>
+          )}
         </div>
       </section>
       {/* Dialog component */}

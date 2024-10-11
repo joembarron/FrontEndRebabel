@@ -33,22 +33,33 @@ app.whenReady().then(() => {
   createWindow();
 
   ipcMain.handle("selectFile", async () => {
-    const filePath = dialog.showOpenDialogSync({
-      properties: ["openFile"],
+    const filePathSelect = dialog.showOpenDialogSync({
+      properties: ["openFile", "multiSelections"],
     });
 
     //if user cancels
-    if (filePath == undefined) {
+    if (filePathSelect == undefined) {
       return undefined;
     }
 
-    //gets fileName from absolute path
-    const fileName = path.basename(filePath[0]);
+    let filePaths = [];
+    let fileNames = [];
 
-    return { filePath: filePath[0], fileName: fileName };
+    //loops through selected files and adds to filePaths and fileNames arrays
+    for (let i = 0; i < filePathSelect.length; i++) {
+      filePaths.push(filePathSelect[i]);
+
+      fileNames.push(path.basename(filePathSelect[i]));
+    }
+
+    //For initial single file selection
+    //gets fileName from absolute path
+    //const fileName = path.basename(filePath[0]);
+
+    return { filePath: filePaths, fileName: fileNames };
   });
 
-  ipcMain.handle("rebabelConvert", async (event) => {
+  ipcMain.handle("rebabelConvert", async (event, data) => {
     let conversionFailure = false;
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
