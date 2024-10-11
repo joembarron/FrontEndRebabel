@@ -8,8 +8,16 @@ module.exports = {
   rebuildConfig: {},
   makers: [
     {
+      platforms: ['darwin'],
       name: '@electron-forge/maker-zip'
     },
+    {
+      name: '@electron-forge/maker-deb',
+      config: {
+        options: {
+        }
+      }
+    }
   ],
   publishers: [
     {
