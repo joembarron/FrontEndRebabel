@@ -8,8 +8,16 @@ module.exports = {
   rebuildConfig: {},
   makers: [
     {
+      platforms: ['darwin'],
       name: '@electron-forge/maker-zip'
     },
+    {
+      platforms: ['linux'],
+      name: '@electron-forge/maker-deb',
+      config: {
+        options: {}
+      }
+    }
   ],
   publishers: [
     {
@@ -17,7 +25,7 @@ module.exports = {
       config: {
         repository: {
           owner: 'ElizabethThorner',
-          name: 'Gap-App'
+          name: 'FrontEndGapApp'
         },
         force: true,
         prerelease: true,
@@ -60,4 +68,4 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
-};
+}
