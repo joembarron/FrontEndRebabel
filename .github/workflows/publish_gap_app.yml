@@ -22,7 +22,7 @@ jobs:
         run: npm install
       - name: Create rebabel_convert executable using PyInstaller
         shell: bash
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller_mac_os
+        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller
       - name: Publish Gap App to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +40,7 @@ jobs:
         run: npm install
       - name: Create rebabel_convert executable using PyInstaller
         shell: bash
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller_mac_os
+        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller
       - name: Publish Gap App to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
