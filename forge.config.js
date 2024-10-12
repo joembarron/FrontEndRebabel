@@ -25,7 +25,7 @@ module.exports = {
       config: {
         repository: {
           owner: 'ElizabethThorner',
-          name: 'Gap-App'
+          name: 'FrontEndGapApp'
         },
         force: true,
         prerelease: true,
