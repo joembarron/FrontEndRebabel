@@ -1,18 +1,36 @@
 import React, { useState } from "react";
+import Help from "./Help.jsx";
+import About from "./About.jsx";
+import AdditionalSettings from "./AdditionalSettings.jsx";
 
 const initialState = {
-  filePath: "",
-  fileName: "",
+  filePath: [],
+  fileName: [],
   inFileType: "",
   outFileType: "",
   mappings: [],
-  additionalSettings: [],
+  root: "",
+  skip: "",
 };
 
 function App() {
+  //Sets state for file conversion
   const [data, setData] = useState(initialState);
-  async function rebabel() {
-    const response = await window.pythonApi.rebabelConvert();
+  //Set state for modals
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
+  //Sets loading status for file conversion
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function convertFiles() {
+    setIsLoading(true);
+    const response = await window.pythonApi.rebabelConvert(data);
+
+    //Temporary setTimeout to show loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
   }
 
   async function handleSelectFile() {
@@ -37,16 +55,28 @@ function App() {
   }
 
   return (
-    <div className="flex-base">
+    <div className="container flex-base">
+      <header>
+        <button onClick={() => setIsHelpOpen(!isHelpOpen)}>Help</button>
+        <h2>Gap App</h2>
+        <button onClick={() => setIsAboutOpen(!isAboutOpen)}>About</button>
+      </header>
+
       <section className="input-fields">
         <div className="select-file">
           <input
             id="file-in"
             readOnly="readonly"
             placeholder="Select File..."
-            value={data.fileName}
+            value={data.fileName.join(", ")}
+            disabled={isLoading}
           />
-          <button id="file-in-btn" onClick={() => handleSelectFile()}>
+          <button
+            data-tooltip="Hold Ctrl to Select Multiple Files"
+            id="file-in-btn"
+            onClick={() => handleSelectFile()}
+            disabled={isLoading}
+          >
             Browse
           </button>
         </div>
@@ -56,6 +86,7 @@ function App() {
             aria-label="Select File Type"
             name="inputType"
             onChange={(e) => handleSelectType(e)}
+            disabled={isLoading}
           >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
@@ -63,26 +94,56 @@ function App() {
             <option value="nlp_pos">NLP</option>
           </select>
         </div>
-        <div>Mappings?</div>
-        <div>Additional Settings?</div>
         <div id="file-type">
           <label>File output type</label>
           <select
             aria-label="Select File Type"
             name="outputType"
             onChange={(e) => handleSelectType(e)}
+            disabled={isLoading}
           >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
             <option value="nlp_pos">NLP</option>
           </select>
         </div>
-        <div className="convert-btn">
-          <button id="convertBtn" onClick={() => rebabel()}>
-            Convert
+        <div className="settings-container">
+          <button disabled={isLoading}> Mappings</button>
+          <button onClick={() => setAddSettingsOpen(true)} disabled={isLoading}>
+            Additional Settings
           </button>
         </div>
+        <div className="convert-btn">
+          {!isLoading && (
+            <button
+              id="convertBtn"
+              onClick={() => convertFiles()}
+              disabled={isLoading}
+            >
+              Convert
+            </button>
+          )}
+          {isLoading && (
+            <span className="loading-status" aria-busy="true">
+              Converting...
+            </span>
+          )}
+        </div>
       </section>
+      {/* Dialog component */}
+      <Help isOpen={isHelpOpen} onClose={() => setIsHelpOpen(!isHelpOpen)} />
+      <About
+        isOpen={isAboutOpen}
+        onClose={() => setIsAboutOpen(!isAboutOpen)}
+      />
+      {isAddSettingsOpen && (
+        <AdditionalSettings
+          isOpen={isAddSettingsOpen}
+          onClose={() => setAddSettingsOpen(!isAddSettingsOpen)}
+          data={data}
+          setData={setData}
+        />
+      )}
     </div>
   );
 }
