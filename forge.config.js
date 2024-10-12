@@ -12,10 +12,10 @@ module.exports = {
       name: '@electron-forge/maker-zip'
     },
     {
+      platforms: ['linux'],
       name: '@electron-forge/maker-deb',
       config: {
-        options: {
-        }
+        options: {}
       }
     }
   ],
@@ -68,4 +68,4 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
-};
+}
