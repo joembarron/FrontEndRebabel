@@ -2,36 +2,22 @@ import React from "react";
 
 function Mappings({ isOpen, onClose, data, setData }) {
   function handleChanges(e) {
-    if (e.target.name == "root") {
-      setData((data) => ({ ...data, root: e.target.value }));
-    } else if (e.target.name == "skip") {
-      setData((data) => ({ ...data, skip: e.target.value }));
-    }
+    setData((data) => ({ ...data, mappings: e.target.value }));
   }
   return (
     <dialog id="a" open={isOpen} className="modal-overlay">
       <article>
         <h2>Mappings</h2>
         <hr></hr>
-        <section id="additional-inputs">
+        <section id="mappings-inputs">
           <div>
-            <label>Root</label>
+            <label>Mappings</label>
             <input
-              name="root"
+              name="mappings"
               type="text"
-              value={data.root}
+              value={data.mappings}
               onChange={(e) => handleChanges(e)}
-              aria-label="root settings"
-            />
-          </div>
-          <div>
-            <label>Skip</label>
-            <input
-              name="skip"
-              type="text"
-              value={data.skip}
-              onChange={(e) => handleChanges(e)}
-              aria-label="skip settings"
+              aria-label="mappings settings"
             />
           </div>
         </section>
