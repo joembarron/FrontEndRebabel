@@ -142,3 +142,18 @@ function initiateSaveAs(data) {
 
   return outputFileNamePath;
 }
+
+//Takes an input FileName and creates a default fileName
+//Ex: file1.eaf => file1.flextext
+function setOutputFileName(data) {
+  let inputFileName = data.fileName[0];
+
+  let extension = path.extname(inputFileName);
+  let nameBeforePeriod = path.basename(inputFileName, extension);
+
+  let outputFileType = data.outFileType;
+
+  let outputFileName = nameBeforePeriod + FileExtensions[outputFileType];
+
+  return outputFileName;
+}
