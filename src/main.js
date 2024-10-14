@@ -6,6 +6,13 @@ const execFilePromisified = util.promisify(
   require("node:child_process").execFile
 );
 
+const FileExtensions = {
+  flextext: ".flextext",
+  conllu: ".conllu",
+  elan: ".eaf",
+  nlp_pos: ".txt",
+};
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
