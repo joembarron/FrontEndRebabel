@@ -70,10 +70,16 @@ app.whenReady().then(() => {
     let conversionFailure = false;
     let outPutFileNamePath = "";
 
+    //calls saveAs dialog if fileName and output file type aren't empty
     if (data.fileName.length === 0 || data.outFileType === "") {
       return "error";
     } else {
       outPutFileNamePath = initiateSaveAs(data);
+    }
+
+    //user cancels
+    if (outPutFileNamePath === "cancelled") {
+      return "cancelled";
     }
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
