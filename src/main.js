@@ -68,6 +68,13 @@ app.whenReady().then(() => {
 
   ipcMain.handle("rebabelConvert", async (event, data) => {
     let conversionFailure = false;
+    let outPutFileNamePath = "";
+
+    if (data.fileName.length === 0 || data.outFileType === "") {
+      return "error";
+    } else {
+      outPutFileNamePath = initiateSaveAs(data);
+    }
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     const { stdout, stderr } = await execFilePromisified(
@@ -117,3 +124,21 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+function initiateSaveAs(data) {
+  //Calls a function to create initial output fileName for SaveAs dialog
+  //I.e. takes an infile abc.inExt and turns into abc.outExt
+  let outputFileName = setOutputFileName(data);
+
+  //Gets absolute path
+  let outputFileNamePath = dialog.showSaveDialogSync({
+    defaultPath: outputFileName,
+  });
+
+  //user cancels SaveAs
+  if (outputFileNamePath === "") {
+    return "cancelled";
+  }
+
+  return outputFileNamePath;
+}
