@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Help from "./Help.jsx";
 import About from "./About.jsx";
 import AdditionalSettings from "./AdditionalSettings.jsx";
+import NLPConfig from "./NLPConfig.jsx";
 
 const initialState = {
   filePath: [],
@@ -20,6 +21,7 @@ function App() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
+  const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,6 +51,10 @@ function App() {
   function handleSelectType(e) {
     if (e.target.name === "inputType") {
       setData((data) => ({ ...data, inFileType: e.target.value }));
+
+      if (e.target.value === "nlp_pos") {
+        setNLPConfigOpen(() => !isNLPConfigOpen);
+      }
     } else if (e.target.name === "outputType") {
       setData((data) => ({ ...data, outFileType: e.target.value }));
     }
@@ -142,6 +148,12 @@ function App() {
           onClose={() => setAddSettingsOpen(!isAddSettingsOpen)}
           data={data}
           setData={setData}
+        />
+      )}
+      {isNLPConfigOpen && (
+        <NLPConfig
+          isOpen={isNLPConfigOpen}
+          onClose={() => setNLPConfigOpen(!isNLPConfigOpen)}
         />
       )}
     </div>
