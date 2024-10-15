@@ -8,6 +8,10 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
       setData((data) => ({ ...data, nlpFileType: e.target.id }));
     }
   }
+
+  function handleDelimiterChange(e) {
+    setData((data) => ({ ...data, delimiter: e.target.value }));
+  }
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
@@ -33,6 +37,17 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
             />
             <label htmlFor="separate">Part of Speech and Language Files</label>
           </fieldset>
+          {data.nlpFileType === "combined" && (
+            <div>
+              <label>NLP Delimiter</label>
+              <input
+                type="text"
+                id="delimiter"
+                value={data.delimiter}
+                onChange={(e) => handleDelimiterChange(e)}
+              />
+            </div>
+          )}
         </section>
         <footer>
           <button onClick={onClose}>Close</button>
