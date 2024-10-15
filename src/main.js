@@ -112,6 +112,16 @@ app.whenReady().then(() => {
     console.log(root);
     console.log(skip);
 
+    const { filePath, fileName, inFileType, outFileType, mappings, root, skip } = data;
+
+    console.log(filePath);
+    console.log(fileName);
+    console.log(inFileType);
+    console.log(outFileType);
+    console.log(mappings);
+    console.log(root);
+    console.log(skip);
+
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     const { stdout, stderr } = await execFilePromisified(
       "./rebabel_scripts/rebabel_convert",
