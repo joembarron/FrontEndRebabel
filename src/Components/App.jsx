@@ -9,6 +9,10 @@ const initialState = {
   fileName: [],
   inFileType: "",
   outFileType: "",
+  delimiter: "",
+  nlpFileType: "",
+  partOfSpeechFile: "",
+  languageFile: "",
   mappings: [],
   root: "",
   skip: "",
@@ -154,6 +158,8 @@ function App() {
         <NLPConfig
           isOpen={isNLPConfigOpen}
           onClose={() => setNLPConfigOpen(!isNLPConfigOpen)}
+          data={data}
+          setData={setData}
         />
       )}
     </div>
