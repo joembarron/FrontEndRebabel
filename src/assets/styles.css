@@ -71,8 +71,14 @@ label {
   color: #6a6a6a;
 }
 
-/* @media (min-width: 1200px) {
-  .input-fields {
-    width: 40%;
-  }
-} */
+/* Styles for NLPConfig Component */
+.nlp-input {
+  padding: 0rem 0.7rem 0rem 0.7rem;
+}
+
+#combined,
+separate {
+  margin-left: 0.3rem;
+}
+
+/* End NLPConfig */

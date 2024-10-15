@@ -25,7 +25,7 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
       <article>
         <h2>NLP Configuration Settings</h2>
         <hr></hr>
-        <section>
+        <section className="nlp-input">
           <fieldset>
             <legend>NLP File Type:</legend>
             <input
