@@ -71,13 +71,17 @@ label {
   color: #6a6a6a;
 }
 
+/* Error coloring */
+.error {
+  color: #c52f21;
+}
+
 /* Styles for NLPConfig Component */
 .nlp-input {
   padding: 0rem 0.7rem 0rem 0.7rem;
 }
 
-#combined,
-separate {
+#combined {
   margin-left: 0.3rem;
 }
 

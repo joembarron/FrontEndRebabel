@@ -59,7 +59,7 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
           {data.nlpFileType === "separate" && (
             <div>
               {data.fileName.length < 2 && (
-                <p>
+                <p className="error">
                   Error! Please Upload a Part of Speech File and a Language File
                 </p>
               )}
