@@ -103,6 +103,15 @@ function App() {
             <option value="conllu">Conllu</option>
             <option value="nlp_pos">NLP</option>
           </select>
+          {data.inFileType === "nlp_pos" && (
+            <button
+              className="nlp-button"
+              disabled={isLoading}
+              onClick={() => setNLPConfigOpen(!isNLPConfigOpen)}
+            >
+              NLP Settings
+            </button>
+          )}
         </div>
         <div id="file-type">
           <label>File output type</label>
