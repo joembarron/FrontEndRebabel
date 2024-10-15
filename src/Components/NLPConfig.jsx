@@ -12,6 +12,14 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
   function handleDelimiterChange(e) {
     setData((data) => ({ ...data, delimiter: e.target.value }));
   }
+
+  function handleFileChange(e) {
+    if (e.target.name === "partOfSpeech") {
+      setData((data) => ({ ...data, partOfSpeechFile: e.target.value }));
+    } else if (e.target.name === "language") {
+      setData((data) => ({ ...data, languageFile: e.target.value }));
+    }
+  }
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
@@ -46,6 +54,45 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
                 value={data.delimiter}
                 onChange={(e) => handleDelimiterChange(e)}
               />
+            </div>
+          )}
+          {data.nlpFileType === "separate" && (
+            <div>
+              {data.fileName.length < 2 && (
+                <p>
+                  Error! Please Upload a Part of Speech File and a Language File
+                </p>
+              )}
+              {data.fileName.length === 2 && (
+                <div>
+                  <label>Part of Speech File</label>
+                  <select
+                    name="partOfSpeech"
+                    onChange={(e) => handleFileChange(e)}
+                    aria-label="Select Part of Speech File"
+                  >
+                    <option defaultValue={""}></option>
+                    {data.fileName.map((name) => (
+                      <option value={name} key={name}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                  <label>Language File</label>
+                  <select
+                    name="language"
+                    onChange={(e) => handleFileChange(e)}
+                    aria-label="Select Language File"
+                  >
+                    <option defaultValue={""}></option>
+                    {data.fileName.map((name) => (
+                      <option value={name} key={name}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
           )}
         </section>
