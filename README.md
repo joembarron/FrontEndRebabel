@@ -15,4 +15,6 @@ https://github.com/user-attachments/assets/2d26076c-cc3c-4107-a997-a327699756a9
 https://github.com/user-attachments/assets/8a2e8899-2cf1-421b-a0fd-76f046e0b421
 
 ## Windows 
-  - coming soon
+  - .Setup.exe
+
+https://github.com/user-attachments/assets/dce5a424-8e19-49ee-80e4-b36995de4967
