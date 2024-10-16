@@ -1,6 +1,10 @@
 import React from "react";
 
 function NLPConfig({ isOpen, onClose, data, setData }) {
+  //Creates copy of FileNames for selecting two file input
+  const fileNames = [...data.fileName];
+  fileNames.unshift("");
+
   function handleRadioChange(e) {
     if (e.target.id === "combined") {
       setData((data) => ({ ...data, nlpFileType: e.target.id }));
@@ -69,10 +73,10 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
                   <select
                     name="partOfSpeech"
                     onChange={(e) => handleFileChange(e)}
+                    value={data.partOfSpeechFile}
                     aria-label="Select Part of Speech File"
                   >
-                    <option defaultValue={""}></option>
-                    {data.fileName.map((name) => (
+                    {fileNames.map((name) => (
                       <option value={name} key={name}>
                         {name}
                       </option>
@@ -82,10 +86,10 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
                   <select
                     name="language"
                     onChange={(e) => handleFileChange(e)}
+                    value={data.languageFile}
                     aria-label="Select Language File"
                   >
-                    <option defaultValue={""}></option>
-                    {data.fileName.map((name) => (
+                    {fileNames.map((name) => (
                       <option value={name} key={name}>
                         {name}
                       </option>
