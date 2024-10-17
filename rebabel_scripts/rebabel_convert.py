@@ -2,7 +2,7 @@ import json
 import sys
 import rebabel_format
 
-(script_name, import_mode, output_mode, infile, outfile,
+(script_name, inType, outType, inPath, outPath,
  nlpFileType, partOfSpeechFile, languageFile, delimiter, mappings, root, skip) = sys.argv
 mappings = json.loads(mappings)
 
@@ -13,18 +13,18 @@ rebabel_format.get_process_parameters("export")
 
 rebabel_format.run_command(
     "import",
-    mode=import_mode,
+    mode=inType,
     db="temp.db",
-    infiles=[infile],
+    infiles=[inPath],
     delimiter=delimiter
 )
 
 rebabel_format.run_command(
     "export",
-    mode=output_mode,
+    mode=outType,
     db="temp.db",
     outfile="out.flextext",
     mappings=mappings["mappings"],
-    root="phrase",
-    skip=["morph"],
+    root=root,
+    skip=skip,
 )

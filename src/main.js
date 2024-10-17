@@ -122,8 +122,8 @@ app.whenReady().then(() => {
         delimiter,
         filePath,
         '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
-        root,
-        skip
+        "phrase",
+        ["morph"]
       ]
     );
 
