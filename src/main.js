@@ -82,15 +82,32 @@ app.whenReady().then(() => {
       return "cancelled";
     }
 
-    const { filePath, fileName, inFileType, outFileType, mappings, root, skip } = data;
+    const { 
+      filePath, 
+      fileName, 
+      inFileType, 
+      outFileType, 
+      delimiter, 
+      nlpFileType, 
+      partOfSpeechFile, 
+      languageFile, 
+      mappings, 
+      root, 
+      skip 
+    } = data;
 
     console.log(filePath);
     console.log(fileName);
     console.log(inFileType);
     console.log(outFileType);
+    console.log(delimiter);
+    console.log(nlpFileType);
+    console.log(partOfSpeechFile);
+    console.log(languageFile);
     console.log(mappings);
     console.log(root);
     console.log(skip);
+    console.log(outPutFileNamePath);
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     const { stdout, stderr } = await execFilePromisified(
@@ -98,7 +115,7 @@ app.whenReady().then(() => {
       [
         inFileType,
         outFileType,
-        "/",
+        delimiter,
         filePath,
         '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
       ]
