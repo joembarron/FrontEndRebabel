@@ -141,7 +141,6 @@ dist
 out/
 
 # rebabel exe
-main.exe
 rebabel.exe
 rebabel
 rebabel_scripts/rebabel_convert.exe

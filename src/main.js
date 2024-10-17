@@ -82,15 +82,47 @@ app.whenReady().then(() => {
       return "cancelled";
     }
 
+    const { 
+      filePath, 
+      fileName, 
+      inFileType, 
+      outFileType, 
+      delimiter, 
+      nlpFileType, 
+      partOfSpeechFile, 
+      languageFile, 
+      mappings, 
+      root, 
+      skip 
+    } = data;
+
+    console.log(inFileType);
+    console.log(outFileType);
+    console.log(filePath);
+    console.log(outPutFileNamePath);
+    console.log(nlpFileType);
+    console.log(partOfSpeechFile);
+    console.log(languageFile);
+    console.log(delimiter);
+    console.log(mappings);
+    console.log(root);
+    console.log(skip);
+
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     const { stdout, stderr } = await execFilePromisified(
       "./rebabel_scripts/rebabel_convert",
       [
-        "nlp_pos",
-        "flextext",
-        "/",
-        "nlp_pos.txt",
-        '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
+        inFileType,
+        outFileType,
+        filePath,
+        outPutFileNamePath,
+        nlpFileType,
+        partOfSpeechFile,
+        languageFile,
+        delimiter,
+        mappings,
+        root,
+        skip
       ]
     );
 
