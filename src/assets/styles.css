@@ -71,8 +71,24 @@ label {
   color: #6a6a6a;
 }
 
-/* @media (min-width: 1200px) {
-  .input-fields {
-    width: 40%;
-  }
-} */
+/* Error coloring */
+.error {
+  color: #c52f21;
+}
+
+.nlp-button {
+  font-size: 0.8rem;
+  padding: 0.7rem;
+  margin-left: 0.7rem;
+}
+
+/* Styles for NLPConfig Component */
+.nlp-input {
+  padding: 0rem 0.7rem 0rem 0.7rem;
+}
+
+#combined {
+  margin-left: 0.3rem;
+}
+
+/* End NLPConfig */
