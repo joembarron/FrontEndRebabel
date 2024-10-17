@@ -142,7 +142,7 @@ function initiateSaveAs(data) {
   });
 
   //user cancels SaveAs
-  if (outputFileNamePath === "") {
+  if (outputFileNamePath === undefined) {
     return "cancelled";
   }
 
