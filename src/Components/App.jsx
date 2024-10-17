@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Help from "./Help.jsx";
 import About from "./About.jsx";
 import AdditionalSettings from "./AdditionalSettings.jsx";
+import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
 
 const initialState = {
@@ -25,6 +26,7 @@ function App() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
+  const [isMappingsOpen, setMappingsOpen] = useState(false);
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
@@ -127,7 +129,9 @@ function App() {
           </select>
         </div>
         <div className="settings-container">
-          <button disabled={isLoading}> Mappings</button>
+          <button onClick={() => setMappingsOpen(true)} disabled={isLoading}>
+            Mappings
+          </button>
           <button onClick={() => setAddSettingsOpen(true)} disabled={isLoading}>
             Additional Settings
           </button>
@@ -155,6 +159,14 @@ function App() {
         isOpen={isAboutOpen}
         onClose={() => setIsAboutOpen(!isAboutOpen)}
       />
+      {isMappingsOpen && (
+        <Mappings
+          isOpen={isMappingsOpen}
+          onClose={() => setMappingsOpen(!isMappingsOpen)}
+          data={data}
+          setData={setData}
+        />
+      )}
       {isAddSettingsOpen && (
         <AdditionalSettings
           isOpen={isAddSettingsOpen}
