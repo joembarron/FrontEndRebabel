@@ -23,7 +23,7 @@ rebabel_format.run_command(
     "export",
     mode=outType,
     db="temp.db",
-    outfile="out.flextext",
+    outfile=outPath,
     mappings=mappings["mappings"],
     root="phrase",
     skip=["morph"]
