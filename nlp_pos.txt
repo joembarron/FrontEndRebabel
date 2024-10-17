@@ -1,9 +1,0 @@
-The/DET
-quick/ADJ
-brown/ADJ
-fox/NOUN
-jumps/VERB
-over/ADP
-the/DET
-lazy/ADJ
-dog/NOUN
