@@ -25,6 +25,6 @@ rebabel_format.run_command(
     db="temp.db",
     outfile="out.flextext",
     mappings=mappings["mappings"],
-    root=root,
-    skip=skip,
+    root="phrase",
+    skip=["morph"]
 )
