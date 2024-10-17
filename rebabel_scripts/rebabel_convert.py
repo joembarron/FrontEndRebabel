@@ -2,7 +2,8 @@ import json
 import sys
 import rebabel_format
 
-script_name, import_mode, output_mode, delimiter, infile, mappings = sys.argv
+(script_name, import_mode, output_mode, infile, outfile,
+ nlpFileType, partOfSpeechFile, languageFile, delimiter, mappings, root, skip) = sys.argv
 mappings = json.loads(mappings)
 
 rebabel_format.load_processes(True)
