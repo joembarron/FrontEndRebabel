@@ -3,6 +3,7 @@ import Help from "./Help.jsx";
 import About from "./About.jsx";
 import AdditionalSettings from "./AdditionalSettings.jsx";
 import Mappings from "./Mappings.jsx";
+import NLPConfig from "./NLPConfig.jsx";
 
 const initialState = {
   filePath: [],
@@ -22,6 +23,7 @@ function App() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
   const [isMappingsOpen, setMappingsOpen] = useState(false);
+  const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
 
