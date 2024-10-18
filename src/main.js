@@ -95,7 +95,7 @@ app.whenReady().then(() => {
       root,
       skip,
     } = data;
-
+    
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     const { stdout, stderr } = await execFilePromisified(
       "./rebabel_scripts/rebabel_convert",
@@ -108,7 +108,7 @@ app.whenReady().then(() => {
         partOfSpeechFile,
         languageFile,
         delimiter,
-        mappings,
+        JSON.stringify(mappings),
         root,
         skip,
       ]
