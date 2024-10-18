@@ -2,23 +2,67 @@ import React from "react";
 
 function Mappings({ isOpen, onClose, data, setData }) {
   function handleChanges(e) {
-    setData((data) => ({ ...data, mappings: e.target.value }));
+    data.mappings[e.target.id] = {
+      ...data.mappings[e.target.id],
+      [e.target.name]: e.target.value,
+    };
+
+    setData((data) => ({ ...data }));
   }
+
   return (
     <dialog id="a" open={isOpen} className="modal-overlay">
       <article>
         <h2>Mappings</h2>
         <hr></hr>
         <section id="mappings-inputs">
-          <div>
-            <label>Mappings</label>
-            <input
-              name="mappings"
-              type="text"
-              value={data.mappings}
-              onChange={(e) => handleChanges(e)}
-              aria-label="mappings settings"
-            />
+          <div className="mappings-container">
+            <div className="input-container left">
+              <label>In Type</label>
+              <input
+                name="in_type"
+                id="0"
+                type="text"
+                value={data.mappings[0].in_type}
+                onChange={(e) => handleChanges(e)}
+                aria-label="In type settings"
+              />
+            </div>
+            <div className="input-container">
+              <label>Out Type</label>
+              <input
+                name="out_type"
+                id="0"
+                type="text"
+                value={data.mappings[0].out_type}
+                onChange={(e) => handleChanges(e)}
+                aria-label="Out type settings"
+              />
+            </div>
+          </div>
+          <div className="mappings-container">
+            <div className="input-container left">
+              <label>In Feature</label>
+              <input
+                name="in_feature"
+                type="text"
+                id="1"
+                value={data.mappings[1].in_feature}
+                onChange={(e) => handleChanges(e)}
+                aria-label="In feature settings"
+              />
+            </div>
+            <div className="input-container">
+              <label>Out Feature</label>
+              <input
+                name="out_feature"
+                type="text"
+                id="1"
+                value={data.mappings[1].out_feature}
+                onChange={(e) => handleChanges(e)}
+                aria-label="Out feature settings"
+              />
+            </div>
           </div>
         </section>
         <footer>

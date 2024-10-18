@@ -14,7 +14,10 @@ const initialState = {
   nlpFileType: "",
   partOfSpeechFile: "",
   languageFile: "",
-  mappings: [],
+  mappings: [
+    { in_type: "", out_type: "" },
+    { in_feature: "", out_feature: "" },
+  ],
   root: "",
   skip: "",
 };
