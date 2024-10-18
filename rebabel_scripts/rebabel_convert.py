@@ -46,6 +46,7 @@ else:
         mode = inType,
         db = "temp.db",
         infiles = [inPath],
+        nlpFileType = "combined",
         delimiter = delimiter,
     )
 
