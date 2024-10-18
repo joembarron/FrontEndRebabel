@@ -25,7 +25,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
                 type="text"
                 value={data.mappings[0].in_type}
                 onChange={(e) => handleChanges(e)}
-                aria-label="mappings settings"
+                aria-label="In type settings"
               />
             </div>
             <div className="input-container">
@@ -36,7 +36,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
                 type="text"
                 value={data.mappings[0].out_type}
                 onChange={(e) => handleChanges(e)}
-                aria-label="mappings settings"
+                aria-label="Out type settings"
               />
             </div>
           </div>
@@ -49,7 +49,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
                 id="1"
                 value={data.mappings[1].in_feature}
                 onChange={(e) => handleChanges(e)}
-                aria-label="mappings settings"
+                aria-label="In feature settings"
               />
             </div>
             <div className="input-container">
@@ -60,7 +60,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
                 id="1"
                 value={data.mappings[1].out_feature}
                 onChange={(e) => handleChanges(e)}
-                aria-label="mappings settings"
+                aria-label="Out feature settings"
               />
             </div>
           </div>
