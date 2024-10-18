@@ -29,7 +29,7 @@ function App() {
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
-  const [isMappingsOpen, setMappingsOpen] = useState(false);
+  const [isMappingsOpen, setMappingsOpen] = useState(true);
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
