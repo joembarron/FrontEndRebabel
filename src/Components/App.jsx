@@ -5,6 +5,7 @@ import AdditionalSettings from "./AdditionalSettings.jsx";
 import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
 import Convert from "./Convert.jsx";
+import SelectFiles from "./SelectFiles.jsx";
 
 const initialState = {
   filePath: [],
@@ -35,19 +36,6 @@ function App() {
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
 
-  async function handleSelectFile() {
-    //returns object with filePath and fileName
-    const response = await window.pythonApi.getFile();
-
-    if (response !== undefined) {
-      setData((data) => ({
-        ...data,
-        fileName: response.fileName,
-        filePath: response.filePath,
-      }));
-    }
-  }
-
   function handleSelectType(e) {
     if (e.target.name === "inputType") {
       setData((data) => ({ ...data, inFileType: e.target.value }));
@@ -69,23 +57,7 @@ function App() {
       </header>
 
       <section className="input-fields">
-        <div className="select-file">
-          <input
-            id="file-in"
-            readOnly="readonly"
-            placeholder="Select File..."
-            value={data.fileName.join(", ")}
-            disabled={isLoading}
-          />
-          <button
-            data-tooltip="Hold Ctrl to Select Multiple Files"
-            id="file-in-btn"
-            onClick={() => handleSelectFile()}
-            disabled={isLoading}
-          >
-            Browse
-          </button>
-        </div>
+        <SelectFiles data={data} isLoading={isLoading} setData={setData} />
         <div id="file-type">
           <label>File input type</label>
           <select

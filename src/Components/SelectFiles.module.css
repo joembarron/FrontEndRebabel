@@ -1,0 +1,13 @@
+.selectFile {
+  display: flex;
+  align-items: center;
+}
+
+.fileIn {
+  width: 70%;
+  margin-right: 1rem;
+}
+
+.btn {
+  margin-bottom: 1rem;
+}
