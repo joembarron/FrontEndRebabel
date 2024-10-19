@@ -4,6 +4,7 @@ import About from "./About.jsx";
 import AdditionalSettings from "./AdditionalSettings.jsx";
 import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
+import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
 
 const initialState = {
@@ -34,16 +35,6 @@ function App() {
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
-
-  async function convertFiles() {
-    setIsLoading(true);
-    const response = await window.pythonApi.rebabelConvert(data);
-
-    //Temporary setTimeout to show loading
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }
 
   function handleSelectType(e) {
     if (e.target.name === "inputType") {
@@ -111,22 +102,11 @@ function App() {
             Additional Settings
           </button>
         </div>
-        <div className="convert-btn">
-          {!isLoading && (
-            <button
-              id="convertBtn"
-              onClick={() => convertFiles()}
-              disabled={isLoading}
-            >
-              Convert
-            </button>
-          )}
-          {isLoading && (
-            <span className="loading-status" aria-busy="true">
-              Converting...
-            </span>
-          )}
-        </div>
+        <Convert
+          data={data}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       </section>
       {/* Dialog component */}
       <Help isOpen={isHelpOpen} onClose={() => setIsHelpOpen(!isHelpOpen)} />

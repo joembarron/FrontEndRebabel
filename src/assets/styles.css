@@ -44,12 +44,6 @@ label {
   margin-right: 0.7rem;
 }
 
-.convert-btn {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-}
-
 /* Additional Settings Styles */
 #additional-inputs {
   margin-top: 1.5rem;
