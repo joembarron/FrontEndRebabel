@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./SelectFiles.module.css";
 
 function SelectFiles({ data, isLoading, setData }) {
   async function handleSelectFile() {
@@ -14,8 +15,9 @@ function SelectFiles({ data, isLoading, setData }) {
     }
   }
   return (
-    <div className="select-file">
+    <div className={styles.selectFile}>
       <input
+        className={styles.fileIn}
         id="file-in"
         readOnly="readonly"
         placeholder="Select File..."
@@ -23,6 +25,7 @@ function SelectFiles({ data, isLoading, setData }) {
         disabled={isLoading}
       />
       <button
+        className={styles.btn}
         data-tooltip="Hold Ctrl to Select Multiple Files"
         id="file-in-btn"
         onClick={() => handleSelectFile()}

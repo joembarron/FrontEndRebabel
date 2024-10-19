@@ -24,11 +24,6 @@ header h2 {
   padding-left: 0rem;
 }
 
-#file-in {
-  width: 70%;
-  margin-right: 1rem;
-}
-
 #file-type > select {
   width: 30%;
 }
