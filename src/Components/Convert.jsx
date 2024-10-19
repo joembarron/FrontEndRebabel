@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Convert.module.css";
 
 function Convert({ data, isLoading, setIsLoading }) {
   async function convertFiles() {
@@ -8,7 +9,7 @@ function Convert({ data, isLoading, setIsLoading }) {
     setIsLoading(false);
   }
   return (
-    <div className="convert-btn">
+    <div className={styles.convertBtn}>
       {!isLoading && (
         <button
           id="convertBtn"
