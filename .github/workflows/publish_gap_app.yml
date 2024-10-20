@@ -45,3 +45,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
+  build-Gap-App-on-Windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: main
+      - uses: actions/setup-node@master
+        with:
+          node-version: "18"
+      - name: Install Node dependencies for Gap App
+        run: npm install
+      - name: Create rebabel_convert executable using PyInstaller
+        shell: pwsh
+        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller_windows.bat
+      - name: Publish Gap App to GitHub releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run publish
