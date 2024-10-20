@@ -6,6 +6,13 @@ const execFilePromisified = util.promisify(
   require("node:child_process").execFile
 );
 
+const FileExtensions = {
+  flextext: ".flextext",
+  conllu: ".conllu",
+  elan: ".eaf",
+  nlp_pos: ".txt",
+};
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
@@ -61,16 +68,49 @@ app.whenReady().then(() => {
 
   ipcMain.handle("rebabelConvert", async (event, data) => {
     let conversionFailure = false;
+    let outPutFileNamePath = "";
 
+    //calls saveAs dialog if fileName and output file type aren't empty
+    if (data.fileName.length === 0 || data.outFileType === "") {
+      return "error";
+    } else {
+      outPutFileNamePath = initiateSaveAs(data);
+    }
+
+    //user cancels
+    if (outPutFileNamePath === "cancelled") {
+      return "cancelled";
+    }
+
+    const {
+      filePath,
+      fileName,
+      inFileType,
+      outFileType,
+      delimiter,
+      nlpFileType,
+      partOfSpeechFile,
+      languageFile,
+      mappings,
+      root,
+      skip,
+    } = data;
+    
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     const { stdout, stderr } = await execFilePromisified(
       "./rebabel_scripts/rebabel_convert",
       [
-        "nlp_pos",
-        "flextext",
-        "/",
-        "nlp_pos.txt",
-        '{"mappings": [{"in_type": "sentence", "out_type": "phrase"},{"in_feature": "UD:upos", "out_feature": "FlexText:en:pos"},{"in_feature": "UD:form", "out_feature": "FlexText:en:txt"}]}',
+        inFileType,
+        outFileType,
+        filePath,
+        outPutFileNamePath,
+        nlpFileType,
+        partOfSpeechFile,
+        languageFile,
+        delimiter,
+        JSON.stringify(mappings),
+        root,
+        skip,
       ]
     );
 
@@ -110,3 +150,36 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+function initiateSaveAs(data) {
+  //Calls a function to create initial output fileName for SaveAs dialog
+  //I.e. takes an infile abc.inExt and turns into abc.outExt
+  let outputFileName = setOutputFileName(data);
+
+  //Gets absolute path
+  let outputFileNamePath = dialog.showSaveDialogSync({
+    defaultPath: outputFileName,
+  });
+
+  //user cancels SaveAs
+  if (outputFileNamePath === undefined) {
+    return "cancelled";
+  }
+
+  return outputFileNamePath;
+}
+
+//Takes an input FileName and creates a default fileName
+//Ex: file1.eaf => file1.flextext
+function setOutputFileName(data) {
+  let inputFileName = data.fileName[0];
+
+  let extension = path.extname(inputFileName);
+  let nameBeforePeriod = path.basename(inputFileName, extension);
+
+  let outputFileType = data.outFileType;
+
+  let outputFileName = nameBeforePeriod + FileExtensions[outputFileType];
+
+  return outputFileName;
+}
