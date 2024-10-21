@@ -6,7 +6,11 @@
   height: max-content;
   border-radius: 2.5rem;
   padding: 0.5rem;
-  margin: 0.3rem 0.4rem;
+  margin: 0.5rem 0.4rem;
+}
+
+.chip:hover {
+  background-color: #c01b52;
 }
 
 .text {
@@ -15,4 +19,10 @@
   margin-right: 0.5rem;
   margin-left: 0.3rem;
   cursor: default;
+}
+
+.deleteIcon {
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
