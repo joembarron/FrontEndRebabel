@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./SelectFiles.module.css";
+import Chip from "./Chip.jsx";
 
 function SelectFiles({ data, isLoading, setData }) {
   async function handleSelectFile() {
@@ -30,9 +31,12 @@ function SelectFiles({ data, isLoading, setData }) {
         </button>
         <div className={styles.container}>
           <div className={styles.backgroundContainer}>
-            <div className={styles.chipsContainer}></div>
+            <div className={styles.chipsContainer}>
+              {data.fileName.map((name) => (
+                <Chip key={name}>{name}</Chip>
+              ))}
+            </div>
           </div>
-          {/* <small>Error goes here!</small> */}
         </div>
       </div>
     </>
