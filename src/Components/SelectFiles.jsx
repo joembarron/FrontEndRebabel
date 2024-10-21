@@ -10,8 +10,8 @@ function SelectFiles({ data, isLoading, setData }) {
     if (response !== undefined) {
       setData((data) => ({
         ...data,
-        fileName: response.fileName,
-        filePath: response.filePath,
+        fileName: [...data.fileName, response.fileName],
+        filePath: [...data.filePath, response.filePath],
       }));
     }
   }
