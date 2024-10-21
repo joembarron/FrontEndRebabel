@@ -15,25 +15,27 @@ function SelectFiles({ data, isLoading, setData }) {
     }
   }
   return (
-    <div className={styles.selectFile}>
-      <input
-        className={styles.fileIn}
-        id="file-in"
-        readOnly="readonly"
-        placeholder="Select File..."
-        value={data.fileName.join(", ")}
-        disabled={isLoading}
-      />
-      <button
-        className={styles.btn}
-        data-tooltip="Hold Ctrl to Select Multiple Files"
-        id="file-in-btn"
-        onClick={() => handleSelectFile()}
-        disabled={isLoading}
-      >
-        Browse
-      </button>
-    </div>
+    <>
+      <div>
+        <label>Select File</label>
+      </div>
+      <div className={styles.selectFile}>
+        <button
+          className={styles.btn}
+          id="file-in-btn"
+          onClick={() => handleSelectFile()}
+          disabled={isLoading}
+        >
+          Browse
+        </button>
+        <div className={styles.container}>
+          <div className={styles.backgroundContainer}>
+            <div className={styles.chipsContainer}></div>
+          </div>
+          {/* <small>Error goes here!</small> */}
+        </div>
+      </div>
+    </>
   );
 }
 
