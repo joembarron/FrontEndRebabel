@@ -11,3 +11,5 @@
 4. Run `python -m PyInstaller --onefile --collect-all rebabel_format rebabel_convert.py`
 5. The executable will be located in the 'dist' folder that is generated. The JavaScript looks for the executable in the top level of the 'rebabel_scripts' directory, so move the executable one directory up.
 6. The executable will run by clicking the 'Convert' button on the user interface after running `npm run start`.
+
+To update the executable, delete every file from the rebabel_scripts folder except for README.md, rebabel_convert.py, and requirements.txt, and then run the script again. Update the executable only after updating this application.
