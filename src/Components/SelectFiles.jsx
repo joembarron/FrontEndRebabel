@@ -33,7 +33,9 @@ function SelectFiles({ data, isLoading, setData }) {
           <div className={styles.backgroundContainer}>
             <div className={styles.chipsContainer}>
               {data.fileName.map((name) => (
-                <Chip key={name}>{name}</Chip>
+                <Chip key={name} data={data} setData={setData}>
+                  {name}
+                </Chip>
               ))}
             </div>
           </div>
