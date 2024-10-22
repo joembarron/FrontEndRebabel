@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./SelectFiles.module.css";
+import Chip from "./Chip.jsx";
 
 function SelectFiles({ data, isLoading, setData }) {
   async function handleSelectFile() {
@@ -9,31 +10,38 @@ function SelectFiles({ data, isLoading, setData }) {
     if (response !== undefined) {
       setData((data) => ({
         ...data,
-        fileName: response.fileName,
-        filePath: response.filePath,
+        fileName: [...data.fileName, response.fileName],
+        filePath: [...data.filePath, response.filePath],
       }));
     }
   }
   return (
-    <div className={styles.selectFile}>
-      <input
-        className={styles.fileIn}
-        id="file-in"
-        readOnly="readonly"
-        placeholder="Select File..."
-        value={data.fileName.join(", ")}
-        disabled={isLoading}
-      />
-      <button
-        className={styles.btn}
-        data-tooltip="Hold Ctrl to Select Multiple Files"
-        id="file-in-btn"
-        onClick={() => handleSelectFile()}
-        disabled={isLoading}
-      >
-        Browse
-      </button>
-    </div>
+    <>
+      <div>
+        <label>Select File</label>
+      </div>
+      <div className={styles.selectFile}>
+        <button
+          className={styles.btn}
+          id="file-in-btn"
+          onClick={() => handleSelectFile()}
+          disabled={isLoading}
+        >
+          Browse
+        </button>
+        <div className={styles.container}>
+          <div className={styles.backgroundContainer}>
+            <div className={styles.chipsContainer}>
+              {data.fileName.map((name) => (
+                <Chip key={name} data={data} setData={setData}>
+                  {name}
+                </Chip>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
