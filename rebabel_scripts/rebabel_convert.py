@@ -60,6 +60,6 @@ rebabel_format.run_command(
         {'in_feature': 'nlp:form', 'out_feature': 'FlexText:en:txt'},
         {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
     ],
-    root = "phrase",
-    skip = ["morph"]
+    root = root,
+    skip = skip.strip().split(",")
 )
