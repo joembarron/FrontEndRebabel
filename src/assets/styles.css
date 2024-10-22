@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  margin-top: 1.8rem;
+  padding-top: 1.8rem;
 }
 
 header {
@@ -17,6 +17,18 @@ header h2 {
   margin: 0 20px;
   font-size: 4rem;
   font-weight: bold;
+  color: white;
+}
+
+body {
+  background: linear-gradient(to bottom, #616161, #385a83);
+  height: 100vh;
+  margin: 0;
+}
+
+button {
+  background-color: #548bcd;
+  color: white;
 }
 
 .input-fields {
@@ -35,6 +47,7 @@ header h2 {
 label {
   font-size: 0.9rem;
   font-weight: bold;
+  color: white;
 }
 
 .settings-container {
