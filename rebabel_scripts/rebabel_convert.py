@@ -50,16 +50,30 @@ else:
         delimiter = delimiter,
     )
 
-rebabel_format.run_command(
-    "export",
-    mode = outType,
-    db = "temp.db",
-    outfile = outPath,
-    mappings = [
-        {'in_type': 'sentence', 'out_type': 'phrase'},
-        {'in_feature': 'nlp:form', 'out_feature': 'FlexText:en:txt'},
-        {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
-    ],
-    root = root,
-    skip = skip.strip().split(",")
-)
+if (skip == ""):
+    rebabel_format.run_command(
+        "export",
+        mode = outType,
+        db = "temp.db",
+        outfile = outPath,
+        mappings = [
+            {'in_type': 'sentence', 'out_type': 'phrase'},
+            {'in_feature': 'nlp:form', 'out_feature': 'FlexText:en:txt'},
+            {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
+        ],
+        root = root
+    )
+else:
+    rebabel_format.run_command(
+        "export",
+        mode = outType,
+        db = "temp.db",
+        outfile = outPath,
+        mappings = [
+            {'in_type': 'sentence', 'out_type': 'phrase'},
+            {'in_feature': 'nlp:form', 'out_feature': 'FlexText:en:txt'},
+            {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
+        ],
+        root = root,
+        skip = skip.replace(" ", "").split(",")
+    )

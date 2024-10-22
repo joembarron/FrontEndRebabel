@@ -19,7 +19,7 @@ function OutputFileConfig({ isOpen, onClose, data, setData }) {
         {data.outFileType === "flextext" && 
            <>
             <div>
-            <label>Select the highest level non-empty layer being used. "interlinear-text" by default</label>
+            <label>Select the highest level non-empty layer being used. Set to "phrase" by default.</label>
             <select
               name="root"
               value={data.root}
@@ -30,11 +30,11 @@ function OutputFileConfig({ isOpen, onClose, data, setData }) {
               <option value="paragraph">paragraph</option>
               <option value="phrase">phrase</option>
               <option value="word">word</option>
-              <option value="morph">morpheme</option>
+              <option value="morph">morph</option>
             </select>
           </div>
           <div>
-            <label>Input any layers to skip, separated by commas</label>
+            <label>Input any layers to skip, if any, separated by commas. Set to "morph" by default.</label>
             <input
               name="skip"
               type="text"

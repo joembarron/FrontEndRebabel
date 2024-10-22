@@ -12,7 +12,7 @@ const initialState = {
   fileName: [],
   inFileType: "",
   outFileType: "",
-  delimiter: "",
+  delimiter: "/",
   nlpFileType: "",
   partOfSpeechFile: "",
   languageFile: "",
@@ -20,8 +20,8 @@ const initialState = {
     { in_type: "", out_type: "" },
     { in_feature: "", out_feature: "" },
   ],
-  root: "",
-  skip: "",
+  root: "phrase",
+  skip: "morph",
 };
 
 function App() {
