@@ -47,7 +47,14 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
           Browse
         </button>
         <div className={styles.container}>
-          <div className={styles.backgroundContainer}>
+          <div
+            className={styles.backgroundContainer}
+            style={
+              errors.selectFile.status === true
+                ? { borderColor: "#c52f21" }
+                : {}
+            }
+          >
             <div className={styles.chipsContainer}>
               {data.fileName.map((name) => (
                 <Chip key={name} data={data} setData={setData}>
