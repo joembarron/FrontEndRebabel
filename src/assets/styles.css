@@ -64,11 +64,6 @@ label {
   color: #6a6a6a;
 }
 
-/* Error coloring */
-.error {
-  color: #c52f21;
-}
-
 .nlp-button {
   font-size: 0.8rem;
   padding: 0.7rem;
