@@ -6,6 +6,7 @@ import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
 import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
+import errorStates from "../ErrorStates.js";
 
 const initialState = {
   filePath: [],
@@ -27,6 +28,8 @@ const initialState = {
 function App() {
   //Sets state for file conversion
   const [data, setData] = useState(initialState);
+  //Sets state for errors
+  const [errors, setErrors] = useState(errorStates);
   //Set state for modals
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -35,6 +38,17 @@ function App() {
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
+
+  function setErrorState(errorStatus, errorMessage, propName) {
+    setErrors((errors) => ({
+      ...errors,
+      [propName]: {
+        status: errorStatus,
+        message: errorMessage,
+        ariaProps: { "aria-invalid": errorStatus },
+      },
+    }));
+  }
 
   function handleSelectType(e) {
     if (e.target.name === "inputType") {
@@ -57,7 +71,13 @@ function App() {
       </header>
 
       <section className="input-fields">
-        <SelectFiles data={data} isLoading={isLoading} setData={setData} />
+        <SelectFiles
+          data={data}
+          setData={setData}
+          isLoading={isLoading}
+          errors={errors}
+          setErrorState={setErrorState}
+        />
         <div className="file-type">
           <label>File input type</label>
           <select
