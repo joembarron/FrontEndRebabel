@@ -126,6 +126,7 @@ function App() {
           data={data}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
+          setErrorState={setErrorState}
         />
       </section>
       {/* Dialog component */}
