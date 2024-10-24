@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const { app, Menu, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const path = require("node:path");
 const { unlink } = require("node:fs");
 const util = require("node:util");
@@ -31,6 +31,74 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+
+  // menubar
+  const menuTemplate = [
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Exit',
+          role: 'quit', // Closes the application
+        },
+      ],
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'Getting Started',
+          click: () => {
+            dialog.showMessageBox({
+              type: 'info',
+              title: 'Getting Started',
+              message: 'Getting Started',
+              detail: `Welcome to Gap App! This tool is designed to simplify file format conversions with just a few clicks. Follow the steps below to quickly convert your files and customize the output to your needs.
+              
+              1. Select the file to be converted.
+              2. Choose the desired input and output file formats.
+              3. Configure mappings or additional settings, if applicable.
+              4. Click "Convert" and specify the destination for the converted file.`,
+              buttons: ['OK'],
+            });
+          },
+        },
+        {
+          label: 'View Rebabel Documentation',
+          click: () => {
+            shell.openExternal('https://github.com/mr-martian/rebabel-format');
+          },
+        },
+        { type: 'separator' },
+        {
+          label: 'About',
+          click: () => {
+            dialog.showMessageBox({
+              type: 'info',
+              title: 'About Gap App',
+              message: 'Gap App',
+              detail: `Version: ${app.getVersion()}
+              Linguists rely on a variety of specialized software tools to document and preserve endangered languages. A common challenge they face is the need to transfer language data between different applications, a process that currently lacks an automated and user-friendly solution. Gap App provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.
+              Team Members:
+              
+              - Joseph Barron: Backend Developer/Scrum Master
+              - Adassa Coimin: Frontend/Backend Developer
+              - Matthew Denslinger: Frontend Developer
+              - Elizabeth Thorner: Backend Developer/Project Manager
+              - Darren Wang: Frontend Developer`,
+              buttons: ['OK'],
+            });
+          },
+        },
+      ],
+    },
+  ];
+
+  // Build the menu from the template
+  const menu = Menu.buildFromTemplate(menuTemplate);
+
+  // Set the menu for the application
+  Menu.setApplicationMenu(menu);
 };
 
 // This method will be called when Electron has finished
