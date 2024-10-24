@@ -53,7 +53,7 @@ const createWindow = () => {
               type: 'info',
               title: 'Getting Started',
               message: 'Getting Started',
-              detail: `1. Select the file to be converted.\n` +
+              detail: `1. Select the file(s) to be converted.\n` +
                       `2. Choose the desired input and output file formats.\n` +
                       `3. Configure mappings or additional settings, if applicable.\n` +
                       `4. Click "Convert" and specify the destination for the converted file.`,
@@ -62,9 +62,9 @@ const createWindow = () => {
           },
         },
         {
-          label: 'View Rebabel Documentation',
+          label: 'Rebabel Documentation',
           click: () => {
-            shell.openExternal('https://github.com/mr-martian/rebabel-format');
+            shell.openExternal('https://github.com/mr-martian/rebabel-format/tree/master/docs');
           },
         },
         { type: 'separator' },
