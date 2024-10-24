@@ -194,8 +194,16 @@ app.whenReady().then(() => {
     } = data;
 
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
-    const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
-    const tempdbPath = path.join(process.resourcesPath, 'temp.db');
+    //const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
+    //const tempdbPath = path.join(process.resourcesPath, 'temp.db');
+
+    rebabelConvertPath = 'resources/rebabel_convert';
+    tempdbPath = 'resources/temp.db';
+    if (!app.isPackaged) {
+      rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
+      tempdbPath = 'temp.db';
+    }
+    console.log(rebabelConvertPath);
 
     const { stdout, stderr } = await execFilePromisified(
       rebabelConvertPath,
