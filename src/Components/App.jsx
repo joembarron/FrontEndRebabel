@@ -21,7 +21,7 @@ const initialState = {
     { in_feature: "", out_feature: "" },
   ],
   root: "phrase",
-  skip: "morph",
+  skip: ["morph"],
 };
 
 function App() {

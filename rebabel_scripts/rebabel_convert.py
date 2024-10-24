@@ -75,5 +75,5 @@ else:
             {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
         ],
         root = root,
-        skip = skip.replace(" ", "").split(",")
+        skip = skip.split(",")
     )

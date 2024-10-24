@@ -1,45 +1,53 @@
 import React from "react";
+import Select from 'react-select'
 
 function OutputFileConfig({ isOpen, onClose, data, setData }) {
 
-  function handleChanges(e) {
-    if (e.target.name == "root") {
-      setData((data) => ({ ...data, root: e.target.value }));
-    } else if (e.target.name == "skip") {
-      setData((data) => ({ ...data, skip: e.target.value }));
-    }
-  }
+  const flextextOptions = [
+    { value : 'interlinear-text', label: 'interlinear-text' },
+    { value : 'paragraph', label: 'paragraph' },
+    { value : 'phrase', label: 'phrase' },
+    { value : 'word', label: 'word' },
+    { value : 'morph', label: 'morpheme' }
+  ]
 
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
-        <h2>Configuration Settings</h2>
+        <h2>{data.outFileType} Configuration Settings</h2>
         <hr></hr>
-        <section className="output">
+        <section>
         {data.outFileType === "flextext" && 
            <>
             <div>
-            <label>Select the highest level non-empty layer being used. Set to "phrase" by default.</label>
-            <select
+            <label>Select the highest level non-empty layer that will be used in the flextext file. Set to "phrase" by default.</label>
+            <Select
+              defaultValue={[flextextOptions[2]]}
+              value={data.root ? flextextOptions.find(option => option.value === data.root) : null}
+              maxMenuHeight={200}
               name="root"
-              value={data.root}
-              onChange={(e) => handleChanges(e)}
+              options={flextextOptions}
+              className="basic-single"
+              classNamePrefix="select"
+              isSearchable={false}
+              onChange={(choice) => setData((data) => ({ ...data, root: choice.value}))}
               aria-label="root settings"
-            >
-              <option value="interlinear-text">interlinear-text</option>
-              <option value="paragraph">paragraph</option>
-              <option value="phrase">phrase</option>
-              <option value="word">word</option>
-              <option value="morph">morph</option>
-            </select>
+            />
+
           </div>
           <div>
-            <label>Input any layers to skip, if any, separated by commas. Set to "morph" by default.</label>
-            <input
+            <label>Select layers to skip, if any. Set to "morpheme" by default.</label>
+            <Select
+              defaultValue={[flextextOptions[4]]}
+              value={data.skip.map(skipValue => flextextOptions.find(option => option.value === skipValue)).filter(Boolean)}
+              maxMenuHeight={85}
+              isMulti
               name="skip"
-              type="text"
-              value={data.skip}
-              onChange={(e) => handleChanges(e)}
+              options={flextextOptions}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              isSearchable={false}
+              onChange={(choices) => setData((data) => ({ ...data, skip: choices.map(choice => choice.value)}))}
               aria-label="skip settings"
             />
             </div>
