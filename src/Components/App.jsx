@@ -58,7 +58,7 @@ function App() {
 
       <section className="input-fields">
         <SelectFiles data={data} isLoading={isLoading} setData={setData} />
-        <div id="file-type">
+        <div className="file-type">
           <label>File input type</label>
           <select
             aria-label="Select File Type"
@@ -81,7 +81,7 @@ function App() {
             </button>
           )}
         </div>
-        <div id="file-type">
+        <div className="file-type">
           <label>File output type</label>
           <select
             aria-label="Select File Type"
