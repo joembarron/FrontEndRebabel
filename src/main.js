@@ -44,6 +44,45 @@ const createWindow = () => {
       ],
     },
     {
+      label: 'View',
+      submenu: [
+        {
+            label: 'Zoom In',
+            accelerator: 'CmdOrCtrl+Plus',
+            click: () => {
+                const focusedWindow = BrowserWindow.getFocusedWindow();
+                if (focusedWindow) {
+                    focusedWindow.webContents.setZoomLevel(
+                        focusedWindow.webContents.getZoomLevel() + 0.5
+                    );
+                }
+            }
+        },
+        {
+            label: 'Zoom Out',
+            accelerator: 'CmdOrCtrl+-',
+            click: () => {
+                const focusedWindow = BrowserWindow.getFocusedWindow();
+                if (focusedWindow) {
+                    focusedWindow.webContents.setZoomLevel(
+                        focusedWindow.webContents.getZoomLevel() - 0.5
+                    );
+                }
+            }
+        },
+        {
+            label: 'Reset Zoom',
+            accelerator: 'CmdOrCtrl+0',
+            click: () => {
+                const focusedWindow = BrowserWindow.getFocusedWindow();
+                if (focusedWindow) {
+                    focusedWindow.webContents.setZoomLevel(0);
+                }
+            }
+        }
+      ]
+    },
+    {
       label: 'Help',
       submenu: [
         {
