@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Help from "./Help.jsx";
 import About from "./About.jsx";
-import AdditionalSettings from "./AdditionalSettings.jsx";
 import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
 import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
+import OutputFileConfig from "./OutputFileConfig.jsx";
 import errorStates from "../ErrorStates.js";
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   fileName: [],
   inFileType: "",
   outFileType: "",
-  delimiter: "",
+  delimiter: "/",
   nlpFileType: "",
   partOfSpeechFile: "",
   languageFile: "",
@@ -21,8 +21,8 @@ const initialState = {
     { in_type: "", out_type: "" },
     { in_feature: "", out_feature: "" },
   ],
-  root: "",
-  skip: "",
+  root: "phrase",
+  skip: ["morph"],
 };
 
 function App() {
@@ -33,9 +33,9 @@ function App() {
   //Set state for modals
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
-  const [isAddSettingsOpen, setAddSettingsOpen] = useState(false);
   const [isMappingsOpen, setMappingsOpen] = useState(false);
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
+  const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
 
@@ -111,15 +111,20 @@ function App() {
           >
             <option defaultValue=""></option>
             <option value="flextext">Flextext</option>
-            <option value="nlp_pos">NLP</option>
           </select>
+          {data.outFileType === "flextext" && (
+            <button
+              className="output-button"
+              disabled={isLoading}
+              onClick={() => setOutputFileConfigOpen(true)}
+            >
+              Output File Settings
+            </button>
+          )}
         </div>
         <div className="settings-container">
           <button onClick={() => setMappingsOpen(true)} disabled={isLoading}>
             Mappings
-          </button>
-          <button onClick={() => setAddSettingsOpen(true)} disabled={isLoading}>
-            Additional Settings
           </button>
         </div>
         <Convert
@@ -143,18 +148,18 @@ function App() {
           setData={setData}
         />
       )}
-      {isAddSettingsOpen && (
-        <AdditionalSettings
-          isOpen={isAddSettingsOpen}
-          onClose={() => setAddSettingsOpen(!isAddSettingsOpen)}
-          data={data}
-          setData={setData}
-        />
-      )}
       {isNLPConfigOpen && (
         <NLPConfig
           isOpen={isNLPConfigOpen}
           onClose={() => setNLPConfigOpen(!isNLPConfigOpen)}
+          data={data}
+          setData={setData}
+        />
+      )}
+      {isOutputFileConfigOpen && (
+        <OutputFileConfig
+          isOpen={isOutputFileConfigOpen}
+          onClose={() => setOutputFileConfigOpen(!isOutputFileConfigOpen)}
           data={data}
           setData={setData}
         />

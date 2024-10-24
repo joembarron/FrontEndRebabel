@@ -48,11 +48,10 @@ label {
   margin-right: 1.2rem;
 }
 
-/* Additional Settings Styles */
-#additional-inputs {
-  margin-top: 1.5rem;
-  margin-left: 1.5rem;
-  width: 40%;
+.output-button {
+  font-size: 0.8rem;
+  padding: 0.7rem;
+  margin-left: 0.7rem;
 }
 
 .inputs {

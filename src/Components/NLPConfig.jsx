@@ -51,7 +51,7 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
           </fieldset>
           {data.nlpFileType === "combined" && (
             <div>
-              <label>NLP Delimiter</label>
+              <label>NLP Delimiter ('/' by default)</label>
               <input
                 type="text"
                 id="delimiter"

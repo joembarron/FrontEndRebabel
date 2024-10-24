@@ -102,7 +102,7 @@ app.whenReady().then(() => {
         delimiter,
         JSON.stringify(mappings),
         root,
-        skip,
+        skip.join(","),
         tempdbPath
       ]
     );
