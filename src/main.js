@@ -53,12 +53,10 @@ const createWindow = () => {
               type: 'info',
               title: 'Getting Started',
               message: 'Getting Started',
-              detail: `Welcome to Gap App! This tool is designed to simplify file format conversions with just a few clicks. Follow the steps below to quickly convert your files and customize the output to your needs.
-              
-              1. Select the file to be converted.
-              2. Choose the desired input and output file formats.
-              3. Configure mappings or additional settings, if applicable.
-              4. Click "Convert" and specify the destination for the converted file.`,
+              detail: `1. Select the file to be converted.\n` +
+                      `2. Choose the desired input and output file formats.\n` +
+                      `3. Configure mappings or additional settings, if applicable.\n` +
+                      `4. Click "Convert" and specify the destination for the converted file.`,
               buttons: ['OK'],
             });
           },
@@ -77,15 +75,18 @@ const createWindow = () => {
               type: 'info',
               title: 'About Gap App',
               message: 'Gap App',
-              detail: `Version: ${app.getVersion()}
-              Linguists rely on a variety of specialized software tools to document and preserve endangered languages. A common challenge they face is the need to transfer language data between different applications, a process that currently lacks an automated and user-friendly solution. Gap App provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.
-              Team Members:
-              
-              - Joseph Barron: Backend Developer/Scrum Master
-              - Adassa Coimin: Frontend/Backend Developer
-              - Matthew Denslinger: Frontend Developer
-              - Elizabeth Thorner: Backend Developer/Project Manager
-              - Darren Wang: Frontend Developer`,
+              detail: `Version: ${app.getVersion()}\n` +
+              `\n` +
+              `Welcome to Gap App! This tool is designed to simplify file format conversions with just a few clicks. Follow the steps below to quickly convert your files and customize the output to your needs.\n` +
+              `\n` +
+              `Linguists rely on a variety of specialized software tools to document and preserve endangered languages. A common challenge they face is the need to transfer language data between different applications, a process that currently lacks an automated and user-friendly solution. Gap App provides an efficient and intuitive solution for converting NLP output files into language data formats compatible with software such as Fieldworks Language Explorer (FLEx) and ELAN.\n` +
+              `\n` +
+              `Team Members:\n` +
+              `- Joseph Barron: Backend Developer/Scrum Master\n` +
+              `- Adassa Coimin: Frontend/Backend Developer\n` +
+              `- Matthew Denslinger: Frontend Developer\n` +
+              `- Elizabeth Thorner: Backend Developer/Project Manager\n` +
+              `- Darren Wang: Frontend Developer`,
               buttons: ['OK'],
             });
           },
