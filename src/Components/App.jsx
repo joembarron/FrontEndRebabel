@@ -5,7 +5,7 @@ import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
 import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
-import OutputFileConfig from "./outputFileConfig.jsx";
+import OutputFileConfig from "./OutputFileConfig.jsx";
 import errorStates from "../ErrorStates.js";
 
 const initialState = {
