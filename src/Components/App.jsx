@@ -65,9 +65,7 @@ function App() {
   return (
     <div className="container flex-base">
       <header>
-        <button onClick={() => setIsHelpOpen(!isHelpOpen)}>Help</button>
         <h2>Gap App</h2>
-        <button onClick={() => setIsAboutOpen(!isAboutOpen)}>About</button>
       </header>
 
       <section className="input-fields">
