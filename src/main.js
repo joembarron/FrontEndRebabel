@@ -22,7 +22,7 @@ if (require("electron-squirrel-startup")) {
 }
 
 const createWindow = () => {
-  // Create the browser window.
+  // Create browser window.
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 800,
@@ -32,16 +32,12 @@ const createWindow = () => {
     },
   });
 
-  // and load the index.html of the app.
+  // Load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
-  // menubar
+  // Create and set menu bar
   const menuTemplate = createMenuTemplate(isDev);
-
-  // Build the menu from the template
   const menu = Menu.buildFromTemplate(menuTemplate);
-
-  // Set the menu for the application
   Menu.setApplicationMenu(menu);
 };
 
@@ -78,11 +74,12 @@ app.whenReady().then(() => {
       outPutFileNamePath = initiateSaveAs(data);
     }
 
-    //user cancels
+    //user cancels saveAs
     if (outPutFileNamePath === "cancelled") {
       return "cancelled";
     }
 
+    // get arguments from input forms
     const {
       filePath,
       fileName,
@@ -97,18 +94,15 @@ app.whenReady().then(() => {
       skip,
     } = data;
 
-    // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
-    //const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
-    //const tempdbPath = path.join(process.resourcesPath, 'temp.db');
-
+    // setting path to rebabel_convert executable
     rebabelConvertPath = 'resources/rebabel_convert';
     tempdbPath = 'resources/temp.db';
     if (isDev) {
       rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
       tempdbPath = 'temp.db';
     }
-    console.log(rebabelConvertPath);
 
+    // calling the executable with arguments
     const { stdout, stderr } = await execFilePromisified(
       rebabelConvertPath,
       [
