@@ -1,0 +1,110 @@
+const { BrowserWindow, dialog, shell } = require("electron");
+const path = require("node:path");
+
+const createMenuTemplate = (isDev) => {
+  const menuTemplate = [
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Exit',
+          role: 'quit',
+        },
+      ],
+    },
+    {
+      label: 'View',
+      submenu: [
+        {
+          label: 'Zoom In',
+          accelerator: 'CmdOrCtrl+Plus',
+          click: () => {
+            const focusedWindow = BrowserWindow.getFocusedWindow();
+            if (focusedWindow) {
+              focusedWindow.webContents.setZoomLevel(
+                focusedWindow.webContents.getZoomLevel() + 0.5
+              );
+            }
+          }
+        },
+        {
+          label: 'Zoom Out',
+          accelerator: 'CmdOrCtrl+-',
+          click: () => {
+            const focusedWindow = BrowserWindow.getFocusedWindow();
+            if (focusedWindow) {
+              focusedWindow.webContents.setZoomLevel(
+                focusedWindow.webContents.getZoomLevel() - 0.5
+              );
+            }
+          }
+        },
+        {
+          label: 'Reset Zoom',
+          accelerator: 'CmdOrCtrl+0',
+          click: () => {
+            const focusedWindow = BrowserWindow.getFocusedWindow();
+            if (focusedWindow) {
+              focusedWindow.webContents.setZoomLevel(0);
+            }
+          }
+        },
+        { type: 'separator' },
+        ...(isDev ? [{
+          label: 'Toggle Developer Tools',
+          accelerator: 'CmdOrCtrl+I',
+          click: () => {
+            const focusedWindow = BrowserWindow.getFocusedWindow();
+            if (focusedWindow) {
+              focusedWindow.webContents.toggleDevTools();
+            }
+          }
+        }] : [])
+      ],
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'Getting Started',
+          click: () => {
+            dialog.showMessageBox({
+              type: 'info',
+              title: 'Getting Started',
+              message: 'Getting Started',
+              detail: `1. Select the file(s) to be converted.\n` +
+                      `2. Choose the desired input and output file formats.\n` +
+                      `3. Configure mappings or additional settings, if applicable.\n` +
+                      `4. Click "Convert" and specify the destination for the converted file.`,
+              buttons: ['OK'],
+            });
+          },
+        },
+        {
+          label: 'Rebabel Documentation',
+          click: () => {
+            shell.openExternal('https://github.com/mr-martian/rebabel-format/tree/master/docs');
+          },
+        },
+        { type: 'separator' },
+        {
+          label: 'About',
+          click: () => {
+            dialog.showMessageBox({
+              type: 'info',
+              title: 'About Gap App',
+              message: 'Gap App',
+              detail: `Version: ${require("electron").app.getVersion()}\n` +
+              `Linguists rely on a variety of specialized software tools...`, // Rest of the message
+              buttons: ['OK'],
+            });
+          },
+        },
+      ],
+    },
+  ];
+
+  return menuTemplate;
+};
+
+module.exports = createMenuTemplate;
