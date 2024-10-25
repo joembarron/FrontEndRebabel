@@ -6,6 +6,8 @@ const execFilePromisified = util.promisify(
   require("node:child_process").execFile
 );
 
+const isDev = !app.isPackaged;
+
 const FileExtensions = {
   flextext: ".flextext",
   conllu: ".conllu",
@@ -199,7 +201,7 @@ app.whenReady().then(() => {
 
     rebabelConvertPath = 'resources/rebabel_convert';
     tempdbPath = 'resources/temp.db';
-    if (!app.isPackaged) {
+    if (isDev) {
       rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
       tempdbPath = 'temp.db';
     }
