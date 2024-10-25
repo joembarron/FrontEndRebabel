@@ -50,6 +50,10 @@ label {
   color: white;
 }
 
+.modal-overlay label {
+  color: black;
+}
+
 .settings-container {
   margin-top: 1rem;
   padding-left: 0.7rem;
