@@ -1,15 +1,14 @@
 const { BrowserWindow, dialog, shell } = require("electron");
 
 const createMenuTemplate = (isDev) => {
-  const menuTemplate = [
+    const menuTemplate = [
     {
-      label: 'File',
-      submenu: [
+        label: 'File',
+        submenu: [
         {
-          label: 'Exit',
-          role: 'quit',
-        },
-      ],
+            label: 'Exit',
+            role: 'quit',
+        }],
     },
     {
       label: 'View',
@@ -82,7 +81,7 @@ const createMenuTemplate = (isDev) => {
         {
           label: 'Rebabel Documentation',
           click: () => {
-            shell.openExternal('https://github.com/mr-martian/rebabel-format/tree/master/docs');
+            shell.openExternal('https://github.com/mr-martian/rebabel-format/blob/master/docs/README.md');
           },
         },
         { type: 'separator' },
