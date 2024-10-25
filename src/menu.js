@@ -1,5 +1,4 @@
 const { BrowserWindow, dialog, shell } = require("electron");
-const path = require("node:path");
 
 const createMenuTemplate = (isDev) => {
   const menuTemplate = [
