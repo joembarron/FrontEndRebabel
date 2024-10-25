@@ -3,3 +3,8 @@
   display: flex;
   justify-content: center;
 }
+
+.convertBtn button {
+  background-color: #48536b;
+  border-color: #525f7a;
+}

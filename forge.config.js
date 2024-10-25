@@ -4,6 +4,7 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    extraResource: ["./rebabel_scripts/rebabel_convert"]
   },
   rebuildConfig: {},
   makers: [
