@@ -9,8 +9,6 @@ const createMenuTemplate = require("./menu");
 
 const isDev = !app.isPackaged;
 
-const isDev = !app.isPackaged;
-
 const FileExtensions = {
   flextext: ".flextext",
   conllu: ".conllu",
