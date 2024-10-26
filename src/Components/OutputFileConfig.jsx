@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from 'react-select';
 
 function OutputFileConfig({ isOpen, onClose, data, setData, 
@@ -33,7 +33,7 @@ function OutputFileConfig({ isOpen, onClose, data, setData,
       setData((data) => ({ ...data, skip: []}));
     }
 
-    setIncludedLayerValues(sortedLayers.map(layer => layer.value))
+    setIncludedLayerValues(layers.map(layer => layer.value))
   }
 
   return (
@@ -46,7 +46,7 @@ function OutputFileConfig({ isOpen, onClose, data, setData,
           <div>
             <label>Include all layers that will be non-empty in the resulting flextext file. By default, only "phrase" and "word" are included.</label>
             <Select
-              defaultValue={flextextOptions.filter(option => includedLayerValues.includes(option.value))}             
+              defaultValue={includedLayerValues.map(value => flextextOptions.find(option => option.value === value))}             
               maxMenuHeight={80}
               isMulti
               name="includedLayers"
