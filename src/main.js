@@ -8,8 +8,22 @@ const execFilePromisified = util.promisify(
 const createMenuTemplate = require("./menu");
 const fs = require('fs');
 
+const appDataPath = () => { // The "application data path" is a common folder on operating systems to store application data files. 
+  switch (process.platform) {
+    case 'darwin': {
+      return path.join(process.env.HOME, 'Library', 'Application Support', 'frontendgapapp');
+    }
+    case 'win32': {
+      return path.join(process.env.APPDATA, 'frontendgapapp');
+    }
+    case 'linux': {
+      return path.join(process.env.HOME, 'frontendgapapp');
+    }
+  }
+}
+const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
+const tempdbPath = path.join(appDataPath(), 'temp.db')
 const isDev = !app.isPackaged;
-
 const FileExtensions = {
   flextext: ".flextext",
   conllu: ".conllu",
@@ -52,21 +66,13 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  // get paths
-  rebabelConvertPath = 'resources/rebabel_convert';
-  tempdbPath = 'resources/temp.db';
-  if (isDev) {
-    rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
-    tempdbPath = 'temp.db';
-  }
-
   // clear database if it exists before app starts
   if (fs.existsSync(tempdbPath)) {
     try {
       fs.unlinkSync(tempdbPath);
-      console.log('previous database cleared');
+      console.log(`The tempdb SQLite database was found at ${tempdbPath} and has been deleted.`);
     } catch (err) {
-      console.error('error clearing previous database:', err);
+      console.error(`Unable to remove the tempdb SQLite database at ${tempdbPath}: ${err}`);
     }
   }
 
@@ -115,10 +121,6 @@ app.whenReady().then(() => {
       root,
       skip,
     } = data;
-
-    // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
-    //const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
-    //const tempdbPath = path.join(process.resourcesPath, 'temp.db');
 
     const { stdout, stderr } = await execFilePromisified(
       rebabelConvertPath,
