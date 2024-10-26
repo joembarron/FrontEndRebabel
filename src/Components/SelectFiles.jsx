@@ -35,7 +35,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
   return (
     <>
       <div>
-        <label>Select File</label>
+        <label>Select File(s)</label>
       </div>
       <div className={styles.selectFile}>
         <button
