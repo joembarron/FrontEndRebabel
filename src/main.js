@@ -58,9 +58,9 @@ app.whenReady().then(() => {
   if (fs.existsSync(tempdbPath)) {
     try {
       fs.unlinkSync(tempdbPath);
-      console.log(`The tempdb SQLite database was found at ${tempdbPath} and has been deleted.`);
+      console.log(`The temp.db SQLite database was found at ${tempdbPath} and has been deleted.`);
     } catch (err) {
-      console.error(`Unable to remove the tempdb SQLite database at ${tempdbPath}: ${err}`);
+      console.error(`Unable to remove the temp.db SQLite database at ${tempdbPath}: ${err}`);
     }
   }
 
