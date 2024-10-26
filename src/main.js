@@ -8,21 +8,9 @@ const execFilePromisified = util.promisify(
 const createMenuTemplate = require("./menu");
 const fs = require('fs');
 
-const appDataPath = () => { // The "application data path" is a common folder on operating systems to store application data files. 
-  switch (process.platform) {
-    case 'darwin': {
-      return path.join(process.env.HOME, 'Library', 'Application Support', 'frontendgapapp');
-    }
-    case 'win32': {
-      return path.join(process.env.APPDATA, 'frontendgapapp');
-    }
-    case 'linux': {
-      return path.join(process.env.HOME, 'frontendgapapp');
-    }
-  }
-}
+const userDataPath = app.getPath('userData')
 const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
-const tempdbPath = path.join(appDataPath(), 'temp.db')
+const tempdbPath = path.join(userDataPath, 'temp.db')
 const isDev = !app.isPackaged;
 const FileExtensions = {
   flextext: ".flextext",
