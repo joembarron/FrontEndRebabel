@@ -6,6 +6,7 @@ const execFilePromisified = util.promisify(
   require("node:child_process").execFile
 );
 const createMenuTemplate = require("./menu");
+const fs = require('fs');
 
 const isDev = !app.isPackaged;
 
@@ -50,6 +51,24 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+
+  // get paths
+  rebabelConvertPath = 'resources/rebabel_convert';
+  tempdbPath = 'resources/temp.db';
+  if (isDev) {
+    rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
+    tempdbPath = 'temp.db';
+  }
+
+  // clear database if it exists before app starts
+  if (fs.existsSync(tempdbPath)) {
+    try {
+      fs.unlinkSync(tempdbPath);
+      console.log('previous database cleared');
+    } catch (err) {
+      console.error('error clearing previous database:', err);
+    }
+  }
 
   ipcMain.handle("selectFile", async () => {
     const filePathSelect = dialog.showOpenDialogSync({
@@ -100,14 +119,6 @@ app.whenReady().then(() => {
     // The arguments passed to execFile are hardcoded. They will be passed from the frontend once forms are present to receive input from the user.
     //const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
     //const tempdbPath = path.join(process.resourcesPath, 'temp.db');
-
-    rebabelConvertPath = 'resources/rebabel_convert';
-    tempdbPath = 'resources/temp.db';
-    if (isDev) {
-      rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
-      tempdbPath = 'temp.db';
-    }
-    console.log(rebabelConvertPath);
 
     const { stdout, stderr } = await execFilePromisified(
       rebabelConvertPath,
