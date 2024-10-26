@@ -34,6 +34,9 @@ function App() {
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
+  //Sets the values for the current included layers in the flextext settings
+  const [includedLayerValues, setIncludedLayerValues] = useState(["phrase", "word"]);
+
 
   function setErrorState(errorStatus, errorMessage, propName) {
     setErrors((errors) => ({
@@ -151,6 +154,8 @@ function App() {
           onClose={() => setOutputFileConfigOpen(!isOutputFileConfigOpen)}
           data={data}
           setData={setData}
+          includedLayerValues={includedLayerValues}
+          setIncludedLayerValues={setIncludedLayerValues}
         />
       )}
     </div>
