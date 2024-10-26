@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Help from "./Help.jsx";
-import About from "./About.jsx";
 import Mappings from "./Mappings.jsx";
 import NLPConfig from "./NLPConfig.jsx";
 import Convert from "./Convert.jsx";
@@ -31,8 +29,6 @@ function App() {
   //Sets state for errors
   const [errors, setErrors] = useState(errorStates);
   //Set state for modals
-  const [isHelpOpen, setIsHelpOpen] = useState(false);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isMappingsOpen, setMappingsOpen] = useState(false);
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
@@ -65,7 +61,7 @@ function App() {
   return (
     <div className="container flex-base">
       <header>
-        <h2>Gap App</h2>
+        <h2>reBabel</h2>
       </header>
 
       <section className="input-fields">
@@ -133,11 +129,6 @@ function App() {
         />
       </section>
       {/* Dialog component */}
-      <Help isOpen={isHelpOpen} onClose={() => setIsHelpOpen(!isHelpOpen)} />
-      <About
-        isOpen={isAboutOpen}
-        onClose={() => setIsAboutOpen(!isAboutOpen)}
-      />
       {isMappingsOpen && (
         <Mappings
           isOpen={isMappingsOpen}
