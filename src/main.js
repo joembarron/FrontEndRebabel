@@ -8,8 +8,10 @@ const execFilePromisified = util.promisify(
 const createMenuTemplate = require("./menu");
 const fs = require('fs');
 
+const userDataPath = app.getPath('userData')
+const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
+const tempdbPath = path.join(userDataPath, 'temp.db')
 const isDev = !app.isPackaged;
-
 const FileExtensions = {
   flextext: ".flextext",
   conllu: ".conllu",
@@ -48,21 +50,13 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
-  // get paths
-  rebabelConvertPath = 'resources/rebabel_convert';
-  tempdbPath = 'resources/temp.db';
-  if (isDev) {
-    rebabelConvertPath = 'rebabel_scripts/rebabel_convert';
-    tempdbPath = 'temp.db';
-  }
-
   // clear database if it exists before app starts
   if (fs.existsSync(tempdbPath)) {
     try {
       fs.unlinkSync(tempdbPath);
-      console.log('previous database cleared');
+      console.log(`The temp.db SQLite database was found at ${tempdbPath} and has been deleted.`);
     } catch (err) {
-      console.error('error clearing previous database:', err);
+      console.error(`Unable to remove the temp.db SQLite database at ${tempdbPath}: ${err}`);
     }
   }
 
