@@ -63,7 +63,7 @@ app.whenReady().then(() => {
   ipcMain.handle("selectFile", async () => {
     const filePathSelect = dialog.showOpenDialogSync({
       filters: [{name: "Allowed File Types", extensions: ["txt", "flextext", "csv", 
-        "eaf", "conllu", "sfm", "tf"]}],
+        "eaf", "conllu", "sfm", "tf", "xml"]}],
       properties: ["openFile"],
     });
 
