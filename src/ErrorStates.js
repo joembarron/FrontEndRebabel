@@ -13,6 +13,11 @@ const errorStates = {
     message: "",
     ariaProps: { "aria-invalid": undefined },
   },
+  delimiter: {
+    status: false,
+    message: "",
+    ariaProps: { "aria-invalid": undefined },
+  },
 };
 
 export default errorStates;

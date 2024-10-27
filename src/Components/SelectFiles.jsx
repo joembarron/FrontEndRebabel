@@ -4,6 +4,8 @@ import Chip from "./Chip.jsx";
 import Error from "./Error.jsx";
 
 function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
+  const errorColor = "#FFBF00";
+
   useEffect(() => {
     setErrorState(false, "", "selectFile");
   }, [data.fileName]);
@@ -51,7 +53,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
             className={styles.backgroundContainer}
             style={
               errors.selectFile.status === true
-                ? { borderColor: "#c52f21" }
+                ? { borderColor: `${errorColor}` }
                 : {}
             }
           >
@@ -63,11 +65,9 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
               ))}
             </div>
           </div>
-          {errors.selectFile.status && (
-            <Error customStyle={{ marginTop: ".2rem" }}>
-              {errors.selectFile.message}
-            </Error>
-          )}
+          <Error customStyle={{ marginTop: ".2rem", color: `${errorColor}` }}>
+            {errors.selectFile.message}
+          </Error>
         </div>
       </div>
     </>

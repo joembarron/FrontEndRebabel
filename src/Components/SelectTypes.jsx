@@ -43,7 +43,6 @@ function SelectTypes({
     setData((data) => ({ ...data, outFileType: e.target.value }));
   }
 
-  console.log(data);
   return (
     <div className={styles.fileType}>
       <label>{label}</label>
