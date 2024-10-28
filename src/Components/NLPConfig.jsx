@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./NLPConfig.module.css";
 
 function NLPConfig({ isOpen, onClose, data, setData }) {
   //Creates copy of FileNames for selecting two file input
@@ -29,7 +30,7 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
       <article>
         <h2>NLP Configuration Settings</h2>
         <hr></hr>
-        <section className="nlp-input">
+        <section className={styles.nlpInput}>
           <fieldset>
             <legend>NLP File Type:</legend>
             <input
@@ -38,6 +39,7 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
               name="nlpfileType"
               checked={data.nlpFileType === "combined"}
               onChange={(e) => handleRadioChange(e)}
+              className={styles.combined}
             />
             <label htmlFor="combined">Combined</label>
             <input
@@ -63,8 +65,14 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
           {data.nlpFileType === "separate" && (
             <div>
               {data.fileName.length < 2 && (
-                <p className="error">
+                <p className={styles.error}>
                   Error! Please Upload a Part of Speech File and a Language File
+                </p>
+              )}
+              {data.fileName.length > 2 && (
+                <p className={styles.error}>
+                  Error! Please Upload one Part of Speech File and one Language
+                  File
                 </p>
               )}
               {data.fileName.length === 2 && (

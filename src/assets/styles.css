@@ -69,17 +69,6 @@ label {
   width: 30%;
 }
 
-/* Styles for NLPConfig Component */
-.nlp-input {
-  padding: 0rem 0.7rem 0rem 0.7rem;
-}
-
-#combined {
-  margin-left: 0.3rem;
-}
-
-/* End NLPConfig */
-
 /* Styles for Mappings Component */
 .mappings-container {
   display: flex;
