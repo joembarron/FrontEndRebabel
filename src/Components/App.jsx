@@ -99,6 +99,7 @@ function App() {
           data={data}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
+          setNLPConfigOpen={setNLPConfigOpen}
           setErrorState={setErrorState}
         />
       </section>
@@ -116,6 +117,8 @@ function App() {
           isOpen={isNLPConfigOpen}
           onClose={() => setNLPConfigOpen(!isNLPConfigOpen)}
           data={data}
+          errors={errors}
+          setErrorState={setErrorState}
           setData={setData}
         />
       )}

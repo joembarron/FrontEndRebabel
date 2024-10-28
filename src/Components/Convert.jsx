@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "./Convert.module.css";
 
-function Convert({ data, isLoading, setIsLoading, setErrorState }) {
+function Convert({
+  data,
+  isLoading,
+  setIsLoading,
+  setNLPConfigOpen,
+  setErrorState,
+}) {
   function preConvertCheck() {
     let errorOccurred = false;
 
@@ -20,24 +26,32 @@ function Convert({ data, isLoading, setIsLoading, setErrorState }) {
       errorOccurred = true;
     }
 
-    if (data.nlpFileType === "") {
-      setErrorState(true, "Select an NLP File Type");
-    }
-
-    if (data.nlpFileType === "combined" && data.delimiter === "") {
-      setErrorState(true, "Enter a delimiter value", "delimiter", true);
-      errorOccurred = true;
-    }
-
-    if (data.nlpFileType === "separate") {
-      if (data.partofSpeechFile === "") {
-        setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
+    //If NLP is select as import file type
+    if (data.inFileType === "nlp_pos") {
+      if (data.nlpFileType === "") {
+        setErrorState(true, "Select an NLP File Type", "nlpFileType");
+        setNLPConfigOpen(true);
         errorOccurred = true;
       }
 
-      if (data.languageFile === "") {
-        setErrorState(true, "Please Select a File", "languageFile", true);
+      if (data.nlpFileType === "combined" && data.delimiter === "") {
+        setErrorState(true, "Enter a delimiter value", "delimiter", true);
+        setNLPConfigOpen(true);
         errorOccurred = true;
+      }
+
+      if (data.nlpFileType === "separate") {
+        if (data.partofSpeechFile === "") {
+          setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
+          setNLPConfigOpen(true);
+          errorOccurred = true;
+        }
+
+        if (data.languageFile === "") {
+          setErrorState(true, "Please Select a File", "languageFile", true);
+          setNLPConfigOpen(true);
+          errorOccurred = true;
+        }
       }
     }
 

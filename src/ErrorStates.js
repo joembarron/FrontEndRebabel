@@ -22,6 +22,16 @@ const errorStates = {
     message: "",
     ariaProps: { "aria-invalid": undefined },
   },
+  partOfSpeechFile: {
+    status: false,
+    message: "",
+    ariaProps: { "aria-invalid": undefined },
+  },
+  languageFile: {
+    status: false,
+    message: "",
+    ariaProps: { "aria-invalid": undefined },
+  },
 };
 
 export default errorStates;

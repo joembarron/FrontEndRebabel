@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./NLPConfig.module.css";
+import Error from "./Error.jsx";
 
-function NLPConfig({ isOpen, onClose, data, setData }) {
+function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
   //Creates copy of FileNames for selecting two file input
   const fileNames = [...data.fileName];
   fileNames.unshift("");
@@ -12,10 +13,14 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
     } else if (e.target.id === "separate") {
       setData((data) => ({ ...data, nlpFileType: e.target.id }));
     }
+
+    setErrorState(false, "", "nlpFileType");
   }
 
   function handleDelimiterChange(e) {
     setData((data) => ({ ...data, delimiter: e.target.value }));
+
+    setErrorState(false, "", "delimiter");
   }
 
   function handleFileChange(e) {
@@ -25,6 +30,7 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
       setData((data) => ({ ...data, languageFile: e.target.value }));
     }
   }
+
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
@@ -51,16 +57,23 @@ function NLPConfig({ isOpen, onClose, data, setData }) {
             />
             <label htmlFor="separate">Part of Speech and Language Files</label>
           </fieldset>
+          {errors.nlpFileType.status && (
+            <p className={styles.error}>Error! Select an NLP File Type</p>
+          )}
           {data.nlpFileType === "combined" && (
-            <div>
-              <label>NLP Delimiter ('/' by default)</label>
-              <input
-                type="text"
-                id="delimiter"
-                value={data.delimiter}
-                onChange={(e) => handleDelimiterChange(e)}
-              />
-            </div>
+            <>
+              <div>
+                <label>NLP Delimiter ('/' by default)</label>
+                <input
+                  type="text"
+                  id="delimiter"
+                  value={data.delimiter}
+                  onChange={(e) => handleDelimiterChange(e)}
+                  {...errors.delimiter.ariaProps}
+                />
+                <Error>{errors.delimiter.message}</Error>
+              </div>
+            </>
           )}
           {data.nlpFileType === "separate" && (
             <div>
