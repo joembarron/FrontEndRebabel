@@ -16,13 +16,10 @@ const initialState = {
   nlpFileType: "",
   partOfSpeechFile: "",
   languageFile: "",
-  /*mappings: [
-    { in_type: "", out_type: "" },
-    { in_feature: "", out_feature: "" },
-  ],*/
   mappings: [
-    {"typePairs": [] },
-    {"featurePairs": [] }
+    [ {in_type: 'sentence', out_type: 'phrase'}],
+    [{in_feature: 'nlp:form', out_feature: 'FlexText:en:txt'},
+      {in_feature: 'nlp:pos', out_feature: 'FlexText:en:pos'}] 
   ],
   root: "phrase",
   skip: ["morph"],
