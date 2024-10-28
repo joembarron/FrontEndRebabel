@@ -36,7 +36,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 800,
-    resizable: true,
+    resizable: false,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },

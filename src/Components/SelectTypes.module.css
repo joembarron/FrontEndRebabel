@@ -33,7 +33,7 @@
   margin-top: 0.2rem;
 }
 
-:where(select)[aria-invalid="true"] {
+.selectContainer select[aria-invalid="true"] {
   border-color: #ffbf00;
 }
 

@@ -98,6 +98,7 @@ function App() {
         <Convert
           data={data}
           isLoading={isLoading}
+          errors={errors}
           setIsLoading={setIsLoading}
           setNLPConfigOpen={setNLPConfigOpen}
           setErrorState={setErrorState}

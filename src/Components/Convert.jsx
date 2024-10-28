@@ -4,6 +4,7 @@ import styles from "./Convert.module.css";
 function Convert({
   data,
   isLoading,
+  errors,
   setIsLoading,
   setNLPConfigOpen,
   setErrorState,
@@ -52,6 +53,11 @@ function Convert({
           setNLPConfigOpen(true);
           errorOccurred = true;
         }
+      }
+
+      if (errors.partOfSpeechFile.status || errors.languageFile.status) {
+        setNLPConfigOpen(true);
+        errorOccurred = true;
       }
     }
 

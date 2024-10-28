@@ -26,8 +26,25 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
   function handleFileChange(e) {
     if (e.target.name === "partOfSpeech") {
       setData((data) => ({ ...data, partOfSpeechFile: e.target.value }));
+
+      if (e.target.value === data.languageFile) {
+        setErrorState(
+          true,
+          "File name already choosen",
+          "partOfSpeechFile",
+          true
+        );
+      } else {
+        setErrorState(false, "", "partOfSpeechFile");
+      }
     } else if (e.target.name === "language") {
       setData((data) => ({ ...data, languageFile: e.target.value }));
+
+      if (e.target.value === data.partOfSpeechFile) {
+        setErrorState(true, "File name already choosen", "languageFile", true);
+      } else {
+        setErrorState(false, "", "languageFile");
+      }
     }
   }
 
@@ -96,6 +113,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
                     onChange={(e) => handleFileChange(e)}
                     value={data.partOfSpeechFile}
                     aria-label="Select Part of Speech File"
+                    {...errors.partOfSpeechFile.ariaProps}
                   >
                     {fileNames.map((name) => (
                       <option value={name} key={name}>
@@ -103,12 +121,14 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
                       </option>
                     ))}
                   </select>
+                  <Error>{errors.partOfSpeechFile.message}</Error>
                   <label>Language File</label>
                   <select
                     name="language"
                     onChange={(e) => handleFileChange(e)}
                     value={data.languageFile}
                     aria-label="Select Language File"
+                    {...errors.languageFile.ariaProps}
                   >
                     {fileNames.map((name) => (
                       <option value={name} key={name}>
@@ -116,6 +136,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
                       </option>
                     ))}
                   </select>
+                  <Error>{errors.languageFile.message}</Error>
                 </div>
               )}
             </div>
