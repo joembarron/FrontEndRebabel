@@ -12,22 +12,25 @@ function Convert({
   function preConvertCheck() {
     let errorOccurred = false;
 
+    //No files uploaded
     if (data.filePath.length === 0) {
       setErrorState(true, "Select a File", "selectFile");
       errorOccurred = true;
     }
 
+    //No import type selected
     if (data.inFileType === "") {
       setErrorState(true, "Select a File Type", "inFileType", true);
       errorOccurred = true;
     }
 
+    //No export type selected
     if (data.outFileType === "") {
       setErrorState(true, "Select a File Type", "outFileType", true);
       errorOccurred = true;
     }
 
-    //If NLP is select as import file type
+    //If NLP is selected as import file type
     if (data.inFileType === "nlp_pos") {
       if (data.nlpFileType === "") {
         setErrorState(true, "Select an NLP File Type", "nlpFileType");
@@ -35,12 +38,22 @@ function Convert({
         errorOccurred = true;
       }
 
-      if (data.nlpFileType === "combined" && data.delimiter === "") {
-        setErrorState(true, "Enter a delimiter value", "delimiter", true);
-        setNLPConfigOpen(true);
-        errorOccurred = true;
+      //if combined file type selected
+      if (data.nlpFileType === "combined") {
+        if (data.delimiter === "") {
+          setErrorState(true, "Enter a delimiter value", "delimiter", true);
+          setNLPConfigOpen(true);
+          errorOccurred = true;
+        }
+
+        //if delimiter error exists, e.g. delimiter too long
+        if (errors.delimiter.status) {
+          setNLPConfigOpen(true);
+          errorOccurred = true;
+        }
       }
 
+      //if Part of Speech and and Language file are selected
       if (data.nlpFileType === "separate") {
         if (data.partofSpeechFile === "") {
           setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
@@ -53,11 +66,12 @@ function Convert({
           setNLPConfigOpen(true);
           errorOccurred = true;
         }
-      }
 
-      if (errors.partOfSpeechFile.status || errors.languageFile.status) {
-        setNLPConfigOpen(true);
-        errorOccurred = true;
+        //if errors already exist, e.g. duplicate file names
+        if (errors.partOfSpeechFile.status || errors.languageFile.status) {
+          setNLPConfigOpen(true);
+          errorOccurred = true;
+        }
       }
     }
 

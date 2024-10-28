@@ -20,14 +20,27 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
   function handleDelimiterChange(e) {
     setData((data) => ({ ...data, delimiter: e.target.value }));
 
-    setErrorState(false, "", "delimiter");
+    if (e.target.value.length > 1) {
+      setErrorState(
+        true,
+        "Delimiter can only be a single character",
+        "delimiter",
+        true
+      );
+    } else if (e.target.value === "") {
+      setErrorState(true, "Enter a delimiter value", "delimiter", true);
+    } else {
+      setErrorState(false, "", "delimiter");
+    }
   }
 
   function handleFileChange(e) {
     if (e.target.name === "partOfSpeech") {
       setData((data) => ({ ...data, partOfSpeechFile: e.target.value }));
 
-      if (e.target.value === data.languageFile) {
+      if (e.target.value === "") {
+        setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
+      } else if (e.target.value === data.languageFile) {
         setErrorState(
           true,
           "File name already choosen",
@@ -40,7 +53,9 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
     } else if (e.target.name === "language") {
       setData((data) => ({ ...data, languageFile: e.target.value }));
 
-      if (e.target.value === data.partOfSpeechFile) {
+      if (e.target.value === "") {
+        setErrorState(true, "Please Select a File", "languageFile", true);
+      } else if (e.target.value === data.partOfSpeechFile) {
         setErrorState(true, "File name already choosen", "languageFile", true);
       } else {
         setErrorState(false, "", "languageFile");
