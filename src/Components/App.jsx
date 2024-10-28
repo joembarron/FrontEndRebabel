@@ -5,6 +5,7 @@ import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
 import OutputFileConfig from "./OutputFileConfig.jsx";
 import errorStates from "../ErrorStates.js";
+import SelectTypes from "./SelectTypes.jsx";
 
 const initialState = {
   filePath: [],
@@ -42,27 +43,20 @@ function App() {
   const [includedLayerValues, setIncludedLayerValues] = useState(["phrase", "word"]);
 
 
-  function setErrorState(errorStatus, errorMessage, propName) {
+  function setErrorState(
+    errorStatus,
+    errorMessage,
+    propName,
+    ariaStatus = undefined
+  ) {
     setErrors((errors) => ({
       ...errors,
       [propName]: {
         status: errorStatus,
         message: errorMessage,
-        ariaProps: { "aria-invalid": errorStatus },
+        ariaProps: { "aria-invalid": ariaStatus },
       },
     }));
-  }
-
-  function handleSelectType(e) {
-    if (e.target.name === "inputType") {
-      setData((data) => ({ ...data, inFileType: e.target.value }));
-
-      if (e.target.value === "nlp_pos") {
-        setNLPConfigOpen(() => !isNLPConfigOpen);
-      }
-    } else if (e.target.name === "outputType") {
-      setData((data) => ({ ...data, outFileType: e.target.value }));
-    }
   }
 
   return (
@@ -79,50 +73,22 @@ function App() {
           errors={errors}
           setErrorState={setErrorState}
         />
-        <div className="file-type">
-          <label>File input type</label>
-          <select
-            aria-label="Select File Type"
-            name="inputType"
-            onChange={(e) => handleSelectType(e)}
-            disabled={isLoading}
-          >
-            <option defaultValue=""></option>
-            <option value="flextext">Flextext</option>
-            <option value="conllu">Conllu</option>
-            <option value="nlp_pos">NLP</option>
-          </select>
-          {data.inFileType === "nlp_pos" && (
-            <button
-              className="nlp-button"
-              disabled={isLoading}
-              onClick={() => setNLPConfigOpen(!isNLPConfigOpen)}
-            >
-              NLP Settings
-            </button>
-          )}
-        </div>
-        <div className="file-type">
-          <label>File output type</label>
-          <select
-            aria-label="Select File Type"
-            name="outputType"
-            onChange={(e) => handleSelectType(e)}
-            disabled={isLoading}
-          >
-            <option defaultValue=""></option>
-            <option value="flextext">Flextext</option>
-          </select>
-          {data.outFileType === "flextext" && (
-            <button
-              className="output-button"
-              disabled={isLoading}
-              onClick={() => setOutputFileConfigOpen(true)}
-            >
-              Output File Settings
-            </button>
-          )}
-        </div>
+        <SelectTypes
+          label="File Input Type"
+          selectConfig="inputType"
+          data={data}
+          setData={setData}
+          isLoading={isLoading}
+          setNLPConfigOpen={setNLPConfigOpen}
+        />
+        <SelectTypes
+          label="File Output Type"
+          selectConfig="outputType"
+          data={data}
+          setData={setData}
+          isLoading={isLoading}
+          setOutputFileConfigOpen={setOutputFileConfigOpen}
+        />
         <div className="settings-container">
           <button onClick={() => setMappingsOpen(true)} disabled={isLoading}>
             Mappings

@@ -1,0 +1,19 @@
+.fileType {
+  margin-top: 1rem;
+}
+
+.fileType select {
+  width: 30%;
+}
+
+.nlpButton {
+  font-size: 0.8rem;
+  padding: 0.7rem;
+  margin-left: 0.7rem;
+}
+
+.outputButton {
+  font-size: 0.8rem;
+  padding: 0.7rem;
+  margin-left: 0.7rem;
+}

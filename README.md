@@ -1,4 +1,12 @@
-# Gap App Installation 
+# Running Gap App in Development Mode
+- To run the application in development mode:
+    - clone the repository from GitHub
+        - `git clone https://github.com/ElizabethThorner/FrontEndGapApp.git`
+    - run `npm install` to install the Node packages Gap App depends on 
+    - follow the instructions in **rebabel_scripts/README.md** to generate the rebabel_convert executable 
+    - run `npm run start` to start the application in development mode 
+
+# Gap App Distributable Installation 
 
 The installation package files can be found on the [GitHub Releases](https://github.com/ElizabethThorner/FrontEndGapApp/releases) page. 
 
