@@ -39,6 +39,11 @@ function SelectTypes({
   function handleInputType(e) {
     setData((data) => ({ ...data, inFileType: e.target.value }));
 
+    if (e.target.value === "") {
+      setErrorState(true, "Type cannot be empty", "inFileType", true);
+      return;
+    }
+
     if (e.target.value === "nlp_pos") {
       setNLPConfigOpen(true);
     }
@@ -48,6 +53,12 @@ function SelectTypes({
 
   function handleOutputType(e) {
     setData((data) => ({ ...data, outFileType: e.target.value }));
+
+    if (e.target.value === "") {
+      setErrorState(true, "Type cannot be empty", "outFileType", true);
+      return;
+    }
+
     setErrorState(false, "", "outFileType");
   }
 
