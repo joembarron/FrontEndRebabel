@@ -19,7 +19,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
       //throws an error if true
       for (let entry in data.fileName) {
         if (data.fileName[entry] === response.fileName) {
-          setErrorState(true, "Error! File Names must be unique", "selectFile");
+          setErrorState(true, "File Names must be unique", "selectFile");
           return;
         }
       }
