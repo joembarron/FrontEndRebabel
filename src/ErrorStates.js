@@ -13,6 +13,10 @@ const errorStates = {
     message: "",
     ariaProps: { "aria-invalid": undefined },
   },
+  nlpFileType: {
+    status: false,
+    message: "",
+  },
   delimiter: {
     status: false,
     message: "",
