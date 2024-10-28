@@ -1,4 +1,11 @@
-const { app, Menu, BrowserWindow, ipcMain, dialog, shell } = require("electron");
+const {
+  app,
+  Menu,
+  BrowserWindow,
+  ipcMain,
+  dialog,
+  shell,
+} = require("electron");
 const path = require("node:path");
 const { unlink } = require("node:fs");
 const util = require("node:util");
@@ -6,11 +13,11 @@ const execFilePromisified = util.promisify(
   require("node:child_process").execFile
 );
 const createMenuTemplate = require("./menu");
-const fs = require('fs');
+const fs = require("fs");
 
-const userDataPath = app.getPath('userData')
-const rebabelConvertPath = path.join(process.resourcesPath, 'rebabel_convert');
-const tempdbPath = path.join(userDataPath, 'temp.db')
+const userDataPath = app.getPath("userData");
+const rebabelConvertPath = path.join(process.resourcesPath, "rebabel_convert");
+const tempdbPath = path.join(userDataPath, "temp.db");
 const isDev = !app.isPackaged;
 const FileExtensions = {
   flextext: ".flextext",
@@ -29,7 +36,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 800,
-    resizable: false,
+    resizable: true,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -54,9 +61,13 @@ app.whenReady().then(() => {
   if (fs.existsSync(tempdbPath)) {
     try {
       fs.unlinkSync(tempdbPath);
-      console.log(`The temp.db SQLite database was found at ${tempdbPath} and has been deleted.`);
+      console.log(
+        `The temp.db SQLite database was found at ${tempdbPath} and has been deleted.`
+      );
     } catch (err) {
-      console.error(`Unable to remove the temp.db SQLite database at ${tempdbPath}: ${err}`);
+      console.error(
+        `Unable to remove the temp.db SQLite database at ${tempdbPath}: ${err}`
+      );
     }
   }
 
@@ -107,23 +118,20 @@ app.whenReady().then(() => {
       skip,
     } = data;
 
-    const { stdout, stderr } = await execFilePromisified(
-      rebabelConvertPath,
-      [
-        inFileType,
-        outFileType,
-        filePath,
-        outPutFileNamePath,
-        nlpFileType,
-        partOfSpeechFile,
-        languageFile,
-        delimiter,
-        JSON.stringify(mappings),
-        root,
-        skip.join(","),
-        tempdbPath
-      ]
-    );
+    const { stdout, stderr } = await execFilePromisified(rebabelConvertPath, [
+      inFileType,
+      outFileType,
+      filePath,
+      outPutFileNamePath,
+      nlpFileType,
+      partOfSpeechFile,
+      languageFile,
+      delimiter,
+      JSON.stringify(mappings),
+      root,
+      skip.join(","),
+      tempdbPath,
+    ]);
 
     if (stderr) {
       console.log(error); // This is temporary minimum error handling.

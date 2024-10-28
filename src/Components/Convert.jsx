@@ -6,43 +6,37 @@ function Convert({ data, isLoading, setIsLoading, setErrorState }) {
     let errorOccurred = false;
 
     if (data.filePath.length === 0) {
-      setErrorState(true, "Error! Please Select a File", "selectFile");
+      setErrorState(true, "Select a File", "selectFile");
       errorOccurred = true;
     }
 
     if (data.inFileType === "") {
-      setErrorState(true, "Error! Select File Type", "inFileType");
+      setErrorState(true, "Select a File Type", "inFileType", true);
       errorOccurred = true;
     }
 
     if (data.outFileType === "") {
-      setErrorState(true, "Error! Select File Type", "outFileType");
+      setErrorState(true, "Select a File Type", "outFileType", true);
       errorOccurred = true;
     }
 
-    if (data.nlpFileType === "combined" && delimiter === "") {
-      setErrorState(true, "Error! Select File Type", "delimiter", true);
+    if (data.nlpFileType === "") {
+      setErrorState(true, "Select an NLP File Type");
+    }
+
+    if (data.nlpFileType === "combined" && data.delimiter === "") {
+      setErrorState(true, "Enter a delimiter value", "delimiter", true);
       errorOccurred = true;
     }
 
     if (data.nlpFileType === "separate") {
       if (data.partofSpeechFile === "") {
-        setErrorState(
-          true,
-          "Error! Please Select a File",
-          "partOfSpeechFile",
-          true
-        );
+        setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
         errorOccurred = true;
       }
 
       if (data.languageFile === "") {
-        setErrorState(
-          true,
-          "Error! Please Select a File",
-          "languageFile",
-          true
-        );
+        setErrorState(true, "Please Select a File", "languageFile", true);
         errorOccurred = true;
       }
     }
@@ -73,7 +67,7 @@ function Convert({ data, isLoading, setIsLoading, setErrorState }) {
         </button>
       )}
       {isLoading && (
-        <span className="loading-status" aria-busy="true">
+        <span className={styles.loadingStatus} aria-busy="true">
           Converting...
         </span>
       )}

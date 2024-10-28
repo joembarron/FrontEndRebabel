@@ -1,7 +1,7 @@
 .selectFile {
   display: grid;
   grid-template-columns: 20% 80%;
-  margin-bottom: 1.8rem;
+  margin-bottom: 0.8rem;
 }
 
 .btn {
