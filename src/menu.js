@@ -13,6 +13,37 @@ const createMenuTemplate = (isDev) => {
   {
     label: 'View',
     submenu: [
+    ...(isDev ? [{
+      label: 'Reload',
+      accelerator: 'CmdOrCtrl+R',
+      click: () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+          focusedWindow.reload();
+        }
+      }
+    }] : []),
+    ...(isDev ? [{
+      label: 'Force Reload',
+      accelerator: 'CmdOrCtrl+Shift+R',
+      click: () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+          focusedWindow.webContents.reloadIgnoringCache();
+        }
+      }
+    }] : []),
+    ...(isDev ? [{
+      label: 'Toggle Developer Tools',
+      accelerator: 'CmdOrCtrl+I',
+      click: () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+          focusedWindow.webContents.toggleDevTools();
+        }
+      }
+    }] : []),
+    { type: 'separator' },
     {
       label: 'Zoom In',
       accelerator: 'CmdOrCtrl+Plus',
@@ -47,18 +78,7 @@ const createMenuTemplate = (isDev) => {
         }
       }
     },
-    { type: 'separator' },
-    ...(isDev ? [{
-      label: 'Toggle Developer Tools',
-      accelerator: 'CmdOrCtrl+I',
-      click: () => {
-        const focusedWindow = BrowserWindow.getFocusedWindow();
-        if (focusedWindow) {
-          focusedWindow.webContents.toggleDevTools();
-        }
-      }
-    }] : [])],
-  },
+  ],},
   {
     label: 'Help',
     submenu: [
