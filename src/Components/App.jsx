@@ -36,8 +36,10 @@ function App() {
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
   //Sets the values for the current included layers in the flextext settings
-  const [includedLayerValues, setIncludedLayerValues] = useState(["phrase", "word"]);
-
+  const [includedLayerValues, setIncludedLayerValues] = useState([
+    "phrase",
+    "word",
+  ]);
 
   function setErrorState(
     errorStatus,
@@ -60,7 +62,6 @@ function App() {
       <header>
         <h2>reBabel</h2>
       </header>
-
       <section className="input-fields">
         <SelectFiles
           data={data}
@@ -74,6 +75,8 @@ function App() {
           selectConfig="inputType"
           data={data}
           setData={setData}
+          errors={errors}
+          setErrorState={setErrorState}
           isLoading={isLoading}
           setNLPConfigOpen={setNLPConfigOpen}
         />
@@ -82,6 +85,8 @@ function App() {
           selectConfig="outputType"
           data={data}
           setData={setData}
+          errors={errors}
+          setErrorState={setErrorState}
           isLoading={isLoading}
           setOutputFileConfigOpen={setOutputFileConfigOpen}
         />
@@ -93,7 +98,10 @@ function App() {
         <Convert
           data={data}
           isLoading={isLoading}
+          errors={errors}
           setIsLoading={setIsLoading}
+          setNLPConfigOpen={setNLPConfigOpen}
+          setOutputFileConfigOpen={setOutputFileConfigOpen}
           setErrorState={setErrorState}
         />
       </section>
@@ -111,6 +119,8 @@ function App() {
           isOpen={isNLPConfigOpen}
           onClose={() => setNLPConfigOpen(!isNLPConfigOpen)}
           data={data}
+          errors={errors}
+          setErrorState={setErrorState}
           setData={setData}
         />
       )}
@@ -120,6 +130,8 @@ function App() {
           onClose={() => setOutputFileConfigOpen(!isOutputFileConfigOpen)}
           data={data}
           setData={setData}
+          errors={errors}
+          setErrorState={setErrorState}
           includedLayerValues={includedLayerValues}
           setIncludedLayerValues={setIncludedLayerValues}
         />

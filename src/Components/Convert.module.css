@@ -10,9 +10,14 @@
 }
 
 .convertBtn button:hover {
-  background-color: #4E4E4E;
+  background-color: #4e4e4e;
 }
 
 .convertBtn button:active {
-  background-color: #3E3E3E;
+  background-color: #3e3e3e;
+}
+
+.loadingStatus {
+  font-weight: 500;
+  color: #d6d6d6;
 }

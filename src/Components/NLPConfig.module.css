@@ -1,0 +1,11 @@
+.nlpInput {
+  padding: 0rem 0.7rem 0rem 0.7rem;
+}
+
+.combined {
+  margin-left: 0.3rem;
+}
+
+.error {
+  color: #c52f21;
+}

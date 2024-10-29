@@ -1,4 +1,5 @@
 /* Error coloring */
 .error {
   color: #c52f21;
+  height: 1rem;
 }

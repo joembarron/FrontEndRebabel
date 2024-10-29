@@ -1,8 +1,19 @@
 .fileType {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 
 .fileType select {
+  width: 100%;
+}
+
+.inputButtonContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 100%;
+}
+
+.selectContainer {
   width: 30%;
 }
 
@@ -10,10 +21,22 @@
   font-size: 0.8rem;
   padding: 0.7rem;
   margin-left: 0.7rem;
+  height: min-content;
+  margin-top: 0.2rem;
 }
 
 .outputButton {
   font-size: 0.8rem;
   padding: 0.7rem;
   margin-left: 0.7rem;
+  height: min-content;
+  margin-top: 0.2rem;
+}
+
+.selectContainer select[aria-invalid="true"] {
+  border-color: #ffbf00;
+}
+
+small {
+  margin-bottom: 0rem;
 }
