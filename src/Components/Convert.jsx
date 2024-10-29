@@ -34,7 +34,7 @@ function Convert({
     //If NLP is selected as import file type
     if (data.inFileType === "nlp_pos") {
       if (data.nlpFileType === "") {
-        setErrorState(true, "Select an NLP File Type", "nlpFileType");
+        setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
         setNLPConfigOpen(true);
         errorOccurred = true;
       }
@@ -56,7 +56,7 @@ function Convert({
 
       //if Part of Speech and and Language file are selected
       if (data.nlpFileType === "separate") {
-        if (data.partofSpeechFile === "") {
+        if (data.partOfSpeechFile === "") {
           setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
           setNLPConfigOpen(true);
           errorOccurred = true;

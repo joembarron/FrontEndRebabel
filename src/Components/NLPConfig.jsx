@@ -78,6 +78,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
               checked={data.nlpFileType === "combined"}
               onChange={(e) => handleRadioChange(e)}
               className={styles.combined}
+              {...errors.nlpFileType.ariaProps}
             />
             <label htmlFor="combined">Combined</label>
             <input
@@ -86,6 +87,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
               name="nlpfileType"
               checked={data.nlpFileType === "separate"}
               onChange={(e) => handleRadioChange(e)}
+              {...errors.nlpFileType.ariaProps}
             />
             <label htmlFor="separate">Part of Speech and Language Files</label>
           </fieldset>
