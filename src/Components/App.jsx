@@ -101,6 +101,7 @@ function App() {
           errors={errors}
           setIsLoading={setIsLoading}
           setNLPConfigOpen={setNLPConfigOpen}
+          setOutputFileConfigOpen={setOutputFileConfigOpen}
           setErrorState={setErrorState}
         />
       </section>
@@ -129,6 +130,8 @@ function App() {
           onClose={() => setOutputFileConfigOpen(!isOutputFileConfigOpen)}
           data={data}
           setData={setData}
+          errors={errors}
+          setErrorState={setErrorState}
           includedLayerValues={includedLayerValues}
           setIncludedLayerValues={setIncludedLayerValues}
         />

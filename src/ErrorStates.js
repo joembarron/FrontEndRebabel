@@ -32,6 +32,10 @@ const errorStates = {
     message: "",
     ariaProps: { "aria-invalid": undefined },
   },
+  skipRoot: {
+    status: false,
+    message: "",
+  },
 };
 
 export default errorStates;

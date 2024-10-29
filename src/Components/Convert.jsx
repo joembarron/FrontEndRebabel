@@ -7,6 +7,7 @@ function Convert({
   errors,
   setIsLoading,
   setNLPConfigOpen,
+  setOutputFileConfigOpen,
   setErrorState,
 }) {
   function preConvertCheck() {
@@ -73,6 +74,12 @@ function Convert({
           errorOccurred = true;
         }
       }
+    }
+
+    //checks if skip or root is empty
+    if (data.skip.length === 0) {
+      setErrorState(true, "Select a value", "skipRoot");
+      setOutputFileConfigOpen(true);
     }
 
     return errorOccurred;
