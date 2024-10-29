@@ -80,6 +80,7 @@ function Convert({
     if (data.skip.length === 0) {
       setErrorState(true, "Select a value", "skipRoot");
       setOutputFileConfigOpen(true);
+      errorOccurred = true;
     }
 
     return errorOccurred;
