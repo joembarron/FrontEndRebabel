@@ -42,7 +42,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
     return (
       <li> 
         {pair.in_type} -{">"} {pair.out_type}
-        <button onClick={() => handleRemoveMapping(0, index)}>Remove</button>
+        <button className="remove-button" onClick={() => handleRemoveMapping(0, index)}>Remove</button>
       </li>
     )
   })
@@ -51,7 +51,7 @@ function Mappings({ isOpen, onClose, data, setData }) {
     return (
       <li> 
         {pair.in_feature} -{">"} {pair.out_feature}
-        <button onClick={() => handleRemoveMapping(1, index)}>Remove</button>
+        <button className="remove-button" onClick={() => handleRemoveMapping(1, index)}>Remove</button>
       </li>
     )
   })
@@ -126,19 +126,19 @@ function Mappings({ isOpen, onClose, data, setData }) {
         <h2>Mappings</h2>
         <hr></hr>
         <div>
-          <label>Current Type Mappings</label>
+          <label>Current Type Mappings:</label>
           <ul>
             {typeMappings}
           </ul>
-          <label>Current Feature Mappings</label>
+          <label>Current Feature Mappings:</label>
           <ul>
             {featureMappings}
           </ul>
         </div>
         <section id="mappings-inputs">
           <div className="mappings-container">
-            <div className="input-container left">
-              <button 
+            <div className="type-button-container">
+              <button
                 onClick={() => setAddTypeMappingOpen(true)}>
                   Add New Type Mapping
               </button>
