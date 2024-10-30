@@ -1,5 +1,43 @@
 const { BrowserWindow, app, dialog, shell } = require("electron");
 
+//menu elements that are created when app run in development mode
+const getDevMenu = (isDev) => {
+  if (!isDev) return [];
+  return [
+    {
+      label: 'Reload',
+      accelerator: 'CmdOrCtrl+R',
+      click: () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+          focusedWindow.reload();
+        }
+      },
+    },
+    {
+      label: 'Force Reload',
+      accelerator: 'CmdOrCtrl+Shift+R',
+      click: () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+          focusedWindow.webContents.reloadIgnoringCache();
+        }
+      }
+    },
+    {
+      label: 'Toggle Developer Tools',
+      accelerator: 'CmdOrCtrl+I',
+      click: () => {
+        const focusedWindow = BrowserWindow.getFocusedWindow();
+        if (focusedWindow) {
+          focusedWindow.webContents.toggleDevTools();
+        }
+      }
+    },
+    { type: 'separator' },
+  ];
+};
+
 const createMenuTemplate = (isDev) => {
   const menuTemplate = [
   {
@@ -13,6 +51,7 @@ const createMenuTemplate = (isDev) => {
   {
     label: 'View',
     submenu: [
+    ...getDevMenu(isDev),
     {
       label: 'Zoom In',
       accelerator: 'CmdOrCtrl+Plus',
@@ -46,19 +85,8 @@ const createMenuTemplate = (isDev) => {
           focusedWindow.webContents.setZoomLevel(0);
         }
       }
-    },
-    { type: 'separator' },
-    ...(isDev ? [{
-      label: 'Toggle Developer Tools',
-      accelerator: 'CmdOrCtrl+I',
-      click: () => {
-        const focusedWindow = BrowserWindow.getFocusedWindow();
-        if (focusedWindow) {
-          focusedWindow.webContents.toggleDevTools();
-        }
-      }
-    }] : [])],
-  },
+    }
+  ]},
   {
     label: 'Help',
     submenu: [
