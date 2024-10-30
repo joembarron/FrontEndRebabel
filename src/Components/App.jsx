@@ -17,8 +17,8 @@ const initialState = {
   partOfSpeechFile: "",
   languageFile: "",
   mappings: [
-    { in_type: "", out_type: "" },
-    { in_feature: "", out_feature: "" },
+    [],
+    [] 
   ],
   root: "phrase",
   skip: ["morph"],

@@ -47,33 +47,26 @@ else:
         db = tempdb_path,
         infiles = [inPath],
         nlpFileType = "combined",
-        delimiter = delimiter,
+        delimiter = delimiter
     )
 
-if (skip == ""):
-    rebabel_format.run_command(
-        "export",
-        mode = outType,
-        db = tempdb_path,
-        outfile = outPath,
-        mappings = [
-            {'in_type': 'sentence', 'out_type': 'phrase'},
-            {'in_feature': 'nlp:form', 'out_feature': 'FlexText:en:txt'},
-            {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
-        ],
-        root = root
-    )
-else:
-    rebabel_format.run_command(
-        "export",
-        mode = outType,
-        db = tempdb_path,
-        outfile = outPath,
-        mappings = [
-            {'in_type': 'sentence', 'out_type': 'phrase'},
-            {'in_feature': 'nlp:form', 'out_feature': 'FlexText:en:txt'},
-            {'in_feature': 'nlp:pos', 'out_feature': 'FlexText:en:pos'}
-        ],
-        root = root,
-        skip = skip.split(",")
-    )
+if (outType == "flextext"):
+    if (skip == ""):
+        rebabel_format.run_command(
+            "export",
+            mode = outType,
+            db = tempdb_path,
+            outfile = outPath,
+            mappings = mappings[0] + mappings[1],
+            root = root
+        )
+    else:
+        rebabel_format.run_command(
+            "export",
+            mode = outType,
+            db = tempdb_path,
+            outfile = outPath,
+            mappings = mappings[0] + mappings[1],
+            root = root,
+            skip = skip.split(",")
+        )
