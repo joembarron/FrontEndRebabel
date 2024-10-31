@@ -1,8 +1,10 @@
 const fs = require('fs');
-const { spawn } = require('child_process');
+const { spawn, execSync } = require('child_process');
 const path = require('path');
 const isWindows = process.platform === 'win32';
+const isMac = process.platform === 'darwin';
 
+//delete previous build files
 const venvPath = path.join(__dirname, '.venv');
 const buildPath = path.join(__dirname, 'build');
 const distPath = path.join(__dirname, 'dist');
@@ -61,5 +63,46 @@ if (isWindows) {
     });
 }
 else {
-    console.log("work in progress");
+    const scriptPath = path.join('.github', 'scripts', 'create_rebabel_convert_executable');
+    const sourcePath = path.join(__dirname, 'dist', 'rebabel_convert');
+    const linuxDestination = path.join('node_modules', 'electron', 'dist', 'resources', 'rebabel_convert');
+    const macDestination = path.join('node_modules', 'electron', 'dist', 'Electron.app', 'Contents', 'Resources', 'rebabel_convert');
+    const destinationPath = isMac ? macDestination : linuxDestination;
+
+    //create executable
+    console.log('Executing Bash script to create executable...');
+
+    try {
+        execSync(`chmod +x ${scriptPath}`);
+        console.log(`Set executable permissions for: ${scriptPath}`);
+    } catch (error) {
+        console.error(`Failed to set permissions: ${error.message}`);
+    }
+
+    const bash = spawn('bash', ['-c', scriptPath]);
+
+    bash.stdout.on('data', (data) => {
+        console.log(`Bash Output: ${data}`);
+    });
+
+    bash.stderr.on('data', (data) => {
+        console.error(`Bash Error Output: ${data}`);
+    });
+
+    bash.on('close', (code) => {
+        if (code !== 0) {
+            console.error(`Bash script exited with code ${code}`);
+            return;
+        }
+        console.log('Bash script executed successfully.');
+
+        // Copy executable to correct location
+        fs.copyFile(sourcePath, destinationPath, (err) => {
+            if (err) {
+                console.error(`Error copying rebabel_convert: ${err.message}`);
+            } else {
+                console.log('rebabel_convert copied successfully');
+            }
+        });
+    });
 }
