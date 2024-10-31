@@ -1,8 +1,8 @@
 {
-  "name": "frontendgapapp",
-  "productName": "frontendgapapp",
+  "name": "frontendrebabel",
+  "productName": "frontendrebabel",
   "version": "1.0.0",
-  "description": "Front End for the rebabel program",
+  "description": "Front End for the reBabel program",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

@@ -31,7 +31,7 @@ module.exports = {
       config: {
         repository: {
           owner: 'ElizabethThorner',
-          name: 'FrontEndGapApp'
+          name: 'FrontEndRebabel'
         },
         force: true,
         prerelease: true,
