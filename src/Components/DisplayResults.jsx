@@ -24,12 +24,8 @@ function DisplayResults({
     message += conversionResult.message;
   }
 
-  function handleOnSuccessClose() {
-    resetData();
-    onClose();
-  }
-
-  function handleOnErrorClearData() {
+  //clears data and closes
+  function handleOnResetClose() {
     resetData();
     onClose();
   }
@@ -58,10 +54,10 @@ function DisplayResults({
         </section>
         <footer>
           {conversionResult.success ? (
-            <button onClick={handleOnSuccessClose}>Close</button>
+            <button onClick={handleOnResetClose}>Close</button>
           ) : (
             <>
-              <button onClick={handleOnErrorClearData}>Clear Data</button>{" "}
+              <button onClick={handleOnResetClose}>Clear Data</button>{" "}
               <button onClick={onClose}>Close</button>
             </>
           )}
