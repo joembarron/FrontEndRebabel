@@ -8,6 +8,7 @@ const {
 } = require("electron");
 const path = require("node:path");
 const { unlink } = require("node:fs");
+const { execFileSync } = require("node:child_process");
 const util = require("node:util");
 const execFilePromisified = util.promisify(
   require("node:child_process").execFile
@@ -105,6 +106,11 @@ app.whenReady().then(() => {
   ipcMain.handle("rebabelConvert", async (event, data) => {
     let outPutFileNamePath = "";
 
+    let returnData = {
+      success: false,
+      message: "An unexpected error occured!",
+    };
+
     //calls saveAs dialog if fileName and output file type aren't empty
     if (data.fileName.length === 0 || data.outFileType === "") {
       return { success: false, message: "empty" };
@@ -132,36 +138,32 @@ app.whenReady().then(() => {
       skip,
     } = data;
 
-    const { stdout, stderr } = await execFilePromisified(rebabelConvertPath, [
-      inFileType,
-      outFileType,
-      filePath,
-      outPutFileNamePath,
-      nlpFileType,
-      partOfSpeechFile,
-      languageFile,
-      delimiter,
-      JSON.stringify(mappings),
-      root,
-      skip.join(","),
-      tempdbPath,
-    ]);
-
-    let returnData = {
-      success: false,
-      message: "An unexpected error occured!",
-    };
-
-    if (stderr) {
-      console.log(error); // This is temporary minimum error handling.
-      returnData = { success: false, message: "An error occcured abort!" };
-    } else {
+    let buffer = "";
+    try {
+      buffer = execFileSync(rebabelConvertPath, [
+        inFileType,
+        outFileType,
+        filePath,
+        outPutFileNamePath,
+        nlpFileType,
+        partOfSpeechFile,
+        languageFile,
+        delimiter,
+        JSON.stringify(mappings),
+        root,
+        skip.join(","),
+        tempdbPath,
+      ]);
       const saveAsFileName = path.basename(outPutFileNamePath);
       returnData = { success: true, convertedFileName: saveAsFileName };
+    } catch (err) {
+      const cleanedErrorMessage = cleanErrorMessage(err);
+      returnData = { success: false, message: cleanedErrorMessage };
     }
 
     unlink(tempdbPath, (err) => {
       if (err) {
+        //Perhaps add something here for a return
         console.error(`Error removing the temp.db SQLite database.`);
       } else {
         console.log(`The temp.db SQLite database has been removed.`);
@@ -220,4 +222,12 @@ function setOutputFileName(data) {
   let outputFileName = nameBeforePeriod + FileExtensions[outputFileType];
 
   return outputFileName;
+}
+
+function cleanErrorMessage(error) {
+  const errorString = error.stderr.toString();
+  const beginOfValueError = errorString.indexOf("ValueError:");
+  const beginOfBrackets = errorString.indexOf("[", beginOfValueError);
+
+  return errorString.substring(beginOfValueError, beginOfBrackets);
 }

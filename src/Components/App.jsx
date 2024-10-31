@@ -65,9 +65,6 @@ function App() {
     setData(initialState);
     setErrors(errorStates);
   }
-
-  console.log(data);
-
   return (
     <div className="container flex-base">
       <header>

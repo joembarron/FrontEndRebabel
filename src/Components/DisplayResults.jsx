@@ -17,7 +17,9 @@ function DisplayResults({
   let conversionFileName = conversionResult.convertedFileName;
 
   if (conversionResult.success) {
-    message = `${data.fileName.toString()} was sucessfully converted to ${conversionFileName}`;
+    message = `${data.fileName.join(
+      ", "
+    )} was sucessfully converted to ${conversionFileName}`;
   } else {
     message += conversionResult.message;
   }
