@@ -9,7 +9,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "rebabel_convert": "node rebabel_scripts/create_rebabel_convert.js"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
