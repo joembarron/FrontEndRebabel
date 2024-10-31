@@ -9,6 +9,8 @@ function Convert({
   setNLPConfigOpen,
   setOutputFileConfigOpen,
   setErrorState,
+  setDisplayResultsOpen,
+  setConversionResult,
 }) {
   function preConvertCheck() {
     let errorOccurred = false;
@@ -94,6 +96,11 @@ function Convert({
       return;
     }
     const response = await window.pythonApi.rebabelConvert(data);
+
+    if (response.message !== "cancelled" && response.message !== "empty") {
+      setDisplayResultsOpen(true);
+      setConversionResult(response);
+    }
 
     setIsLoading(false);
   }
