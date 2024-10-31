@@ -73,8 +73,21 @@ app.whenReady().then(() => {
 
   ipcMain.handle("selectFile", async () => {
     const filePathSelect = dialog.showOpenDialogSync({
-      filters: [{name: "Allowed File Types", extensions: ["txt", "flextext", "csv", 
-        "eaf", "conllu", "sfm", "tf", "xml"]}],
+      filters: [
+        {
+          name: "Allowed File Types",
+          extensions: [
+            "txt",
+            "flextext",
+            "csv",
+            "eaf",
+            "conllu",
+            "sfm",
+            "tf",
+            "xml",
+          ],
+        },
+      ],
       properties: ["openFile"],
     });
 
@@ -90,19 +103,18 @@ app.whenReady().then(() => {
   });
 
   ipcMain.handle("rebabelConvert", async (event, data) => {
-    let conversionFailure = false;
     let outPutFileNamePath = "";
 
     //calls saveAs dialog if fileName and output file type aren't empty
     if (data.fileName.length === 0 || data.outFileType === "") {
-      return "error";
+      return { success: false, message: "empty" };
     } else {
       outPutFileNamePath = initiateSaveAs(data);
     }
 
     //user cancels saveAs
     if (outPutFileNamePath === "cancelled") {
-      return "cancelled";
+      return { success: false, message: "cancelled" };
     }
 
     // get arguments from input forms
@@ -135,23 +147,28 @@ app.whenReady().then(() => {
       tempdbPath,
     ]);
 
+    let returnData = {
+      success: false,
+      message: "An unexpected error occured!",
+    };
+
     if (stderr) {
       console.log(error); // This is temporary minimum error handling.
-      conversionFailure = true;
+      returnData = { success: false, message: "An error occcured abort!" };
     } else {
-      console.log("The file conversion process completed.");
+      const saveAsFileName = path.basename(outPutFileNamePath);
+      returnData = { success: true, convertedFileName: saveAsFileName };
     }
 
     unlink(tempdbPath, (err) => {
       if (err) {
         console.error(`Error removing the temp.db SQLite database.`);
-        conversionFailure = true;
       } else {
         console.log(`The temp.db SQLite database has been removed.`);
       }
     });
 
-    return conversionFailure;
+    return returnData;
   });
 
   // On OS X it's common to re-create a window in the app when the
