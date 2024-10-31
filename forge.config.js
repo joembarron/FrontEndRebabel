@@ -5,7 +5,7 @@ const isWindows = process.platform === 'win32';
 module.exports = {
   packagerConfig: {
     asar: true,
-    extraResource: [isWindows ? "./rebabel_scripts/rebabel_convert.exe" : "./rebabel_scripts/rebabel_convert"]
+    extraResource: [isWindows ? "./rebabel_scripts/dist/rebabel_convert.exe" : "./rebabel_scripts/dist/rebabel_convert"]
   },
   rebuildConfig: {},
   makers: [
@@ -31,7 +31,7 @@ module.exports = {
       config: {
         repository: {
           owner: 'ElizabethThorner',
-          name: 'FrontEndGapApp'
+          name: 'FrontEndRebabel'
         },
         force: true,
         prerelease: true,

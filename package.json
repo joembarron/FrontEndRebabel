@@ -1,15 +1,16 @@
 {
-  "name": "frontendgapapp",
-  "productName": "frontendgapapp",
+  "name": "frontendrebabel",
+  "productName": "frontendrebabel",
   "version": "1.0.0",
-  "description": "Front End for the rebabel program",
+  "description": "Front End for the reBabel program",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "rebabel_convert": "node rebabel_scripts/create_rebabel_convert.js"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -32,7 +33,7 @@
     "style-loader": "^3.3.4"
   },
   "keywords": [],
-  "author": "GapApp Team",
+  "author": "reBabel Team",
   "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
