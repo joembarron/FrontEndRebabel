@@ -31,6 +31,7 @@ function DisplayResults({
 
   function handleOnErrorClearData() {
     resetData();
+    onClose();
   }
 
   return (
