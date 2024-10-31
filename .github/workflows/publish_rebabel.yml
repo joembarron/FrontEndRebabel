@@ -20,9 +20,9 @@ jobs:
           node-version: "18"
       - name: Install Node dependencies for reBabel
         run: npm install
-      - name: Create rebabel_convert executable using PyInstaller
+      - name: Create rebabel_convert executable
         shell: bash
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller
+        run: .github/scripts/create_rebabel_convert_executable
       - name: Publish reBabel to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,9 +38,9 @@ jobs:
           node-version: "18"
       - name: Install Node dependencies for reBabel
         run: npm install
-      - name: Create rebabel_convert executable using PyInstaller
+      - name: Create rebabel_convert executable
         shell: bash
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller
+        run: .github/scripts/create_rebabel_convert_executable
       - name: Publish reBabel to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,9 +56,9 @@ jobs:
           node-version: "18"
       - name: Install Node dependencies for reBabel
         run: npm install
-      - name: Create rebabel_convert executable using PyInstaller
+      - name: Create rebabel_convert executable
         shell: pwsh
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller_windows.bat
+        run: .github/scripts/create_rebabel_convert_executable_windows.bat
       - name: Publish reBabel to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
