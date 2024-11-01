@@ -129,13 +129,8 @@ app.whenReady().then(() => {
       fileName,
       inFileType,
       outFileType,
-      delimiter,
-      nlpFileType,
-      partOfSpeechFile,
-      languageFile,
       mappings,
-      root,
-      skip,
+      additionalArguments
     } = data;
 
     let buffer = "";
@@ -145,13 +140,8 @@ app.whenReady().then(() => {
         outFileType,
         filePath,
         outPutFileNamePath,
-        nlpFileType,
-        partOfSpeechFile,
-        languageFile,
-        delimiter,
         JSON.stringify(mappings),
-        root,
-        skip.join(","),
+        JSON.stringify(additionalArguments),
         tempdbPath,
       ]);
       const saveAsFileName = path.basename(outPutFileNamePath);

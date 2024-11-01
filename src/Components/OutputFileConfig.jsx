@@ -6,7 +6,6 @@ function OutputFileConfig({
   isOpen,
   onClose,
   data,
-  setData,
   errors,
   setErrorState,
   includedLayerValues,
@@ -41,16 +40,14 @@ function OutputFileConfig({
         (layer) => !sortedLayers.includes(layer)
       );
 
-      setData((data) => ({ ...data, root: sortedLayers[0].value }));
-      setData((data) => ({
-        ...data,
-        skip: skippedLayers.map((layer) => layer.value),
-      }));
+      data.additionalArguments.root = sortedLayers[0].value;
+      data.additionalArguments.skip = skippedLayers.map((layer) => layer.value);
+      
       setErrorState(false, "", "skipRoot");
     } else {
-      setData((data) => ({ ...data, root: "" }));
-      setData((data) => ({ ...data, skip: [] }));
-      setErrorState(true, "Select a value", "skipRoot");
+      data.additionalArguments.root = "";
+      data.additionalArguments.skip = [];
+      setErrorState(true, "At least one layer must be selected", "skipRoot");
     }
 
     setIncludedLayerValues(layers.map((layer) => layer.value));

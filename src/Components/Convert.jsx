@@ -78,11 +78,13 @@ function Convert({
       }
     }
 
-    //checks if skip or root is empty
-    if (data.skip.length === 0) {
-      setErrorState(true, "Select a value", "skipRoot");
-      setOutputFileConfigOpen(true);
-      errorOccurred = true;
+    //checks if root is empty if flextext is selected as the export file type
+    if (data.outFileType === "flextext") {
+      if (data.additionalArguments.root === "") {
+        setErrorState(true, "Select at least one layer", "skipRoot");
+        setOutputFileConfigOpen(true);
+        errorOccurred = true;
+      }
     }
 
     return errorOccurred;

@@ -8,17 +8,13 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
   fileNames.unshift("");
 
   function handleRadioChange(e) {
-    if (e.target.id === "combined") {
-      setData((data) => ({ ...data, nlpFileType: e.target.id }));
-    } else if (e.target.id === "separate") {
-      setData((data) => ({ ...data, nlpFileType: e.target.id }));
-    }
+    data.additionalArguments.nlpFileType = e.target.id;
 
     setErrorState(false, "", "nlpFileType");
   }
 
   function handleDelimiterChange(e) {
-    setData((data) => ({ ...data, delimiter: e.target.value }));
+    data.additionalArguments.delimiter = e.target.value;
 
     if (e.target.value.length > 1) {
       setErrorState(
@@ -36,11 +32,11 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
 
   function handleFileChange(e) {
     if (e.target.name === "partOfSpeech") {
-      setData((data) => ({ ...data, partOfSpeechFile: e.target.value }));
+      data.additionalArguments.partOfSpeechFile = e.target.value;
 
       if (e.target.value === "") {
         setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
-      } else if (e.target.value === data.languageFile) {
+      } else if (e.target.value === data.additionalArguments.languageFile) {
         setErrorState(
           true,
           "File name already choosen",
@@ -51,11 +47,11 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
         setErrorState(false, "", "partOfSpeechFile");
       }
     } else if (e.target.name === "language") {
-      setData((data) => ({ ...data, languageFile: e.target.value }));
+      data.additionalArguments.languageFile = e.target.value;
 
       if (e.target.value === "") {
         setErrorState(true, "Please Select a File", "languageFile", true);
-      } else if (e.target.value === data.partOfSpeechFile) {
+      } else if (e.target.value === data.additionalArguments.partOfSpeechFile) {
         setErrorState(true, "File name already choosen", "languageFile", true);
       } else {
         setErrorState(false, "", "languageFile");
@@ -75,7 +71,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
               type="radio"
               id="combined"
               name="nlpfileType"
-              checked={data.nlpFileType === "combined"}
+              checked={data.additionalArguments.nlpFileType === "combined"}
               onChange={(e) => handleRadioChange(e)}
               className={styles.combined}
               {...errors.nlpFileType.ariaProps}
@@ -85,7 +81,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
               type="radio"
               id="separate"
               name="nlpfileType"
-              checked={data.nlpFileType === "separate"}
+              checked={data.additionalArguments.nlpFileType === "separate"}
               onChange={(e) => handleRadioChange(e)}
               {...errors.nlpFileType.ariaProps}
             />
@@ -94,14 +90,14 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
           {errors.nlpFileType.status && (
             <p className={styles.error}>Error! Select an NLP File Type</p>
           )}
-          {data.nlpFileType === "combined" && (
+          {data.additionalArguments.nlpFileType === "combined" && (
             <>
               <div>
                 <label>NLP Delimiter ('/' by default)</label>
                 <input
                   type="text"
                   id="delimiter"
-                  value={data.delimiter}
+                  value={data.additionalArguments.delimiter}
                   onChange={(e) => handleDelimiterChange(e)}
                   {...errors.delimiter.ariaProps}
                 />
@@ -109,7 +105,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
               </div>
             </>
           )}
-          {data.nlpFileType === "separate" && (
+          {data.additionalArguments.nlpFileType === "separate" && (
             <div>
               {data.fileName.length < 2 && (
                 <p className={styles.error}>
@@ -128,7 +124,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
                   <select
                     name="partOfSpeech"
                     onChange={(e) => handleFileChange(e)}
-                    value={data.partOfSpeechFile}
+                    value={data.additionalArguments.partOfSpeechFile}
                     aria-label="Select Part of Speech File"
                     {...errors.partOfSpeechFile.ariaProps}
                   >
@@ -143,7 +139,7 @@ function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
                   <select
                     name="language"
                     onChange={(e) => handleFileChange(e)}
-                    value={data.languageFile}
+                    value={data.additionalArguments.languageFile}
                     aria-label="Select Language File"
                     {...errors.languageFile.ariaProps}
                   >
