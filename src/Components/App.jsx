@@ -13,13 +13,12 @@ const initialState = {
   fileName: [],
   inFileType: "",
   outFileType: "",
-  delimiter: "/",
-  nlpFileType: "",
-  partOfSpeechFile: "",
-  languageFile: "",
   mappings: [[], []],
-  root: "phrase",
-  skip: ["morph"],
+  additionalArguments: {
+    root: "phrase", 
+    skip: ["morph"], 
+    delimiter: "/"
+  }
 };
 
 function App() {
