@@ -11,9 +11,17 @@ function Convert({
   setErrorState,
   setDisplayResultsOpen,
   setConversionResult,
+  setMappingsOpen
 }) {
   function preConvertCheck() {
     let errorOccurred = false;
+
+    //No mappings provided
+    if ((data.mappings[0].length === 0) && (data.mappings[1].length === 0)) {
+      setErrorState(true, "Mappings must be provided", "mappings")
+      setMappingsOpen(true);
+      errorOccurred = true;
+    }
 
     //No files uploaded
     if (data.filePath.length === 0) {
@@ -35,36 +43,36 @@ function Convert({
 
     //If NLP is selected as import file type
     if (data.inFileType === "nlp_pos") {
-      if (data.nlpFileType === "") {
+      if (data.additionalArguments.nlpFileType === "") {
         setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
         setNLPConfigOpen(true);
         errorOccurred = true;
       }
 
       //if combined file type selected
-      if (data.nlpFileType === "combined") {
-        if (data.delimiter === "") {
-          setErrorState(true, "Enter a delimiter value", "delimiter", true);
+      if (data.additionalArguments.nlpFileType === "combined") {
+        if (data.additionalArguments.nlpDelimiter === "") {
+          setErrorState(true, "Enter a delimiter value", "nlpDelimiter", true);
           setNLPConfigOpen(true);
           errorOccurred = true;
         }
 
         //if delimiter error exists, e.g. delimiter too long
-        if (errors.delimiter.status) {
+        if (errors.nlpDelimiter.status) {
           setNLPConfigOpen(true);
           errorOccurred = true;
         }
       }
 
       //if Part of Speech and and Language file are selected
-      if (data.nlpFileType === "separate") {
-        if (data.partOfSpeechFile === "") {
+      if (data.additionalArguments.nlpFileType === "separate") {
+        if (data.additionalArguments.partOfSpeechFile === "") {
           setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
           setNLPConfigOpen(true);
           errorOccurred = true;
         }
 
-        if (data.languageFile === "") {
+        if (data.additionalArguments.languageFile === "") {
           setErrorState(true, "Please Select a File", "languageFile", true);
           setNLPConfigOpen(true);
           errorOccurred = true;
