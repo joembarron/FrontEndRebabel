@@ -82,8 +82,8 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   const typeDialog = (
     <dialog open={isAddTypeMappingOpen}>
       <article>
-        <div className={styles.mappingsContainer}>
-          <div className={`${styles.inputContainer} ${styles.left}`}>
+        <div className={styles.inputsContainer}>
+          <div>
             <label>In Type</label>
             <input
               name="in_type"
@@ -122,7 +122,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   const featureDialog = (
     <dialog open={isAddFeatureMappingOpen}>
       <article>
-        <div className={styles.mappingsContainer}>
+        <div className={styles.inputsContainer}>
           <div>
             <label>In Feature</label>
             <input
