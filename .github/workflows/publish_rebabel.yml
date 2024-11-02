@@ -1,4 +1,4 @@
-name: Publish Gap App
+name: Publish reBabel
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-Gap-App-on-Mac-OS:
+  build-reBabel-on-Mac-OS:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -18,16 +18,16 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: "18"
-      - name: Install Node dependencies for Gap App
+      - name: Install Node dependencies for reBabel
         run: npm install
-      - name: Create rebabel_convert executable using PyInstaller
+      - name: Create rebabel_convert executable
         shell: bash
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller
-      - name: Publish Gap App to GitHub releases
+        run: .github/scripts/create_rebabel_convert_executable
+      - name: Publish reBabel to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
-  build-Gap-App-on-Linux:
+  build-reBabel-on-Linux:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -36,16 +36,16 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: "18"
-      - name: Install Node dependencies for Gap App
+      - name: Install Node dependencies for reBabel
         run: npm install
-      - name: Create rebabel_convert executable using PyInstaller
+      - name: Create rebabel_convert executable
         shell: bash
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller
-      - name: Publish Gap App to GitHub releases
+        run: .github/scripts/create_rebabel_convert_executable
+      - name: Publish reBabel to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
-  build-Gap-App-on-Windows:
+  build-reBabel-on-Windows:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@master
@@ -54,12 +54,12 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: "18"
-      - name: Install Node dependencies for Gap App
+      - name: Install Node dependencies for reBabel
         run: npm install
-      - name: Create rebabel_convert executable using PyInstaller
+      - name: Create rebabel_convert executable
         shell: pwsh
-        run: .github/scripts/create_rebabel_convert_executable_using_pyinstaller_windows.bat
-      - name: Publish Gap App to GitHub releases
+        run: .github/scripts/create_rebabel_convert_executable_windows.ps1
+      - name: Publish reBabel to GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish

@@ -75,6 +75,9 @@ function SelectTypes({
                 ? (e) => handleInputType(e)
                 : (e) => handleOutputType(e)
             }
+            value={
+              selectConfig === "inputType" ? data.inFileType : data.outFileType
+            }
             disabled={isLoading}
             {...(selectConfig === "inputType"
               ? errors.inFileType.ariaProps
