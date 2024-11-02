@@ -24,10 +24,9 @@ jobs:
         run: Xvfb :0 -screen 0 1024x768x16 &
       - name: Install Node Dependencies
         run: npm install
-      - name: Create rebabel_convert executable
-        shell: bash
+      - name: Create rebabel_convert Executable Using PyInstaller
         run: .github/scripts/create_rebabel_convert_executable
-      - name: Create Rebabel executable
+      - name: Create Rebabel Electron Executable
         run: npm run make
-      - name: Run Jasmine tests
+      - name: Run Jasmine Tests
         run: npm run test:build_agent
