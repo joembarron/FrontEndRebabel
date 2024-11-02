@@ -169,9 +169,17 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         <section>
           <div>
             <label>Current Type Mappings:</label>
-            <ul>{typeMappings}</ul>
+            <ul>
+              {typeMappings.length === 0 && <p>No Current Types to Display</p>}
+              {typeMappings.length > 0 && typeMappings}
+            </ul>
             <label>Current Feature Mappings:</label>
-            <ul>{featureMappings}</ul>
+            <ul>
+              {featureMappings.length === 0 && (
+                <p>No Current Features to Display</p>
+              )}
+              {featureMappings.length > 0 && featureMappings}
+            </ul>
           </div>
           <div className={styles.mappingsContainer}>
             <div>
