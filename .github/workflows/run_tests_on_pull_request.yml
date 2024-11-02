@@ -10,10 +10,10 @@ jobs:
       DISPLAY: ":0"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 'main' Branch
+      - name: Checkout Source Branch of Pull Request
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{github.event.pull_request.head.ref}}
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
