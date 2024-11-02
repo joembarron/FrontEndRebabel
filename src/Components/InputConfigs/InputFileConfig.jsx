@@ -6,18 +6,23 @@ function InputFileConfig({
   onClose,
   data,
   errors,
-  setData,
   setErrorState,
 }) {
-  let dialogConfigTitle;
 
-  if (data.inFileType === "nlp_pos") {
-    dialogConfigTitle = "NLP";
+  function getDialogConfigTitle() {
+    let dialogConfigTitle = "";
+    
+    if (data.inFileType === "nlp_pos") {
+      dialogConfigTitle = "NLP";
+    }
+
+    return dialogConfigTitle;
   }
+  
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
-        <h2>{dialogConfigTitle} Configuration Settings</h2>
+        <h2>{getDialogConfigTitle()} Configuration Settings</h2>
         <hr></hr>
         <section>
           {data.inFileType == "nlp_pos" && (
