@@ -10,15 +10,21 @@ function OutputFileConfig({
   includedLayerValues,
   setIncludedLayerValues,
 }) {
-  let dialogConfigTitle;
 
-  if (data.inFileType === "flextext") {
-    dialogConfigTitle = "Flextext";
+  function getDialogConfigTitle() {
+    let dialogConfigTitle = "";
+
+    if (data.outFileType === "flextext") {
+      dialogConfigTitle = "Flextext";
+    }
+
+    return dialogConfigTitle;
   }
+  
   return (
     <dialog open={isOpen} className="modal-overlay">
       <article>
-        <h2>{dialogConfigTitle} Configuration Settings</h2>
+        <h2>{getDialogConfigTitle()} Configuration Settings</h2>
         <hr></hr>
         <section>
           {data.outFileType === "flextext" && (
