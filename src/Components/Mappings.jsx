@@ -123,7 +123,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
     <dialog open={isAddFeatureMappingOpen}>
       <article>
         <div className={styles.mappingsContainer}>
-          <div className={`${styles.inputContainer} ${styles.left}`}>
+          <div>
             <label>In Feature</label>
             <input
               name="in_feature"
@@ -133,7 +133,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
               aria-label="In feature settings"
             />
           </div>
-          <div className={styles.inputContainer}>
+          <div>
             <label>Out Feature</label>
             <input
               name="out_feature"
@@ -162,25 +162,25 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   );
 
   return (
-    <dialog id="a" open={isOpen} className="modal-overlay">
+    <dialog open={isOpen} className="modal-overlay">
       <article>
         <h2>Mappings</h2>
         <hr></hr>
-        <div>
-          <label>Current Type Mappings:</label>
-          <ul>{typeMappings}</ul>
-          <label>Current Feature Mappings:</label>
-          <ul>{featureMappings}</ul>
-        </div>
         <section>
+          <div>
+            <label>Current Type Mappings:</label>
+            <ul>{typeMappings}</ul>
+            <label>Current Feature Mappings:</label>
+            <ul>{featureMappings}</ul>
+          </div>
           <div className={styles.mappingsContainer}>
-            <div className={styles.typeButtonContainer}>
+            <div>
               <button onClick={() => setAddTypeMappingOpen(true)}>
                 Add New Type Mapping
               </button>
               {typeDialog}
             </div>
-            <div className={styles.inputContainer}>
+            <div>
               <button onClick={() => setAddFeatureMappingOpen(true)}>
                 Add New Feature Mapping
               </button>
