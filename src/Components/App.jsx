@@ -6,22 +6,19 @@ import SelectFiles from "./SelectFiles.jsx";
 import OutputFileConfig from "./OutputFileConfig.jsx";
 import errorStates from "../ErrorStates.js";
 import SelectTypes from "./SelectTypes.jsx";
+import DisplayResults from "./DisplayResults.jsx";
 
 const initialState = {
   filePath: [],
   fileName: [],
   inFileType: "",
   outFileType: "",
-  delimiter: "/",
-  nlpFileType: "",
-  partOfSpeechFile: "",
-  languageFile: "",
-  mappings: [
-    { in_type: "", out_type: "" },
-    { in_feature: "", out_feature: "" },
-  ],
-  root: "phrase",
-  skip: ["morph"],
+  mappings: [[], []],
+  additionalArguments: {
+    root: "phrase", 
+    skip: ["morph"], 
+    delimiter: "/"
+  }
 };
 
 function App() {
@@ -29,10 +26,16 @@ function App() {
   const [data, setData] = useState(initialState);
   //Sets state for errors
   const [errors, setErrors] = useState(errorStates);
+  //Sets Conversion Results
+  const [conversionResult, setConversionResult] = useState({
+    success: true,
+    message: "An Unexpected Error Occured!",
+  });
   //Set state for modals
   const [isMappingsOpen, setMappingsOpen] = useState(false);
   const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
+  const [isDisplayResultsOpen, setDisplayResultsOpen] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
   //Sets the values for the current included layers in the flextext settings
@@ -57,6 +60,10 @@ function App() {
     }));
   }
 
+  function resetData() {
+    setData(initialState);
+    setErrors(errorStates);
+  }
   return (
     <div className="container flex-base">
       <header>
@@ -103,6 +110,8 @@ function App() {
           setNLPConfigOpen={setNLPConfigOpen}
           setOutputFileConfigOpen={setOutputFileConfigOpen}
           setErrorState={setErrorState}
+          setDisplayResultsOpen={setDisplayResultsOpen}
+          setConversionResult={setConversionResult}
         />
       </section>
       {/* Dialog component */}
@@ -134,6 +143,15 @@ function App() {
           setErrorState={setErrorState}
           includedLayerValues={includedLayerValues}
           setIncludedLayerValues={setIncludedLayerValues}
+        />
+      )}
+      {isDisplayResultsOpen && (
+        <DisplayResults
+          isOpen={isDisplayResultsOpen}
+          onClose={() => setDisplayResultsOpen(false)}
+          conversionResult={conversionResult}
+          data={data}
+          resetData={resetData}
         />
       )}
     </div>
