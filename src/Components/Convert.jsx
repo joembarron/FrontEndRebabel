@@ -16,13 +16,6 @@ function Convert({
   function preConvertCheck() {
     let errorOccurred = false;
 
-    //No mappings provided
-    if ((data.mappings[0].length === 0) && (data.mappings[1].length === 0)) {
-      setErrorState(true, "Mappings must be provided", "mappings")
-      setMappingsOpen(true);
-      errorOccurred = true;
-    }
-
     //No files uploaded
     if (data.filePath.length === 0) {
       setErrorState(true, "Select a File", "selectFile");
@@ -41,17 +34,25 @@ function Convert({
       errorOccurred = true;
     }
 
+    //No mappings provided
+    if (data.filePath.length && data.inFileType && data.outFileType &&
+      !data.mappings[0].length && !data.mappings[1].length) {
+      setErrorState(true, "Mappings must be provided", "mappings")
+      setMappingsOpen(true);
+      errorOccurred = true;
+    }
+
     //If NLP is selected as import file type
     if (data.inFileType === "nlp_pos") {
-      if (data.additionalArguments.nlpFileType === "") {
+      if (!data.additionalArguments?.nlpFileType) {
         setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
         setNLPConfigOpen(true);
         errorOccurred = true;
       }
 
       //if combined file type selected
-      if (data.additionalArguments.nlpFileType === "combined") {
-        if (data.additionalArguments.nlpDelimiter === "") {
+      if (data.additionalArguments?.nlpFileType === "combined") {
+        if (!data.additionalArguments?.nlpDelimiter) {
           setErrorState(true, "Enter a delimiter value", "nlpDelimiter", true);
           setNLPConfigOpen(true);
           errorOccurred = true;
@@ -65,14 +66,14 @@ function Convert({
       }
 
       //if Part of Speech and and Language file are selected
-      if (data.additionalArguments.nlpFileType === "separate") {
-        if (data.additionalArguments.partOfSpeechFile === "") {
+      if (data.additionalArguments?.nlpFileType === "separate") {
+        if (!data.additionalArguments?.partOfSpeechFile) {
           setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
           setNLPConfigOpen(true);
           errorOccurred = true;
         }
 
-        if (data.additionalArguments.languageFile === "") {
+        if (!data.additionalArguments?.languageFile) {
           setErrorState(true, "Please Select a File", "languageFile", true);
           setNLPConfigOpen(true);
           errorOccurred = true;

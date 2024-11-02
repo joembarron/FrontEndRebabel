@@ -23,7 +23,7 @@ const dataFormats = [
   },
   {
     name: "ELAN",
-    rebabelCode: "eaf",
+    rebabelCode: "elan",
     operations: "import"
   },
   {
