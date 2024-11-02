@@ -30,4 +30,4 @@ jobs:
       - name: Create Rebabel executable
         run: npm run make
       - name: Run Jasmine tests
-        run: npm run test:local
+        run: npm run test:build_agent
