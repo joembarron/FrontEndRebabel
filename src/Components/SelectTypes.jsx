@@ -46,10 +46,24 @@ function SelectTypes({
   errors,
   setErrorState,
   isLoading,
-  setNLPConfigOpen = undefined,
+  setInputFileConfigOpen = undefined,
   setOutputFileConfigOpen = undefined,
 }) {
   const errorColor = "#FFBF00";
+
+  //Whether to show additional parameters for input
+  let displayInputButton = false;
+
+  if (data.inFileType === "nlp_pos") {
+    displayInputButton = true;
+  }
+
+  //Whether to show additional parameters for output
+  let displayOutputButton = false;
+
+  if (data.outFileType === "flextext") {
+    displayOutputButton = true;
+  }
 
   function handleInputType(e) {
     setData((data) => ({ ...data, inFileType: e.target.value }));
@@ -60,7 +74,7 @@ function SelectTypes({
     }
 
     if (e.target.value === "nlp_pos") {
-      setNLPConfigOpen(true);
+      setInputFileConfigOpen(true);
     }
 
     setErrorState(false, "", "inFileType");
@@ -131,16 +145,16 @@ function SelectTypes({
               : errors.outFileType.message}
           </Error>
         </div>
-        {selectConfig === "inputType" && data.inFileType === "nlp_pos" && (
+        {selectConfig === "inputType" && displayInputButton && (
           <button
-            className={styles.nlpButton}
+            className={styles.inputButton}
             disabled={isLoading}
-            onClick={() => setNLPConfigOpen(true)}
+            onClick={() => setInputFileConfigOpen(true)}
           >
-            NLP Settings
+            Input File Settings
           </button>
         )}
-        {selectConfig === "outputType" && data.outFileType === "flextext" && (
+        {selectConfig === "outputType" && displayOutputButton && (
           <button
             className={styles.outputButton}
             disabled={isLoading}

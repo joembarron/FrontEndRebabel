@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Mappings from "./Mappings.jsx";
-import NLPConfig from "./NLPConfig.jsx";
 import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
-import OutputFileConfig from "./OutputFileConfig.jsx";
+import InputFileConfig from "./InputConfigs/InputFileConfig.jsx";
+import OutputFileConfig from "./OutputConfigs/OutputFileConfig.jsx";
 import errorStates from "../ErrorStates.js";
 import SelectTypes from "./SelectTypes.jsx";
 import DisplayResults from "./DisplayResults.jsx";
@@ -28,12 +28,12 @@ function App() {
   const [errors, setErrors] = useState(errorStates);
   //Sets Conversion Results
   const [conversionResult, setConversionResult] = useState({
-    success: true,
+    success: false,
     message: "An Unexpected Error Occured!",
   });
   //Set state for modals
   const [isMappingsOpen, setMappingsOpen] = useState(false);
-  const [isNLPConfigOpen, setNLPConfigOpen] = useState(false);
+  const [isInputFileConfigOpen, setInputFileConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   const [isDisplayResultsOpen, setDisplayResultsOpen] = useState(false);
   //Sets loading status for file conversion
@@ -85,7 +85,7 @@ function App() {
           errors={errors}
           setErrorState={setErrorState}
           isLoading={isLoading}
-          setNLPConfigOpen={setNLPConfigOpen}
+          setInputFileConfigOpen={setInputFileConfigOpen}
         />
         <SelectTypes
           label="File Output Type"
@@ -107,7 +107,7 @@ function App() {
           isLoading={isLoading}
           errors={errors}
           setIsLoading={setIsLoading}
-          setNLPConfigOpen={setNLPConfigOpen}
+          setInputFileConfigOpen={setInputFileConfigOpen}
           setOutputFileConfigOpen={setOutputFileConfigOpen}
           setErrorState={setErrorState}
           setDisplayResultsOpen={setDisplayResultsOpen}
@@ -126,10 +126,10 @@ function App() {
           setErrorState={setErrorState}
         />
       )}
-      {isNLPConfigOpen && (
-        <NLPConfig
-          isOpen={isNLPConfigOpen}
-          onClose={() => setNLPConfigOpen(!isNLPConfigOpen)}
+      {isInputFileConfigOpen && (
+        <InputFileConfig
+          isOpen={isInputFileConfigOpen}
+          onClose={() => setInputFileConfigOpen(!isInputFileConfigOpen)}
           data={data}
           errors={errors}
           setErrorState={setErrorState}

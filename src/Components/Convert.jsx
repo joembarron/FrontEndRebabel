@@ -6,7 +6,7 @@ function Convert({
   isLoading,
   errors,
   setIsLoading,
-  setNLPConfigOpen,
+  setInputFileConfigOpen,
   setOutputFileConfigOpen,
   setErrorState,
   setDisplayResultsOpen,
@@ -46,21 +46,22 @@ function Convert({
     if (data.inFileType === "nlp_pos") {
       if (!data.additionalArguments?.nlpFileType) {
         setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
-        setNLPConfigOpen(true);
+        setInputFileConfigOpen(true);
         errorOccurred = true;
       }
 
       //if combined file type selected
+
       if (data.additionalArguments?.nlpFileType === "combined") {
         if (!data.additionalArguments?.nlpDelimiter) {
           setErrorState(true, "Enter a delimiter value", "nlpDelimiter", true);
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
 
         //if delimiter error exists, e.g. delimiter too long
         if (errors.nlpDelimiter.status) {
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
       }
@@ -69,19 +70,19 @@ function Convert({
       if (data.additionalArguments?.nlpFileType === "separate") {
         if (!data.additionalArguments?.partOfSpeechFile) {
           setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
 
         if (!data.additionalArguments?.languageFile) {
           setErrorState(true, "Please Select a File", "languageFile", true);
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
 
         //if errors already exist, e.g. duplicate file names
         if (errors.partOfSpeechFile.status || errors.languageFile.status) {
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
       }
