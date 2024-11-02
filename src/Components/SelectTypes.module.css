@@ -17,12 +17,13 @@
   width: 30%;
 }
 
-.nlpButton {
+.inputButton {
   font-size: 0.8rem;
   padding: 0.7rem;
   margin-left: 0.7rem;
   height: min-content;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
+  width: 8.6rem;
 }
 
 .outputButton {
@@ -30,7 +31,8 @@
   padding: 0.7rem;
   margin-left: 0.7rem;
   height: min-content;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
+  width: 8.6rem;
 }
 
 .selectContainer select[aria-invalid="true"] {

@@ -6,7 +6,7 @@ function Convert({
   isLoading,
   errors,
   setIsLoading,
-  setNLPConfigOpen,
+  setInputFileConfigOpen,
   setOutputFileConfigOpen,
   setErrorState,
   setDisplayResultsOpen,
@@ -37,7 +37,7 @@ function Convert({
     if (data.inFileType === "nlp_pos") {
       if (data.nlpFileType === "") {
         setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
-        setNLPConfigOpen(true);
+        setInputFileConfigOpen(true);
         errorOccurred = true;
       }
 
@@ -45,13 +45,13 @@ function Convert({
       if (data.nlpFileType === "combined") {
         if (data.delimiter === "") {
           setErrorState(true, "Enter a delimiter value", "delimiter", true);
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
 
         //if delimiter error exists, e.g. delimiter too long
         if (errors.delimiter.status) {
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
       }
@@ -60,19 +60,19 @@ function Convert({
       if (data.nlpFileType === "separate") {
         if (data.partOfSpeechFile === "") {
           setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
 
         if (data.languageFile === "") {
           setErrorState(true, "Please Select a File", "languageFile", true);
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
 
         //if errors already exist, e.g. duplicate file names
         if (errors.partOfSpeechFile.status || errors.languageFile.status) {
-          setNLPConfigOpen(true);
+          setInputFileConfigOpen(true);
           errorOccurred = true;
         }
       }
