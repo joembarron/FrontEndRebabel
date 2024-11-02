@@ -37,7 +37,9 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 800,
-    resizable: false,
+    resizable: true,
+    minWidth: 900,
+    minHeight: 768,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -129,7 +131,7 @@ app.whenReady().then(() => {
       inFileType,
       outFileType,
       mappings,
-      additionalArguments
+      additionalArguments,
     } = data;
 
     let buffer = "";
