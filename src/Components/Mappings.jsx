@@ -168,12 +168,12 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         <hr></hr>
         <section>
           <div>
-            <label>Current Type Mappings:</label>
+            <label>Type Mappings:</label>
             <ul>
               {typeMappings.length === 0 && <p>No Current Types to Display</p>}
               {typeMappings.length > 0 && typeMappings}
             </ul>
-            <label>Current Feature Mappings:</label>
+            <label>Feature Mappings:</label>
             <ul>
               {featureMappings.length === 0 && (
                 <p>No Current Features to Display</p>
