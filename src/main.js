@@ -40,6 +40,7 @@ const createWindow = () => {
     resizable: true,
     minWidth: 900,
     minHeight: 768,
+    icon: 'src/icon.png',
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
