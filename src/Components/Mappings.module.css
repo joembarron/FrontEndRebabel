@@ -6,11 +6,13 @@
   margin-top: 2rem;
 }
 
+.headingLabel {
+  margin-left: 0.5rem;
+}
+
 .removeButton {
-  margin-left: 1rem;
-  height: 15%;
-  width: 16%;
-  background-color: orangered;
+  font-size: 1.5rem;
+  color: orangered;
 }
 
 .inputsContainer {
@@ -19,4 +21,23 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 1rem;
+}
+
+.emptyValue {
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.cell {
+  text-align: center;
+}
+
+table {
+  width: 85%;
+}
+
+.tableWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

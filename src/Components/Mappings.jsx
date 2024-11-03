@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Error from "./Error.jsx";
 import styles from "./Mappings.module.css";
+import { TiDelete } from "react-icons/ti";
 
 function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   const [isAddTypeMappingOpen, setAddTypeMappingOpen] = useState(false);
@@ -53,35 +54,41 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
 
   const typeMappings = data.mappings[0].map((pair, index) => {
     return (
-      <li>
-        {pair.in_type} -{">"} {pair.out_type}
-        <button
-          className={styles.removeButton}
-          onClick={() => handleRemoveMapping(0, index)}
-        >
-          Remove
-        </button>
-      </li>
+      <tr>
+        <td className={`${styles.cell} ${styles.first}`}>{pair.in_type}</td>
+        <td className={`${styles.cell} ${styles.second}`}>{pair.out_type}</td>
+        <td className={`${styles.cell} ${styles.third}`}>
+          <TiDelete
+            className={styles.removeButton}
+            onClick={() => handleRemoveMapping(0, index)}
+          />
+        </td>
+      </tr>
     );
   });
 
   const featureMappings = data.mappings[1].map((pair, index) => {
     return (
-      <li>
-        {pair.in_feature} -{">"} {pair.out_feature}
-        <button
-          className={styles.removeButton}
-          onClick={() => handleRemoveMapping(1, index)}
-        >
-          Remove
-        </button>
-      </li>
+      <tr>
+        <td className={`${styles.cell} ${styles.first}`}>{pair.in_feature}</td>
+        <td className={`${styles.cell} ${styles.second}`}>
+          {pair.out_feature}
+        </td>
+        <td className={`${styles.cell} ${styles.third}`}>
+          <TiDelete
+            className={styles.removeButton}
+            onClick={() => handleRemoveMapping(1, index)}
+          />
+        </td>
+      </tr>
     );
   });
 
   const typeDialog = (
     <dialog open={isAddTypeMappingOpen}>
       <article>
+        <h2>Type Mapping</h2>
+        <hr></hr>
         <div className={styles.inputsContainer}>
           <div>
             <label>In Type</label>
@@ -122,6 +129,8 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   const featureDialog = (
     <dialog open={isAddFeatureMappingOpen}>
       <article>
+        <h2>Feature Mapping</h2>
+        <hr></hr>
         <div className={styles.inputsContainer}>
           <div>
             <label>In Feature</label>
@@ -168,18 +177,61 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         <hr></hr>
         <section>
           <div>
-            <label>Type Mappings:</label>
-            <ul>
-              {typeMappings.length === 0 && <p>No Current Types to Display</p>}
-              {typeMappings.length > 0 && typeMappings}
-            </ul>
-            <label>Feature Mappings:</label>
-            <ul>
-              {featureMappings.length === 0 && (
-                <p>No Current Features to Display</p>
-              )}
-              {featureMappings.length > 0 && featureMappings}
-            </ul>
+            <label className={styles.headingLabel}>Type Mappings:</label>
+
+            {typeMappings.length === 0 && (
+              <p className={styles.emptyValue}>
+                No Current Type Mappings to Display
+              </p>
+            )}
+            {typeMappings.length > 0 && (
+              <div className={styles.tableWrapper}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col" className={styles.cell}>
+                        In Type
+                      </th>
+                      <th scope="col" className={styles.cell}>
+                        Out Type
+                      </th>
+                      <th scope="col" className={styles.cell}>
+                        Remove
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>{typeMappings}</tbody>
+                </table>
+              </div>
+            )}
+
+            <label className={styles.headingLabel}>Feature Mappings:</label>
+
+            {featureMappings.length === 0 && (
+              <p className={styles.emptyValue}>
+                No Current Feature Mappings to Display
+              </p>
+            )}
+            {featureMappings.length > 0 && (
+              <div className={styles.tableWrapper}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col" className={styles.cell}>
+                        In Feature
+                      </th>
+                      <th scope="col" className={styles.cell}>
+                        Out Feature
+                      </th>
+                      <th scope="col" className={styles.cell}>
+                        Remove
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>{featureMappings}</tbody>
+                </table>
+              </div>
+            )}
           </div>
           <div className={styles.mappingsContainer}>
             <div>
