@@ -178,8 +178,12 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         <section>
           <div>
             <label className={styles.headingLabel}>Type Mappings:</label>
-
-            {typeMappings.length === 0 && (
+            {errors.mappings.status && (
+              <p className={`${styles.emptyValue} ${styles.error}`}>
+                Error! Type or Feature Mappings cannot be empty
+              </p>
+            )}
+            {typeMappings.length === 0 && !errors.mappings.status && (
               <p className={styles.emptyValue}>
                 No Current Type Mappings to Display
               </p>
@@ -206,8 +210,12 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
             )}
 
             <label className={styles.headingLabel}>Feature Mappings:</label>
-
-            {featureMappings.length === 0 && (
+            {errors.mappings.status && (
+              <p className={`${styles.emptyValue} ${styles.error}`}>
+                Error! Type or Feature Mappings cannot be empty
+              </p>
+            )}
+            {featureMappings.length === 0 && !errors.mappings.status && (
               <p className={styles.emptyValue}>
                 No Current Feature Mappings to Display
               </p>
@@ -247,7 +255,6 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
               {featureDialog}
             </div>
           </div>
-          <Error>{errors.mappings.message}</Error>
         </section>
         <footer>
           <button onClick={onClose}>Close</button>

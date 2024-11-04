@@ -1,3 +1,7 @@
+.error {
+  color: #c52f21;
+}
+
 .mappingsContainer {
   display: flex;
   flex-direction: row;
