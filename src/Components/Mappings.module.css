@@ -13,6 +13,7 @@
 .removeButton {
   font-size: 1.5rem;
   color: orangered;
+  cursor: pointer;
 }
 
 .inputsContainer {
@@ -28,10 +29,6 @@
   padding: 0.8rem;
 }
 
-.cell {
-  text-align: center;
-}
-
 table {
   width: 85%;
 }
@@ -40,4 +37,20 @@ table {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.cell {
+  text-align: center;
+}
+
+.first {
+  width: 33.3%;
+}
+
+.second {
+  width: 33.3%;
+}
+
+.third {
+  width: 33.3%;
 }
