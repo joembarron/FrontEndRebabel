@@ -5,6 +5,7 @@ const isWindows = process.platform === 'win32';
 module.exports = {
   packagerConfig: {
     asar: true,
+    icon: 'src/icon',
     extraResource: [isWindows ? "./rebabel_scripts/dist/rebabel_convert.exe" : "./rebabel_scripts/dist/rebabel_convert"]
   },
   rebuildConfig: {},
@@ -15,13 +16,17 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-squirrel',
-      config: {}
+      config: {
+        setupIcon: 'src/icon.ico'
+      }
     },
     {
       platforms: ['linux'],
       name: '@electron-forge/maker-deb',
       config: {
-        options: {}
+        options: {
+          icon: 'src/icon.png'
+        }
       }
     }
   ],
