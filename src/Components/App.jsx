@@ -17,7 +17,8 @@ const initialState = {
   additionalArguments: {
     root: "phrase", 
     skip: ["morph"], 
-    nlpDelimiter: "/"
+    nlpDelimiter: "/",
+    seconds: false
   }
 };
 
