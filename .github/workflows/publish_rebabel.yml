@@ -7,10 +7,7 @@ on:
 
 jobs:
   build-reBabel-on-Mac-OS:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-12, macos-latest]
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@master
         with:
