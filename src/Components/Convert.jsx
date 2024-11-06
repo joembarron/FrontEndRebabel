@@ -34,88 +34,96 @@ function Convert({
       errorOccurred = true;
     }
 
-    //No mappings provided
+    //Checking if input file type and file extension of uploaded file match
     if (
-      data.filePath.length &&
-      data.inFileType &&
-      data.outFileType &&
-      !data.mappings[0].length &&
-      !data.mappings[1].length
+      (errors.inFileType.message === "Input type must match file extension")
+      || (errors.selectFile.message === "File extension must match input type")
     ) {
-      setErrorState(true, "Mappings must be provided", "mappings");
-      setMappingsOpen(true);
       errorOccurred = true;
     }
 
-    //If NLP is selected as import file type
-    if (data.inFileType === "nlp_pos") {
-      if (!data.additionalArguments?.nlpFileType) {
-        setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
-        setInputFileConfigOpen(true);
+    //Error checks that open dialogs
+    if (!errorOccurred) {
+
+      //No mappings provided
+      if (!data.mappings[0].length && !data.mappings[1].length) {
+        setErrorState(true, "Mappings must be provided", "mappings");
+        setMappingsOpen(true);
         errorOccurred = true;
       }
 
-      //if combined file type selected
-
-      if (data.additionalArguments?.nlpFileType === "combined") {
-        if (!data.additionalArguments?.nlpDelimiter) {
-          setErrorState(true, "Enter a delimiter value", "nlpDelimiter", true);
+      //If NLP is selected as import file type
+      if (data.inFileType === "nlp_pos") {
+        if (!data.additionalArguments?.nlpFileType) {
+          setErrorState(true, "Select an NLP File Type", "nlpFileType", true);
           setInputFileConfigOpen(true);
           errorOccurred = true;
         }
-
-        //if delimiter error exists, e.g. delimiter too long
-        if (errors.nlpDelimiter.status) {
-          setInputFileConfigOpen(true);
+  
+        //If combined file type selected
+  
+        if (data.additionalArguments?.nlpFileType === "combined") {
+          if (!data.additionalArguments?.nlpDelimiter) {
+            setErrorState(true, "Enter a delimiter value", "nlpDelimiter", true);
+            setInputFileConfigOpen(true);
+            errorOccurred = true;
+          }
+  
+          //If delimiter error exists, e.g. delimiter too long
+          if (errors.nlpDelimiter.status) {
+            setInputFileConfigOpen(true);
+            errorOccurred = true;
+          }
+        }
+  
+        //If Part of Speech and and Language file are selected
+        if (data.additionalArguments?.nlpFileType === "separate") {
+          if (!data.additionalArguments?.partOfSpeechFile) {
+            setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
+            setInputFileConfigOpen(true);
+            errorOccurred = true;
+          }
+  
+          if (!data.additionalArguments?.languageFile) {
+            setErrorState(true, "Please Select a File", "languageFile", true);
+            setInputFileConfigOpen(true);
+            errorOccurred = true;
+          }
+  
+          //if errors already exist, e.g. duplicate file names
+          if (errors.partOfSpeechFile.status || errors.languageFile.status) {
+            setInputFileConfigOpen(true);
+            errorOccurred = true;
+          }
+        }
+      }
+  
+      //Checks if root is empty if flextext is selected as the export file type
+      if (data.outFileType === "flextext") {
+        if (data.additionalArguments.root === "") {
+          setErrorState(true, "Select at least one layer", "skipRoot");
+          setOutputFileConfigOpen(true);
           errorOccurred = true;
         }
       }
-
-      //if Part of Speech and and Language file are selected
-      if (data.additionalArguments?.nlpFileType === "separate") {
-        if (!data.additionalArguments?.partOfSpeechFile) {
-          setErrorState(true, "Please Select a File", "partOfSpeechFile", true);
-          setInputFileConfigOpen(true);
+  
+      //Checks if a template file is provided if ELAN is selected as the exported file type
+      if (data.outFileType === "elan") {
+        if (!data.additionalArguments?.templateFile) {
+          setErrorState(
+            true,
+            "A template file must be selected",
+            "selectELANTemplateFile"
+          );
+          setOutputFileConfigOpen(true);
           errorOccurred = true;
         }
-
-        if (!data.additionalArguments?.languageFile) {
-          setErrorState(true, "Please Select a File", "languageFile", true);
-          setInputFileConfigOpen(true);
-          errorOccurred = true;
-        }
-
-        //if errors already exist, e.g. duplicate file names
-        if (errors.partOfSpeechFile.status || errors.languageFile.status) {
-          setInputFileConfigOpen(true);
-          errorOccurred = true;
-        }
-      }
-    }
-
-    //checks if root is empty if flextext is selected as the export file type
-    if (data.outFileType === "flextext") {
-      if (data.additionalArguments.root === "") {
-        setErrorState(true, "Select at least one layer", "skipRoot");
-        setOutputFileConfigOpen(true);
-        errorOccurred = true;
-      }
-    }
-
-    if (data.outFileType === "elan") {
-      if (!data.additionalArguments?.templateFile) {
-        setErrorState(
-          true,
-          "A template file must be selected",
-          "selectELANTemplateFile"
-        );
-        setOutputFileConfigOpen(true);
-        errorOccurred = true;
       }
     }
 
     return errorOccurred;
   }
+
   async function convertFiles() {
     setIsLoading(true);
 

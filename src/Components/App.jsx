@@ -37,7 +37,7 @@ function App() {
   const [isInputFileConfigOpen, setInputFileConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   const [isDisplayResultsOpen, setDisplayResultsOpen] = useState(false);
-  const [elanTemplateFileName, setElanTemplateFileName] = useState([])
+  const [elanTemplateFileName, setElanTemplateFileName] = useState([]);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
   //Sets the values for the current included layers in the flextext settings
@@ -45,6 +45,16 @@ function App() {
     "phrase",
     "word",
   ]);
+
+  const fileTypeExtensions = {
+    "flextext": "flextext",
+    "conllu": "conllu",
+    "nlp_pos": "txt",
+    "elan": "eaf",
+    "sfm": "sfm",
+    "macula-node": "xml"
+  };
+
 
   function setErrorState(
     errorStatus,
@@ -78,6 +88,7 @@ function App() {
           isLoading={isLoading}
           errors={errors}
           setErrorState={setErrorState}
+          fileTypeExtensions={fileTypeExtensions}
         />
         <SelectTypes
           label="File Input Type"
@@ -88,6 +99,7 @@ function App() {
           setErrorState={setErrorState}
           isLoading={isLoading}
           setInputFileConfigOpen={setInputFileConfigOpen}
+          fileTypeExtensions={fileTypeExtensions}
         />
         <SelectTypes
           label="File Output Type"
@@ -98,6 +110,7 @@ function App() {
           setErrorState={setErrorState}
           isLoading={isLoading}
           setOutputFileConfigOpen={setOutputFileConfigOpen}
+          fileTypeExtensions={fileTypeExtensions}
         />
         <div className="settings-container">
           <button onClick={() => setMappingsOpen(true)} disabled={isLoading}>
