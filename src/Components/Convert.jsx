@@ -11,7 +11,7 @@ function Convert({
   setErrorState,
   setDisplayResultsOpen,
   setConversionResult,
-  setMappingsOpen
+  setMappingsOpen,
 }) {
   function preConvertCheck() {
     let errorOccurred = false;
@@ -35,9 +35,14 @@ function Convert({
     }
 
     //No mappings provided
-    if (data.filePath.length && data.inFileType && data.outFileType &&
-      !data.mappings[0].length && !data.mappings[1].length) {
-      setErrorState(true, "Mappings must be provided", "mappings")
+    if (
+      data.filePath.length &&
+      data.inFileType &&
+      data.outFileType &&
+      !data.mappings[0].length &&
+      !data.mappings[1].length
+    ) {
+      setErrorState(true, "Mappings must be provided", "mappings");
       setMappingsOpen(true);
       errorOccurred = true;
     }
@@ -99,7 +104,11 @@ function Convert({
 
     if (data.outFileType === "elan") {
       if (!data.additionalArguments?.templateFile) {
-        setErrorState(true, "A template file must be selected", "selectELANTemplateFile");
+        setErrorState(
+          true,
+          "A template file must be selected",
+          "selectELANTemplateFile"
+        );
         setOutputFileConfigOpen(true);
         errorOccurred = true;
       }
