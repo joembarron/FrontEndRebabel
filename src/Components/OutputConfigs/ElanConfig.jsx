@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Chip from "../Chip.jsx";
 import Error from "../Error.jsx";
 import styles from "./ElanConfig.module.css";
@@ -8,15 +8,12 @@ function ElanConfig({
   setData,
   errors,
   setErrorState,
-  isELANTemplateFileSelected,
-  setELANTemplateFileSelected,
+  elanTemplateFileName,
+  setElanTemplateFileName
 }) {
-  //Template fileName
-  const [fileName, setFileName] = useState([]);
-
   async function handleSelectFile() {
     //Pre dialog check
-    if (fileName.length === 1) {
+    if (elanTemplateFileName.length === 1) {
       setErrorState(
         true,
         "Only one template file can be selected",
@@ -30,7 +27,7 @@ function ElanConfig({
 
     if (response !== undefined) {
       data.additionalArguments.templateFile = response.filePath;
-      setFileName([response.fileName]);
+      setElanTemplateFileName([response.fileName]);
       setErrorState(false, "", "selectELANTemplateFile");
     }
   }
@@ -41,7 +38,7 @@ function ElanConfig({
   }
 
   function handleRemoveChip() {
-    setFileName([]);
+    setElanTemplateFileName([]);
     data.additionalArguments.templateFile = "";
     setErrorState(false, "", "selectELANTemplateFile");
   }
@@ -68,7 +65,7 @@ function ElanConfig({
             }
           >
             <div className={styles.chipsContainer}>
-              {fileName.map((name) => (
+              {elanTemplateFileName.map((name) => (
                 <Chip key={name} removeChip={() => handleRemoveChip()}>
                   {name}
                 </Chip>

@@ -11,8 +11,8 @@ function OutputFileConfig({
   setErrorState,
   includedLayerValues,
   setIncludedLayerValues,
-  isELANTemplateFileSelected,
-  setELANTemplateFileSelected
+  elanTemplateFileName,
+  setElanTemplateFileName
 }) {
 
   function getDialogConfigTitle() {
@@ -48,8 +48,8 @@ function OutputFileConfig({
               setData={setData}
               errors={errors}
               setErrorState={setErrorState}
-              isELANTemplateFileSelected={isELANTemplateFileSelected}
-              setELANTemplateFileSelected={setELANTemplateFileSelected}
+              elanTemplateFileName={elanTemplateFileName}
+              setElanTemplateFileName={setElanTemplateFileName}
             />
           )}
         </section>
