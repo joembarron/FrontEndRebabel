@@ -34,6 +34,27 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
     }
   }
 
+  function handleRemoveChip(nameOfChip) {
+    //create copies of Paths for removal
+    let pathCopies = [...data.filePath];
+
+    let newFileName = data.fileName.filter((fileName, index) => {
+      if (fileName !== nameOfChip) {
+        return true;
+      } else {
+        //remove path from copies
+        pathCopies.splice(index, 1);
+        return false;
+      }
+    });
+
+    setData((data) => ({
+      ...data,
+      filePath: [...pathCopies],
+      fileName: [...newFileName],
+    }));
+  }
+
   return (
     <>
       <div>
@@ -59,7 +80,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
           >
             <div className={styles.chipsContainer}>
               {data.fileName.map((name) => (
-                <Chip key={name} data={data} setData={setData}>
+                <Chip key={name} removeChip={() => handleRemoveChip(name)}>
                   {name}
                 </Chip>
               ))}

@@ -15,11 +15,11 @@ const initialState = {
   outFileType: "",
   mappings: [[], []],
   additionalArguments: {
-    root: "phrase", 
-    skip: ["morph"], 
+    root: "phrase",
+    skip: ["morph"],
     nlpDelimiter: "/",
-    seconds: false
-  }
+    seconds: false,
+  },
 };
 
 function App() {
@@ -37,7 +37,6 @@ function App() {
   const [isInputFileConfigOpen, setInputFileConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   const [isDisplayResultsOpen, setDisplayResultsOpen] = useState(false);
-  const [isELANTemplateFileSelected, setELANTemplateFileSelected] = useState(false);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
   //Sets the values for the current included layers in the flextext settings
@@ -148,8 +147,6 @@ function App() {
           setErrorState={setErrorState}
           includedLayerValues={includedLayerValues}
           setIncludedLayerValues={setIncludedLayerValues}
-          isELANTemplateFileSelected={isELANTemplateFileSelected}
-          setELANTemplateFileSelected={setELANTemplateFileSelected}
         />
       )}
       {isDisplayResultsOpen && (
