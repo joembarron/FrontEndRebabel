@@ -48,6 +48,7 @@ function SelectTypes({
   isLoading,
   setInputFileConfigOpen = undefined,
   setOutputFileConfigOpen = undefined,
+  fileTypeExtensions
 }) {
   const errorColor = "#FFBF00";
 
@@ -71,6 +72,15 @@ function SelectTypes({
     if (e.target.value === "") {
       setErrorState(true, "Type cannot be empty", "inFileType", true);
       return;
+    }
+
+    if (data.filePath.length) {
+      for (let path of data.filePath) {
+        if (path.toString().split(".")[1] !== fileTypeExtensions[e.target.value]) {
+          setErrorState(true, "Input type must match file extension", "inFileType", true);
+          return;
+        }
+      }
     }
 
     if (e.target.value === "nlp_pos") {

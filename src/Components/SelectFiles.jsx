@@ -3,7 +3,7 @@ import styles from "./SelectFiles.module.css";
 import Chip from "./Chip.jsx";
 import Error from "./Error.jsx";
 
-function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
+function SelectFiles({ data, isLoading, setData, errors, setErrorState, fileTypeExtensions }) {
   const errorColor = "#FFBF00";
 
   useEffect(() => {
@@ -21,6 +21,15 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
         if (data.fileName[entry] === response.fileName) {
           setErrorState(true, "File Names must be unique", "selectFile");
           return;
+        }
+      }
+
+      if (data.inFileType) {
+        for (let path of response.filePath) {
+          if (path.toString().split(".")[1] !== fileTypeExtensions[data.inFileType]) {
+            setErrorState(true, "File extension must match input type", "selectFile");
+            return;
+          }
         }
       }
 
