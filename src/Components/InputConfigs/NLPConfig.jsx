@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./NLPConfig.module.css";
 import Error from "../Error.jsx";
 
-function NLPConfig({ isOpen, onClose, data, errors, setErrorState, setData }) {
+function NLPConfig({ data, errors, setErrorState }) {
   //Creates copy of FileNames for selecting two file input
   const fileNames = [...data.fileName];
   fileNames.unshift("");
