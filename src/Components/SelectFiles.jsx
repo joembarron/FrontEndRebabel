@@ -12,7 +12,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
 
   async function handleSelectFile() {
     //returns object with filePath and fileName
-    const response = await window.pythonApi.getFile();
+    const response = await window.pythonApi.getFile(true);
 
     if (response !== undefined) {
       //loops through checking to see if file name already exists

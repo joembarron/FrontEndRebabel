@@ -98,6 +98,21 @@ label {
 }
 /* End Mappings */
 
+/* Styles for ELAN Component */
+.template-file-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.template-button {
+  margin-left: 0.5rem;
+}
+
+.template-label {
+  padding-top: 0.5rem;
+}
+/* End ELAN Component */
+
 @media (min-width: 900px) {
   .flex-base {
     width: 80%;

@@ -24,7 +24,7 @@ const dataFormats = [
   {
     name: "ELAN",
     rebabelCode: "elan",
-    operations: "import"
+    operations: "both"
   },
   {
     name: "Macula",
@@ -61,7 +61,7 @@ function SelectTypes({
   //Whether to show additional parameters for output
   let displayOutputButton = false;
 
-  if (data.outFileType === "flextext") {
+  if ((data.outFileType === "flextext") || (data.outFileType === "elan")) {
     displayOutputButton = true;
   }
 

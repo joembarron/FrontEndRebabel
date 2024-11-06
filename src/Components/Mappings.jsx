@@ -24,29 +24,27 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
   function handleRemoveMapping(mappingTypeIndex, mappingIndex) {
     const newMappings = data.mappings[mappingTypeIndex].filter((_, i) => i !== mappingIndex);
     data.mappings[mappingTypeIndex] = newMappings;
-    if ((data.mappings[0].length === 0) && (data.mappings[1].length === 0)) {
+    if (!data.mappings[0].length && !data.mappings[1].length) {
       setErrorState(true, "Mappings must be provided", "mappings");
     }
     setData((data) => ({ ...data }));
   }
 
-  function resetTypeDialog(isSubmit) {
+  function resetDialog(mappingTypeIndex, isSubmit) {
     if (isSubmit) {
       setErrorState(false, "", "mappings");
     }
-    setAddTypeMappingOpen(false);
-    setInType("");
-    setOutType("");
-  }
 
-  function resetFeatureDialog(isSubmit) {
-    if (isSubmit) {
-      setErrorState(false, "", "mappings");
+    if (mappingTypeIndex) {
+      setAddFeatureMappingOpen(false);
+      setInFeature("");
+      setOutFeature("");
+    } else {
+      setAddTypeMappingOpen(false);
+      setInType("");
+      setOutType("");
     }
-    setAddFeatureMappingOpen(false);
-    setInFeature("");
-    setOutFeature("");
-  }
+}
 
   const typeMappings = data.mappings[0].map((pair, index) => {
     return (
@@ -92,8 +90,8 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         </div>
       </div>
       <footer>
-          <button onClick={() => data.mappings[0].push({in_type: inType, out_type: outType}) && resetTypeDialog(true)}>Submit</button>
-          <button onClick={() => resetTypeDialog(false)}>Cancel</button>
+          <button onClick={() => data.mappings[0].push({in_type: inType, out_type: outType}) && resetDialog(0, true)}>Submit</button>
+          <button onClick={() => resetDialog(0, false)}>Cancel</button>
       </footer>
     </article>
   </dialog>
@@ -124,8 +122,8 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         </div>
       </div>
       <footer>
-        <button onClick={() => data.mappings[1].push({in_feature: inFeature, out_feature: outFeature}) && resetFeatureDialog(true)}>Submit</button>
-        <button onClick={() => resetFeatureDialog(false)}>Cancel</button>
+        <button onClick={() => data.mappings[1].push({in_feature: inFeature, out_feature: outFeature}) && resetDialog(1, true)}>Submit</button>
+        <button onClick={() => resetDialog(1, false)}>Cancel</button>
       </footer>
     </article>
   </dialog>

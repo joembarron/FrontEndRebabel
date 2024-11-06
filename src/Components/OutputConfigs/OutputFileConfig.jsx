@@ -1,14 +1,18 @@
 import React from "react";
 import FlextextConfig from "./FlextextConfig.jsx";
+import ElanConfig from "./ElanConfig.jsx";
 
 function OutputFileConfig({
   isOpen,
   onClose,
   data,
+  setData,
   errors,
   setErrorState,
   includedLayerValues,
   setIncludedLayerValues,
+  isELANTemplateFileSelected,
+  setELANTemplateFileSelected
 }) {
 
   function getDialogConfigTitle() {
@@ -16,6 +20,8 @@ function OutputFileConfig({
 
     if (data.outFileType === "flextext") {
       dialogConfigTitle = "Flextext";
+    } else if (data.outFileType === "elan") {
+      dialogConfigTitle = "ELAN";
     }
 
     return dialogConfigTitle;
@@ -34,6 +40,16 @@ function OutputFileConfig({
               setErrorState={setErrorState}
               includedLayerValues={includedLayerValues}
               setIncludedLayerValues={setIncludedLayerValues}
+            />
+          )}
+          {data.outFileType === "elan" && (
+            <ElanConfig
+              data={data}
+              setData={setData}
+              errors={errors}
+              setErrorState={setErrorState}
+              isELANTemplateFileSelected={isELANTemplateFileSelected}
+              setELANTemplateFileSelected={setELANTemplateFileSelected}
             />
           )}
         </section>
