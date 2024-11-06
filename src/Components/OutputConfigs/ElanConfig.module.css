@@ -1,0 +1,33 @@
+.templateLabel {
+  margin-bottom: 0.8rem;
+}
+
+.selectFile {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  margin-bottom: 0.8rem;
+}
+
+.btn {
+  width: min-content;
+  height: min-content;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.backgroundContainer {
+  background-color: #fbfcfc;
+  border: 1px solid #cfd5e2;
+  border-radius: 0.3rem;
+  min-height: 3.125rem;
+}
+
+.chipsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: inherit;
+}

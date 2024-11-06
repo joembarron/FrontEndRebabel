@@ -40,6 +40,7 @@ const createWindow = () => {
     resizable: true,
     minWidth: 900,
     minHeight: 768,
+    icon: 'src/icon.png',
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
@@ -74,24 +75,38 @@ app.whenReady().then(() => {
     }
   }
 
-  ipcMain.handle("selectFile", async () => {
-    const filePathSelect = dialog.showOpenDialogSync({
-      filters: [
-        {
-          name: "Allowed File Types",
-          extensions: [
-            "txt",
-            "flextext",
-            "csv",
-            "eaf",
-            "conllu",
-            "sfm",
-            "xml"
-          ],
-        },
-      ],
-      properties: ["openFile"],
-    });
+  ipcMain.handle("selectFile", async (event, isMainFileSelect) => {
+    let filePathSelect;
+
+    if (isMainFileSelect) {
+      filePathSelect = dialog.showOpenDialogSync({
+        filters: [
+          {
+            name: "Allowed File Types",
+            extensions: [
+              "txt",
+              "flextext",
+              "csv",
+              "eaf",
+              "conllu",
+              "sfm",
+              "xml"
+            ],
+          },
+        ],
+        properties: ["openFile"]
+      });
+    } else {
+      filePathSelect = dialog.showOpenDialogSync({
+        filters: [
+          {
+            name: "ELAN template file type",
+            extensions: ["etf"],
+          },
+        ],
+        properties: ["openFile"]
+      });
+    }
 
     //if user cancels
     if (filePathSelect == undefined) {
@@ -109,7 +124,7 @@ app.whenReady().then(() => {
 
     let returnData = {
       success: false,
-      message: "An unexpected error occured!",
+      message: "An unexpected error occurred!"
     };
 
     //calls saveAs dialog if fileName and output file type aren't empty

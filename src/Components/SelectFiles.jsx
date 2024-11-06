@@ -12,7 +12,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
 
   async function handleSelectFile() {
     //returns object with filePath and fileName
-    const response = await window.pythonApi.getFile();
+    const response = await window.pythonApi.getFile(true);
 
     if (response !== undefined) {
       //loops through checking to see if file name already exists
@@ -32,6 +32,27 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
 
       setErrorState(false, "", "selectFile");
     }
+  }
+
+  function handleRemoveChip(nameOfChip) {
+    //create copies of Paths for removal
+    let pathCopies = [...data.filePath];
+
+    let newFileName = data.fileName.filter((fileName, index) => {
+      if (fileName !== nameOfChip) {
+        return true;
+      } else {
+        //remove path from copies
+        pathCopies.splice(index, 1);
+        return false;
+      }
+    });
+
+    setData((data) => ({
+      ...data,
+      filePath: [...pathCopies],
+      fileName: [...newFileName],
+    }));
   }
 
   return (
@@ -59,7 +80,7 @@ function SelectFiles({ data, isLoading, setData, errors, setErrorState }) {
           >
             <div className={styles.chipsContainer}>
               {data.fileName.map((name) => (
-                <Chip key={name} data={data} setData={setData}>
+                <Chip key={name} removeChip={() => handleRemoveChip(name)}>
                   {name}
                 </Chip>
               ))}
