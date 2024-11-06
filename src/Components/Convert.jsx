@@ -97,6 +97,14 @@ function Convert({
       }
     }
 
+    if (data.outFileType === "elan") {
+      if (!data.additionalArguments?.templateFile) {
+        setErrorState(true, "A template file must be selected", "selectELANTemplateFile");
+        setOutputFileConfigOpen(true);
+        errorOccurred = true;
+      }
+    }
+
     return errorOccurred;
   }
   async function convertFiles() {

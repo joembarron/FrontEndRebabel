@@ -79,6 +79,16 @@ if (outType == "flextext"):
             root = additionalArguments["root"],
             skip = additionalArguments["skip"]
         )
+elif (outType == "elan"):
+    rebabel_format.run_command(
+            "export",
+            mode = outType,
+            db = tempdb_path,
+            outfile = outPath,
+            mappings = mappings[0] + mappings[1],
+            template_file = additionalArguments["templateFile"],
+            seconds = additionalArguments["seconds"]
+    ) 
 else:
     rebabel_format.run_command(
             "export",
@@ -86,5 +96,5 @@ else:
             db = tempdb_path,
             outfile = outPath,
             mappings = mappings[0] + mappings[1]
-        )
+    )
     

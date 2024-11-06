@@ -6,10 +6,13 @@ function OutputFileConfig({
   isOpen,
   onClose,
   data,
+  setData,
   errors,
   setErrorState,
   includedLayerValues,
   setIncludedLayerValues,
+  isELANTemplateFileSelected,
+  setELANTemplateFileSelected
 }) {
 
   function getDialogConfigTitle() {
@@ -42,8 +45,11 @@ function OutputFileConfig({
           {data.outFileType === "elan" && (
             <ElanConfig
               data={data}
+              setData={setData}
               errors={errors}
               setErrorState={setErrorState}
+              isELANTemplateFileSelected={isELANTemplateFileSelected}
+              setELANTemplateFileSelected={setELANTemplateFileSelected}
             />
           )}
         </section>
