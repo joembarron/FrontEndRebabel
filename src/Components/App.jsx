@@ -147,8 +147,6 @@ function App() {
           setErrorState={setErrorState}
           includedLayerValues={includedLayerValues}
           setIncludedLayerValues={setIncludedLayerValues}
-          isELANTemplateFileSelected={isELANTemplateFileSelected}
-          setELANTemplateFileSelected={setELANTemplateFileSelected}
         />
       )}
       {isDisplayResultsOpen && (
