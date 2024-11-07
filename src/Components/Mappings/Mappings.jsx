@@ -146,7 +146,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
         <section>
           {errors.mappings.status && (
             <p className={`${styles.emptyValue} ${styles.error}`}>
-              Type or Feature Mappings cannot be empty
+              Mappings cannot be empty
             </p>
           )}
           <div>

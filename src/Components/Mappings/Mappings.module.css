@@ -14,12 +14,6 @@
   margin-left: 0.5rem;
 }
 
-.removeButton {
-  font-size: 1.5rem;
-  color: orangered;
-  cursor: pointer;
-}
-
 .inputsContainer {
   display: flex;
   flex-direction: row;
@@ -31,30 +25,4 @@
 .emptyValue {
   text-align: center;
   padding: 0.8rem;
-}
-
-table {
-  width: 85%;
-}
-
-.tableWrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.cell {
-  text-align: center;
-}
-
-.first {
-  width: 33.3%;
-}
-
-.second {
-  width: 33.3%;
-}
-
-.third {
-  width: 33.3%;
 }
