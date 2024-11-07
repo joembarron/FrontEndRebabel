@@ -178,7 +178,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
             <label className={styles.headingLabel}>Type Mappings:</label>
             {errors.mappings.status && (
               <p className={`${styles.emptyValue} ${styles.error}`}>
-                Error! Type or Feature Mappings cannot be empty
+                Type or Feature Mappings cannot be empty
               </p>
             )}
             {typeMappings.length === 0 && !errors.mappings.status && (
@@ -210,7 +210,7 @@ function Mappings({ isOpen, onClose, data, setData, errors, setErrorState }) {
             <label className={styles.headingLabel}>Feature Mappings:</label>
             {errors.mappings.status && (
               <p className={`${styles.emptyValue} ${styles.error}`}>
-                Error! Type or Feature Mappings cannot be empty
+                Type or Feature Mappings cannot be empty
               </p>
             )}
             {featureMappings.length === 0 && !errors.mappings.status && (
