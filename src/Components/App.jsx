@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Mappings from "./Mappings.jsx";
+import Mappings from "./Mappings/Mappings.jsx";
 import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
 import InputFileConfig from "./InputConfigs/InputFileConfig.jsx";
@@ -37,7 +37,7 @@ function App() {
   const [isInputFileConfigOpen, setInputFileConfigOpen] = useState(false);
   const [isOutputFileConfigOpen, setOutputFileConfigOpen] = useState(false);
   const [isDisplayResultsOpen, setDisplayResultsOpen] = useState(false);
-  const [elanTemplateFileName, setElanTemplateFileName] = useState([])
+  const [elanTemplateFileName, setElanTemplateFileName] = useState([]);
   //Sets loading status for file conversion
   const [isLoading, setIsLoading] = useState(false);
   //Sets the values for the current included layers in the flextext settings
