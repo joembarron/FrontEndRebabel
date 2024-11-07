@@ -47,14 +47,13 @@ function App() {
   ]);
 
   const fileTypeExtensions = {
-    "flextext": "flextext",
-    "conllu": "conllu",
-    "nlp_pos": "txt",
-    "elan": "eaf",
-    "sfm": "sfm",
-    "macula-node": "xml"
+    flextext: "flextext",
+    conllu: "conllu",
+    nlp_pos: "txt",
+    elan: "eaf",
+    sfm: "sfm",
+    "macula-node": "xml",
   };
-
 
   function setErrorState(
     errorStatus,
