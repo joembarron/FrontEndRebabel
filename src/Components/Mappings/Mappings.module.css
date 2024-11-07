@@ -1,0 +1,28 @@
+.error {
+  color: #c52f21;
+}
+
+.mappingsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.headingLabel {
+  margin-left: 0.5rem;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.emptyValue {
+  text-align: center;
+  padding: 0.8rem;
+}

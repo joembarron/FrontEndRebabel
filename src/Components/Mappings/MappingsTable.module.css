@@ -1,0 +1,31 @@
+table {
+  width: 85%;
+}
+
+.tableWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cell {
+  text-align: center;
+}
+
+.first {
+  width: 33.3%;
+}
+
+.second {
+  width: 33.3%;
+}
+
+.third {
+  width: 33.3%;
+}
+
+.removeButton {
+  font-size: 1.5rem;
+  color: orangered;
+  cursor: pointer;
+}

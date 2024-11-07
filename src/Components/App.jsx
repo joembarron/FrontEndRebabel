@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Mappings from "./Mappings.jsx";
+import Mappings from "./Mappings/Mappings.jsx";
 import Convert from "./Convert.jsx";
 import SelectFiles from "./SelectFiles.jsx";
 import InputFileConfig from "./InputConfigs/InputFileConfig.jsx";
