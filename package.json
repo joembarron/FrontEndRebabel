@@ -1,7 +1,7 @@
 {
   "name": "rebabel",
   "productName": "rebabel",
-  "version": "0.4.0-alpha.0",
+  "version": "0.5.0-alpha.0",
   "description": "Front End for the reBabel program",
   "main": ".webpack/main",
   "scripts": {
